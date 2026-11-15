@@ -111,11 +111,15 @@ main h1#_top {
 }
 
 .sl-markdown-content table {
+  display: table;
+  width: 100%;
+  overflow: visible;
   border-collapse: collapse;
 }
 
 .sl-markdown-content :is(th, td) {
   border-color: var(--p-line);
+  overflow-wrap: anywhere;
 }
 
 .pagination-links a {
