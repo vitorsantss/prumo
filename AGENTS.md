@@ -20,7 +20,7 @@ Plataforma local-first que conduz tarefas de software em etapas com portões (ga
 | `docs/processo.md` | Como o projeto é conduzido |
 | `CONTRIBUTING.md` | Fluxo de contribuição |
 | `.github/` | Modelos de issue e PR, dono do código, CI |
-
+| `site/` | Site (Starlight): página inicial e documentação gerada a partir de `docs/` (ADR-0010) |
 | `cmd/prumo/` | Ponto de entrada da CLI |
 | `internal/pipeline/` | Leitura e validação do `pipeline.yml` |
 | `internal/coordenador/` | Decide o que roda e grava o rastro (ADR-0007) |
@@ -37,6 +37,7 @@ Núcleo em Go (ADR-0006); a interface web (TypeScript/React) ainda não existe.
 - Testes: `go test ./...` (sempre antes de abrir PR)
 - Formatação: `gofmt -w .`
 - Análise: `go vet ./...`
+- Site: `cd site && npm install && npm run dev` (precisa de Node 22+)
 - Rodar sem IA: `go run ./cmd/prumo executar --pipeline exemplos/pipeline.yml --tarefa exemplos/rinha-2024q1/tarefa.md`
 
 ## Regras

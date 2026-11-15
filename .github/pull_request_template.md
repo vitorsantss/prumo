@@ -14,3 +14,4 @@ Fecha #
 - [ ] Decisão de arquitetura nova tem ADR em `docs/adr/`
 - [ ] Dependência nova é livre (ADR-0005)
 - [ ] Sem links de sessão, conversa ou conta privada
+- [ ] Se mudou algo que a página inicial ou a documentação mostram, atualizei `docs/` e `site/src/data/landing.json`

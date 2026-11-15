@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  --sl-font: 'Inter', system-ui, sans-serif;
+  --sl-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --prumo-manuscrita: 'Architects Daughter', cursive;
+  --sl-color-accent-low: #2b2013;
+  --sl-color-accent: #ffa94d;
+  --sl-color-accent-high: #ffd8a8;
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #e3e3e8;
+  --sl-color-gray-2: #c8c8cf;
+  --sl-color-gray-3: #a0a0aa;
+  --sl-color-gray-4: #6e6e78;
+  --sl-color-gray-5: #3e3e45;
+  --sl-color-gray-6: #1e1e21;
+  --sl-color-black: #121212;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: #fff4e0;
+  --sl-color-accent: #a35a00;
+  --sl-color-accent-high: #5c3300;
+  --sl-color-white: #1e1e1e;
+  --sl-color-gray-1: #2a2a2e;
+  --sl-color-gray-2: #3e3e45;
+  --sl-color-gray-3: #5a5a62;
+  --sl-color-gray-4: #9a9aa3;
+  --sl-color-gray-5: #d2d2d8;
+  --sl-color-gray-6: #efeff2;
+  --sl-color-gray-7: #f7f7f8;
+  --sl-color-black: #fafafa;
+}
+
+.site-title {
+  font-family: var(--prumo-manuscrita);
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.sl-markdown-content h1,
+main h1#_top {
+  font-family: var(--prumo-manuscrita);
+  font-weight: 400;
+}
+
+.sl-markdown-content a {
+  text-underline-offset: 3px;
+}
