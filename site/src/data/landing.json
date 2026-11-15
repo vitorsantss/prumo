@@ -12,16 +12,46 @@
     "compartilhar": "Compartilhar a ideia",
     "copiado": "Link copiado",
     "respostas": [
-      ["O que é", "Uma hipótese", "Etapas com portões pra construir software com IA."],
-      ["O que não é", "Uma ferramenta pronta", "Ainda não resolve o problema nem foi medido."],
-      ["Onde está", "Um esqueleto", "Roda uma tarefa de exemplo, sem IA, pra estudo."],
-      ["Como ajudar", "Estude e contribua", "Código, docs, tradução, revisão ou perguntas."]
+      [
+        "O que é",
+        "Uma hipótese",
+        "Etapas com portões pra construir software com IA."
+      ],
+      [
+        "O que não é",
+        "Uma ferramenta pronta",
+        "Ainda não resolve o problema nem foi medido."
+      ],
+      [
+        "Onde está",
+        "Um esqueleto",
+        "Roda uma tarefa de exemplo, sem IA, pra estudo."
+      ],
+      [
+        "Como ajudar",
+        "Estude e contribua",
+        "Código, docs, tradução, revisão ou perguntas."
+      ]
     ],
     "ideiaTitulo": "Ninguém sabe ainda qual é o jeito certo.",
     "ideiaTexto1": "Todo mês surge um padrão novo de trabalhar com IA: especificar antes, planejar antes, deixar o agente livre, revisar no fim. Cada um funciona pra alguém, e quase ninguém mede.",
     "ideiaTexto2": "O Prumo quer ser o lugar onde dá pra montar fluxos diferentes, rodar a mesma tarefa em cada um e ver qual funciona pro seu jeito de trabalhar. Um padrão que se adapta a você, provado com números.",
-    "fluxos": [["Fluxo A", "Research → SPEC → PLAN → Código"], ["Fluxo B", "SPEC → Código → Review"], ["Fluxo C", "Código → Review"]],
-    "medir": "medir", "qualServe": "qual serve?",
+    "fluxos": [
+      [
+        "Fluxo A",
+        "Research → SPEC → PLAN → Código"
+      ],
+      [
+        "Fluxo B",
+        "SPEC → Código → Review"
+      ],
+      [
+        "Fluxo C",
+        "Código → Review"
+      ]
+    ],
+    "medir": "medir",
+    "qualServe": "qual serve?",
     "labTitulo": "O que queremos provar",
     "labTexto": "Cada ideia vira uma hipótese com uma medida. Nenhuma foi testada ainda, e é aí que dá pra ajudar.",
     "naoTestada": "ainda não testada",
@@ -32,10 +62,44 @@
     "cta3": "Começar pela documentação",
     "rodape1": "Código aberto sob AGPL-3.0 · construído com IA, revisado por gente",
     "rodape2": "Toda afirmação de fora tem fonte na documentação",
-    "secoes": ["A pergunta", "A ideia", "Hipóteses", "Onde está", "Faça parte"],
-    "navRotulo": "Seções da página", "idiomaRotulo": "Idioma", "temaRotulo": "Tema escuro",
+    "secoes": [
+      "A pergunta",
+      "A ideia",
+      "Hipóteses",
+      "Onde está",
+      "Faça parte"
+    ],
+    "navRotulo": "Seções da página",
+    "idiomaRotulo": "Idioma",
+    "temaRotulo": "Tema escuro",
     "docs": "docs/comece-aqui/",
-    "formas": [["Estudar", "Ler a ideia e as decisões, com as fontes."], ["Perguntar", "Dúvida também é contribuição."], ["Traduzir", "Revisar o inglês, traduzir páginas."], ["Escrever docs", "Deixar mais claro o que já existe."], ["Desenhar", "Telas, diagramas, o visual."], ["Programar", "Tarefas marcadas pra começar."]]
+    "formas": [
+      [
+        "Estudar",
+        "Ler a ideia e as decisões, com as fontes."
+      ],
+      [
+        "Perguntar",
+        "Dúvida também é contribuição."
+      ],
+      [
+        "Traduzir",
+        "Revisar o inglês, traduzir páginas."
+      ],
+      [
+        "Escrever docs",
+        "Deixar mais claro o que já existe."
+      ],
+      [
+        "Desenhar",
+        "Telas, diagramas, o visual."
+      ],
+      [
+        "Programar",
+        "Tarefas marcadas pra começar."
+      ]
+    ],
+    "mantido": "Mantido por"
   },
   "en": {
     "lang": "en",
@@ -50,16 +114,46 @@
     "compartilhar": "Share the idea",
     "copiado": "Link copied",
     "respostas": [
-      ["What it is", "A hypothesis", "Gated stages to build software with AI."],
-      ["What it is not", "A finished tool", "It does not solve the problem yet, nor has it been measured."],
-      ["Where it is", "A skeleton", "Runs a sample task, without AI, for study."],
-      ["How to help", "Study and contribute", "Code, docs, translation, review or questions."]
+      [
+        "What it is",
+        "A hypothesis",
+        "Gated stages to build software with AI."
+      ],
+      [
+        "What it is not",
+        "A finished tool",
+        "It does not solve the problem yet, nor has it been measured."
+      ],
+      [
+        "Where it is",
+        "A skeleton",
+        "Runs a sample task, without AI, for study."
+      ],
+      [
+        "How to help",
+        "Study and contribute",
+        "Code, docs, translation, review or questions."
+      ]
     ],
     "ideiaTitulo": "Nobody knows the right way yet.",
     "ideiaTexto1": "Every month brings a new way of working with AI: specify first, plan first, let the agent run, review at the end. Each works for someone, and almost nobody measures.",
     "ideiaTexto2": "Prumo wants to be the place where you can build different flows, run the same task through each, and see which one fits the way you work. A pattern that adapts to you, proven with numbers.",
-    "fluxos": [["Flow A", "Research → SPEC → PLAN → Code"], ["Flow B", "SPEC → Code → Review"], ["Flow C", "Code → Review"]],
-    "medir": "measure", "qualServe": "which fits?",
+    "fluxos": [
+      [
+        "Flow A",
+        "Research → SPEC → PLAN → Code"
+      ],
+      [
+        "Flow B",
+        "SPEC → Code → Review"
+      ],
+      [
+        "Flow C",
+        "Code → Review"
+      ]
+    ],
+    "medir": "measure",
+    "qualServe": "which fits?",
     "labTitulo": "What we want to prove",
     "labTexto": "Each idea becomes a hypothesis with a measure. None has been tested yet, and that is where you can help.",
     "naoTestada": "not tested yet",
@@ -70,21 +164,158 @@
     "cta3": "Start with the docs",
     "rodape1": "Open source under AGPL-3.0 · built with AI, reviewed by people",
     "rodape2": "Every outside claim is sourced in the docs",
-    "secoes": ["The question", "The idea", "Hypotheses", "Where it stands", "Be part"],
-    "navRotulo": "Page sections", "idiomaRotulo": "Language", "temaRotulo": "Dark theme",
+    "secoes": [
+      "The question",
+      "The idea",
+      "Hypotheses",
+      "Where it stands",
+      "Be part"
+    ],
+    "navRotulo": "Page sections",
+    "idiomaRotulo": "Language",
+    "temaRotulo": "Dark theme",
     "docs": "en/docs/comece-aqui/",
-    "formas": [["Study", "Read the idea and the decisions, with sources."], ["Ask", "Questions count too."], ["Translate", "Review the English, translate pages."], ["Write docs", "Make what exists clearer."], ["Design", "Screens, diagrams, visuals."], ["Code", "Tasks marked for newcomers."]]
+    "formas": [
+      [
+        "Study",
+        "Read the idea and the decisions, with sources."
+      ],
+      [
+        "Ask",
+        "Questions count too."
+      ],
+      [
+        "Translate",
+        "Review the English, translate pages."
+      ],
+      [
+        "Write docs",
+        "Make what exists clearer."
+      ],
+      [
+        "Design",
+        "Screens, diagrams, visuals."
+      ],
+      [
+        "Code",
+        "Tasks marked for newcomers."
+      ]
+    ],
+    "mantido": "Maintained by"
   },
   "hipoteses": [
-    { "id": "H1", "pt": ["Etapas com arquivos declarados reduzem o retrabalho.", "Medida: quantas vezes a tarefa volta, por etapa."], "en": ["Stages with declared files reduce rework.", "Measure: how often the task goes back, per stage."], "estado": "nao-testada" },
-    { "id": "H2", "pt": ["O custo por etapa aprovada cai com o portão humano.", "Medida: tokens e tempo até a aprovação."], "en": ["Cost per approved stage drops with a human gate.", "Measure: tokens and time until approval."], "estado": "nao-testada" },
-    { "id": "H3", "pt": ["O melhor fluxo muda de pessoa pra pessoa.", "Medida: a mesma tarefa em fluxos diferentes."], "en": ["The best flow changes from person to person.", "Measure: the same task in different flows."], "estado": "nao-testada" }
+    {
+      "id": "H1",
+      "pt": [
+        "Etapas com arquivos declarados reduzem o retrabalho.",
+        "Medida: quantas vezes a tarefa volta, por etapa."
+      ],
+      "en": [
+        "Stages with declared files reduce rework.",
+        "Measure: how often the task goes back, per stage."
+      ],
+      "estado": "nao-testada"
+    },
+    {
+      "id": "H2",
+      "pt": [
+        "O custo por etapa aprovada cai com o portão humano.",
+        "Medida: tokens e tempo até a aprovação."
+      ],
+      "en": [
+        "Cost per approved stage drops with a human gate.",
+        "Measure: tokens and time until approval."
+      ],
+      "estado": "nao-testada"
+    },
+    {
+      "id": "H3",
+      "pt": [
+        "O melhor fluxo muda de pessoa pra pessoa.",
+        "Medida: a mesma tarefa em fluxos diferentes."
+      ],
+      "en": [
+        "The best flow changes from person to person.",
+        "Measure: the same task in different flows."
+      ],
+      "estado": "nao-testada"
+    }
   ],
   "marcos": [
-    { "quando": { "pt": "11 nov 2026", "en": "Nov 11, 2026" }, "pt": ["A ideia", "Um jeito pessoal de trabalhar com IA vira a hipótese: etapas com portões."], "en": ["The idea", "A personal way of working with AI becomes the hypothesis: gated stages."], "tipo": "feito" },
-    { "quando": { "pt": "14 nov 2026", "en": "Nov 14, 2026" }, "pt": ["Nasce aberto", "Nome, licença livre e as primeiras decisões registradas, à vista."], "en": ["Born open", "Name, free license and the first recorded decisions, in the open."], "tipo": "feito" },
-    { "quando": { "pt": "15 nov 2026", "en": "Nov 15, 2026" }, "pt": ["Primeiro esqueleto", "Uma tarefa passa por especificação e entrega, com um portão no meio. Sem IA, pra estudo."], "en": ["First skeleton", "A task goes through specification and delivery, with a gate in between. No AI, for study."], "tipo": "feito" },
-    { "quando": { "pt": "agora", "en": "now" }, "pt": ["Base e documentação", "Fechando as decisões de base e documentando o processo."], "en": ["Foundations and docs", "Closing the foundational decisions and documenting the process."], "tipo": "agora" },
-    { "quando": { "pt": "depois", "en": "next" }, "pt": ["Medir de verdade", "Usar em tarefas reais, medir custo e qualidade, e só então dizer se funciona."], "en": ["Measure for real", "Use it on real tasks, measure cost and quality, and only then say whether it works."], "tipo": "depois" }
+    {
+      "quando": {
+        "pt": "11 nov 2026",
+        "en": "Nov 11, 2026"
+      },
+      "pt": [
+        "A ideia",
+        "Um jeito pessoal de trabalhar com IA vira a hipótese: etapas com portões."
+      ],
+      "en": [
+        "The idea",
+        "A personal way of working with AI becomes the hypothesis: gated stages."
+      ],
+      "tipo": "feito"
+    },
+    {
+      "quando": {
+        "pt": "14 nov 2026",
+        "en": "Nov 14, 2026"
+      },
+      "pt": [
+        "Nasce aberto",
+        "Nome, licença livre e as primeiras decisões registradas, à vista."
+      ],
+      "en": [
+        "Born open",
+        "Name, free license and the first recorded decisions, in the open."
+      ],
+      "tipo": "feito"
+    },
+    {
+      "quando": {
+        "pt": "15 nov 2026",
+        "en": "Nov 15, 2026"
+      },
+      "pt": [
+        "Primeiro esqueleto",
+        "Uma tarefa passa por especificação e entrega, com um portão no meio. Sem IA, pra estudo."
+      ],
+      "en": [
+        "First skeleton",
+        "A task goes through specification and delivery, with a gate in between. No AI, for study."
+      ],
+      "tipo": "feito"
+    },
+    {
+      "quando": {
+        "pt": "agora",
+        "en": "now"
+      },
+      "pt": [
+        "Base e documentação",
+        "Fechando as decisões de base e documentando o processo."
+      ],
+      "en": [
+        "Foundations and docs",
+        "Closing the foundational decisions and documenting the process."
+      ],
+      "tipo": "agora"
+    },
+    {
+      "quando": {
+        "pt": "depois",
+        "en": "next"
+      },
+      "pt": [
+        "Medir de verdade",
+        "Usar em tarefas reais, medir custo e qualidade, e só então dizer se funciona."
+      ],
+      "en": [
+        "Measure for real",
+        "Use it on real tasks, measure cost and quality, and only then say whether it works."
+      ],
+      "tipo": "depois"
+    }
   ]
 }
