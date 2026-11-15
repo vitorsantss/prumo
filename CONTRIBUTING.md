@@ -25,7 +25,7 @@ Você pode contribuir escrevendo tudo na mão, usando a IA que já tem (paga ou 
 
 1. Faça um fork e crie um branch: `tipo/numero-descricao` (ex.: `feat/12-ler-pipeline-yml`).
 2. Faça commits pequenos, com mensagem que diga o porquê.
-3. Abra o PR ligando a issue (`Fecha #12`) e preencha o modelo.
+3. Abra o PR ligando a issue (`Fecha #12`) e preencha o modelo. Capriche no título: o merge é por squash (ADR-0008), então o título do PR vira o commit na `main`.
 4. Um mantenedor revisa. Pode haver pedido de ajuste, faz parte.
 
 ## Decisões grandes
