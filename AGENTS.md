@@ -19,9 +19,25 @@ Plataforma local-first que conduz tarefas de software em etapas com portões (ga
 | `docs/adr/` | Decisões de arquitetura (Nygard), com fontes |
 | `docs/processo.md` | Como o projeto é conduzido |
 | `CONTRIBUTING.md` | Fluxo de contribuição |
-| `.github/` | Modelos de issue e PR, dono do código |
+| `.github/` | Modelos de issue e PR, dono do código, CI |
 
-O código ainda não existe: o núcleo será em Go (ADR-0006) e a interface em TypeScript/React.
+| `cmd/prumo/` | Ponto de entrada da CLI |
+| `internal/pipeline/` | Leitura e validação do `pipeline.yml` |
+| `internal/coordenador/` | Decide o que roda e grava o rastro (ADR-0007) |
+| `internal/executor/` | Porta Executor e adapters: dublê, modelo (sem IA), Claude Code |
+| `internal/gate/` | Decisão humana entre etapas |
+| `internal/rastro/` | `etapa.json`, `tarefa.json`, `usage.jsonl`, `gates.jsonl` |
+| `internal/tarefa/`, `internal/local/` | Pasta da tarefa e diretórios XDG |
+| `exemplos/` | Pipeline e tarefa de exemplo (Rinha de Backend) |
+
+Núcleo em Go (ADR-0006); a interface web (TypeScript/React) ainda não existe.
+
+## Comandos
+
+- Testes: `go test ./...` (sempre antes de abrir PR)
+- Formatação: `gofmt -w .`
+- Análise: `go vet ./...`
+- Rodar sem IA: `go run ./cmd/prumo executar --pipeline exemplos/pipeline.yml --tarefa exemplos/rinha-2024q1/tarefa.md`
 
 ## Regras
 
