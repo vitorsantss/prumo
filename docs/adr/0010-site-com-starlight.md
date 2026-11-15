@@ -20,7 +20,7 @@ Alternativas avaliadas: Astro puro, sem o Starlight (visual todo nosso, mas busc
 - O repositório passa a ter Node, só dentro de `site/`. A interface futura do Prumo também será TypeScript e React, então não é uma dependência a mais no longo prazo.
 - Trocar de gerador é trocar a moldura: o conteúdo é Markdown comum em `docs/`.
 - A busca (Pagefind) roda no próprio site, sem serviço externo.
-- Publicar depende de um serviço de hospedagem. O caminho livre é o GitHub Pages (ADR-0005); enquanto o Actions da conta estiver parado, ver a issue de hospedagem.
+- Publicar depende de um serviço de hospedagem. Hoje o site está no Cloudflare Pages (https://prumo-docs.pages.dev), que publica a cada push na `main`, porque o Actions da conta está parado. O caminho livre é o GitHub Pages (ADR-0005), acompanhado na #61.
 
 ## Quando reavaliar
 O Starlight ainda está na versão 0.x e muda entre versões. A versão fica travada no `package.json` e só sobe de propósito, lendo o changelog. Migrar pra Astro puro entra em pauta se uma atualização quebrar um componente trocado duas vezes seguidas, se precisarmos trocar mais da metade dos componentes, ou se uma necessidade do Prumo não couber no Starlight. Acompanhamento na issue #58.

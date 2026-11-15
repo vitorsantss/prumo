@@ -6,6 +6,8 @@ Prumo é uma plataforma pessoal pra conduzir tarefas de software com IA em etapa
 Issue → Research → SPEC → PLAN → Código → Review (risco) → Entrega
 ```
 
+**Site e documentação:** https://prumo-docs.pages.dev · em estudo, ainda não pronto pra uso.
+
 A ideia: decidir sem IA sempre que der (regras, heurísticas), usar IA só onde o trabalho é aberto, medir os tokens de cada etapa e nunca deixar código arriscado passar sem revisão humana.
 
 ## Por que "Prumo"
