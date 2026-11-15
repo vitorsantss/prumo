@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import SeletorIdioma, { type OpcaoIdioma } from '../SeletorIdioma.astro';
+
+const rota = Astro.locals.starlightRoute;
+const en = rota.locale === 'en';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const caminho = rota.id.replace(/^en\//, '');
+const traducoes = await getCollection('docs', (entrada) => entrada.id.startsWith('en/'));
+const traducao = traducoes.find((entrada) => entrada.id === `en/${caminho}`);
+const estadoIngles: OpcaoIdioma['estado'] = traducao ? (traducao.data.traducao ?? 'revisada') : 'falta';
+const href = (prefixo: string) => `${base}${prefixo}${caminho}/`;
+
+const opcoes: OpcaoIdioma[] = [
+  { nome: 'Português', lang: 'pt-BR', href: href(''), atual: !en, estado: 'original' },
+  { nome: 'English', lang: 'en', href: href('en/'), atual: en, estado: estadoIngles },
+];
+const textos = en
+  ? { original: 'original', ia: 'translated by AI, awaiting review', revisada: 'reviewed translation', falta: 'not translated yet', ajuda: 'Why, and how to help →' }
+  : { original: 'original', ia: 'traduzida por IA, aguardando revisão', revisada: 'tradução revisada', falta: 'ainda sem tradução', ajuda: 'Por que e como ajudar →' };
+---
+<SeletorIdioma opcoes={opcoes} rotulo={en ? 'Language of this page' : 'Idioma desta página'} textos={textos} ajudaHref={`${base}docs/traduzir/`} />

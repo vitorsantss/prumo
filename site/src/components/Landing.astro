@@ -1,5 +1,9 @@
 ---
+import '../estilos/tokens.css';
 import dados from '../data/landing.json';
+import Busca from './Busca.astro';
+import ChaveTema from './ChaveTema.astro';
+import SeletorIdioma from './SeletorIdioma.astro';
 
 interface Props {
   idioma: 'pt' | 'en';
@@ -7,9 +11,10 @@ interface Props {
 
 const { idioma } = Astro.props;
 const x = dados[idioma];
+const en = idioma === 'en';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-const urlCanonica = new URL(idioma === 'en' ? `${base}en/` : base, Astro.site).href;
-const urlOutroIdioma = idioma === 'en' ? base : `${base}en/`;
+const urlCanonica = new URL(en ? `${base}en/` : base, Astro.site).href;
+const docs = `${base}${x.docs}`;
 const repositorio = 'https://github.com/vitorsantss/prumo';
 const icones = [
   'M4 5h7v14H4zM13 5h7v14h-7',
@@ -19,7 +24,14 @@ const icones = [
   'M4 20l4-1 10-10-3-3L5 16zM14 6l3 3',
   'M8 8l-4 4 4 4M16 8l4 4-4 4M13 6l-2 12',
 ];
-const ids = ['pergunta', 'ideia', 'hipoteses', 'hoje', 'parte'];
+const estadoDoMarco = { feito: 'feito', agora: 'andamento', depois: 'falta' } as const;
+const opcoesIdioma = [
+  { nome: 'Português', lang: 'pt-BR', href: base, atual: !en, estado: 'original' as const },
+  { nome: 'English', lang: 'en', href: `${base}en/`, atual: en, estado: 'ia' as const },
+];
+const textosIdioma = en
+  ? { original: 'original', ia: 'translated by AI, awaiting review', revisada: 'reviewed translation', falta: 'not translated yet', ajuda: 'Why, and how to help →' }
+  : { original: 'original', ia: 'traduzida por IA, aguardando revisão', revisada: 'tradução revisada', falta: 'ainda sem tradução', ajuda: 'Por que e como ajudar →' };
 const dadosEstruturados = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareSourceCode',
@@ -29,7 +41,7 @@ const dadosEstruturados = {
   license: 'https://www.gnu.org/licenses/agpl-3.0.html',
   programmingLanguage: 'Go',
   inLanguage: x.lang,
-  creativeWorkStatus: 'Em estudo',
+  author: { '@type': 'Person', name: 'Vitor Santos', url: 'https://github.com/vitorsantss' },
 };
 ---
 <!doctype html>
@@ -48,81 +60,70 @@ const dadosEstruturados = {
 <meta property="og:url" content={urlCanonica} />
 <meta name="twitter:card" content="summary" />
 <script type="application/ld+json" set:html={JSON.stringify(dadosEstruturados)} />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
 <script is:inline>
   (() => {
-    const salvo = localStorage.getItem('starlight-theme');
-    const escuro = salvo ? salvo === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    let salvo = null;
+    try { salvo = localStorage.getItem('starlight-theme'); } catch {}
+    const escuro = salvo ? salvo === 'dark' : !matchMedia('(prefers-color-scheme: light)').matches;
     document.documentElement.dataset.theme = escuro ? 'dark' : 'light';
   })();
 </script>
 </head>
-<body>
+<body class="p-canvas">
 <a class="pular" href="#conteudo">{x.pular}</a>
 
 <header class="topo">
-  <span class="marca"><span class="logo">prumo</span><span class="adesivo">{x.adesivo}</span></span>
-  <div class="controles">
-    <nav class="idiomas" aria-label={x.idiomaRotulo}>
-      <a href={base} lang="pt-BR" aria-current={idioma === 'pt' ? 'true' : undefined}>PT</a>
-      <a href={`${base}en/`} lang="en" aria-current={idioma === 'en' ? 'true' : undefined}>EN</a>
-    </nav>
-    <button type="button" class="chave-tema" role="switch" aria-checked="false" aria-label={x.temaRotulo} data-chave-tema>
-      <svg class="sol" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
-      <svg class="lua" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg>
-      <span class="bolinha" aria-hidden="true"></span>
-    </button>
+  <div class="p-ilha barra">
+    <span class="marca"><span class="logo" translate="no">prumo</span><span class="p-adesivo adesivo">{x.adesivo}</span></span>
+    <a class="link-docs" href={docs}>{en ? 'Docs' : 'Documentação'}</a>
+    <Busca idioma={idioma} />
+    <div class="controles">
+      <SeletorIdioma opcoes={opcoesIdioma} rotulo={x.idiomaRotulo} textos={textosIdioma} ajudaHref={`${base}docs/traduzir/`} />
+      <ChaveTema rotulo={x.temaRotulo} />
+    </div>
   </div>
 </header>
 
-<nav class="indice" aria-label={x.navRotulo}>
-  {x.secoes.map((nome, i) => (
-    <a href={`#${ids[i]}`} data-indice={ids[i]}><span class="marca-indice" aria-hidden="true"></span><span class="rotulo">{nome}</span></a>
-  ))}
-</nav>
-
 <main id="conteudo">
-  <section id="pergunta" class="secao heroi" aria-labelledby="titulo">
+  <section id="pergunta" class="heroi" aria-labelledby="titulo">
     <div class="heroi-texto">
       <span class="kicker">{x.kicker}</span>
       <h1 id="titulo">{x.pergunta}</h1>
       <p class="resposta"><span class="digita">{x.resposta}</span></p>
       <div class="botoes">
-        <a class="botao primario" href={`${base}${x.docs}`}>{x.cta1}</a>
-        <button type="button" class="botao" data-compartilhar data-copiado={x.copiado}>
+        <a class="p-botao primario grande" href={docs}>{x.cta1}</a>
+        <button type="button" class="p-botao grande" data-compartilhar data-copiado={x.copiado}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"></path></svg>
           <span>{x.compartilhar}</span>
         </button>
       </div>
     </div>
-    <ul class="respostas">
+    <ul class="grade respostas">
       {x.respostas.map(([rotulo, titulo, texto], i) => (
-        <li class:list={['cartao', 'aparece', { destaque: i === 1 }]} style={`animation-delay: ${0.4 + i * 0.15}s`}>
+        <li class="p-ilha cartao aparece" style={`animation-delay: ${0.4 + i * 0.15}s`}>
           <span class="rotulo-cartao">{rotulo}</span><strong>{titulo}</strong><span class="suave">{texto}</span>
         </li>
       ))}
     </ul>
   </section>
 
-  <section id="ideia" class="faixa" aria-labelledby="t-ideia">
-    <div class="secao duas-colunas">
-      <div class="revela">
-        <h2 id="t-ideia">{x.ideiaTitulo}</h2>
-        <p class="suave">{x.ideiaTexto1}</p>
-        <p>{x.ideiaTexto2}</p>
-      </div>
-      <div class="fluxos" aria-hidden="true">
-        <svg viewBox="0 0 560 300" fill="none" preserveAspectRatio="none">
-          <path class="traco" d="M20 50 C 180 50, 300 50, 470 150"></path>
-          <path class="traco" d="M20 150 C 180 150, 300 150, 470 150"></path>
-          <path class="traco" d="M20 250 C 180 250, 300 250, 470 150"></path>
-        </svg>
-        {x.fluxos.map(([nome, etapas], i) => (
-          <div class="fluxo revela" style={`top: ${18 + i * 100}px`}><span class="rotulo-cartao">{nome}</span><span class="manuscrita">{etapas}</span></div>
-        ))}
-        <div class="medir revela"><span class="manuscrita">{x.medir}</span><span>{x.qualServe}</span></div>
-      </div>
+  <section id="ideia" class="p-folha folha" aria-labelledby="t-ideia">
+    <div class="revela coluna">
+      <h2 id="t-ideia">{x.ideiaTitulo}</h2>
+      <p class="suave">{x.ideiaTexto1}</p>
+      <p>{x.ideiaTexto2}</p>
+      <a class="terciario" href={`${base}${en ? 'en/' : ''}docs/a-ideia/`}>{en ? 'Read the full idea' : 'Ler a ideia completa'}</a>
+    </div>
+    <div class="fluxos" aria-hidden="true">
+      <svg viewBox="0 0 560 300" fill="none" preserveAspectRatio="none">
+        <path class="traco" d="M20 50 C 180 50, 300 50, 470 150"></path>
+        <path class="traco" d="M20 150 C 180 150, 300 150, 470 150"></path>
+        <path class="traco" d="M20 250 C 180 250, 300 250, 470 150"></path>
+      </svg>
+      {x.fluxos.map(([nome, etapas], i) => (
+        <div class="p-ilha fluxo revela" style={`top: ${14 + i * 100}px`}><span class="rotulo-cartao">{nome}</span><span class="manuscrita">{etapas}</span></div>
+      ))}
+      <div class="p-ilha medir revela"><span class="anel"></span><span class="manuscrita">{x.medir}</span><span class="suave pequeno">{x.qualServe}</span></div>
     </div>
   </section>
 
@@ -133,21 +134,26 @@ const dadosEstruturados = {
     </div>
     <ol class="grade">
       {dados.hipoteses.map((h) => (
-        <li class="cartao revela"><span class="mono suave">{h.id}</span><strong>{h[idioma][0]}</strong><span class="suave">{h[idioma][1]}</span><span class="selo">{x.naoTestada}</span></li>
+        <li class="p-ilha cartao revela"><span class="mono suave">{h.id}</span><strong>{h[idioma][0]}</strong><span class="suave">{h[idioma][1]}</span><span class="estado"><span class="p-ponto falta" aria-hidden="true"></span>{x.naoTestada}</span></li>
       ))}
     </ol>
   </section>
 
-  <section id="hoje" class="secao duas-colunas" aria-labelledby="t-hoje">
-    <div class="revela">
+  <section id="hoje" class="p-folha folha" aria-labelledby="t-hoje">
+    <div class="revela coluna">
       <h2 id="t-hoje">{x.hojeTitulo}</h2>
       <p class="suave">{x.hojeTexto}</p>
+      <ul class="legenda">
+        <li><span class="p-ponto feito" aria-hidden="true"></span>{en ? 'done' : 'feito'}</li>
+        <li><span class="p-ponto andamento" aria-hidden="true"></span>{en ? 'in progress' : 'em andamento'}</li>
+        <li><span class="p-ponto falta" aria-hidden="true"></span>{en ? 'not yet' : 'ainda não'}</li>
+      </ul>
     </div>
     <div class="fio">
       <ol>
         {dados.marcos.map((m) => (
           <li class="revela">
-            <span class:list={['no', m.tipo]} aria-hidden="true"></span>
+            <span class:list={['p-ponto', 'no', estadoDoMarco[m.tipo as keyof typeof estadoDoMarco]]} aria-hidden="true"></span>
             <span class:list={['mono', { agora: m.tipo === 'agora' }]}>{m.quando[idioma]}</span>
             <p class="marco-titulo">{m[idioma][0]}</p>
             <p class="suave">{m[idioma][1]}</p>
@@ -157,41 +163,32 @@ const dadosEstruturados = {
     </div>
   </section>
 
-  <section id="parte" class="faixa" aria-labelledby="t-parte">
-    <div class="secao">
-      <div class="revela cabecalho">
-        <h2 id="t-parte">{x.parteTitulo}</h2>
-        <p class="suave">{x.parteTexto}</p>
-      </div>
-      <ul class="grade formas">
-        {x.formas.map(([nome, texto], i) => (
-          <li class="cartao revela"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={icones[i]}></path></svg><strong>{nome}</strong><span class="suave">{texto}</span></li>
-        ))}
-      </ul>
-      <div class="botoes">
-        <a class="botao primario" href={`${base}${x.docs}`}>{x.cta3}</a>
-        <button type="button" class="botao" data-compartilhar data-copiado={x.copiado}><span>{x.compartilhar}</span></button>
-      </div>
+  <section id="parte" class="secao" aria-labelledby="t-parte">
+    <div class="revela cabecalho">
+      <h2 id="t-parte">{x.parteTitulo}</h2>
+      <p class="suave">{x.parteTexto}</p>
+    </div>
+    <ul class="grade formas">
+      {x.formas.map(([nome, texto], i) => (
+        <li class="p-ilha cartao revela"><span class="icone" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={icones[i]}></path></svg></span><strong>{nome}</strong><span class="suave">{texto}</span></li>
+      ))}
+    </ul>
+    <div class="botoes">
+      <a class="p-botao primario grande" href={docs}>{x.cta3}</a>
+      <button type="button" class="p-botao grande" data-compartilhar data-copiado={x.copiado}><span>{x.compartilhar}</span></button>
     </div>
   </section>
 </main>
 
-<footer class="rodape"><span>{x.mantido} <strong>Vitor Santos</strong> · <a href="https://github.com/vitorsantss">GitHub</a> · <a href="https://www.linkedin.com/in/vitorsantss/">LinkedIn</a></span><span>{x.rodape1}</span><span>{x.rodape2}</span></footer>
+<footer class="pe">
+  <div class="p-ilha rodape">
+    <span>{x.mantido} <strong>Vitor Santos</strong> · <a href="https://github.com/vitorsantss">GitHub</a> · <a href="https://www.linkedin.com/in/vitorsantss/">LinkedIn</a></span>
+    <span>{x.rodape1}</span>
+    <span>{x.rodape2}</span>
+  </div>
+</footer>
 
 <script>
-  const raiz = document.documentElement;
-  const chave = document.querySelector<HTMLButtonElement>('[data-chave-tema]');
-  const aplicar = (escuro: boolean) => {
-    raiz.dataset.theme = escuro ? 'dark' : 'light';
-    chave?.setAttribute('aria-checked', String(escuro));
-  };
-  aplicar(raiz.dataset.theme === 'dark');
-  chave?.addEventListener('click', () => {
-    const escuro = raiz.dataset.theme !== 'dark';
-    aplicar(escuro);
-    localStorage.setItem('starlight-theme', escuro ? 'dark' : 'light');
-  });
-
   document.querySelectorAll<HTMLButtonElement>('[data-compartilhar]').forEach((botao) => {
     botao.addEventListener('click', async () => {
       const url = location.href.split('#')[0];
@@ -199,135 +196,103 @@ const dadosEstruturados = {
         await navigator.share({ title: document.title, url }).catch(() => undefined);
         return;
       }
-      await navigator.clipboard?.writeText(url);
+      await navigator.clipboard?.writeText(url).catch(() => undefined);
       const rotulo = botao.querySelector('span');
       if (rotulo) rotulo.textContent = botao.dataset.copiado ?? '';
     });
   });
-
-  const itens = new Map(
-    [...document.querySelectorAll<HTMLAnchorElement>('[data-indice]')].map((a) => [a.dataset.indice, a]),
-  );
-  const observador = new IntersectionObserver(
-    (entradas) => {
-      entradas.forEach((entrada) => {
-        if (!entrada.isIntersecting) return;
-        itens.forEach((a) => a.removeAttribute('aria-current'));
-        itens.get(entrada.target.id)?.setAttribute('aria-current', 'location');
-      });
-    },
-    { rootMargin: '-40% 0px -55% 0px' },
-  );
-  document.querySelectorAll('main > section[id]').forEach((s) => observador.observe(s));
 </script>
 
 <style is:global>
-  :root {
-    --bg: #fafafa; --faixa: #f3f3f5; --card: #ffffff; --ink: #1e1e1e; --muted: #5a5a62; --line: #d2d2d8; --soft: #efeff2;
-    --wait: #f08c00; --wait-text: #a35a00; --aviso-fundo: #fff4e0; --aviso-texto: #5c3300; --done: #2f9e44; --todo: #9a9aa3; --sticky: #fff3bf;
-    --sombra: 0 8px 24px rgba(0, 0, 0, 0.07);
-    --raio: 14px 12px 16px 12px / 12px 16px 12px 14px;
-    --manuscrita: 'Architects Daughter', cursive;
-    color-scheme: light;
-  }
-  :root[data-theme='dark'] {
-    --bg: #121212; --faixa: #18181b; --card: #1e1e21; --ink: #e3e3e8; --muted: #a0a0aa; --line: #3e3e45; --soft: #2a2a2e;
-    --wait: #ffa94d; --wait-text: #ffc078; --aviso-fundo: #2b2013; --aviso-texto: #ffd8a8; --done: #51cf66; --todo: #6e6e78; --sticky: #f5e3a1;
-    --sombra: 0 8px 24px rgba(0, 0, 0, 0.45);
-    color-scheme: dark;
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; }
-  a { color: inherit; }
+  body { margin: 0; font-family: var(--p-texto); color: var(--p-ink); overflow-x: hidden; }
   a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; border-radius: 8px; }
-  h1, h2 { font-family: var(--manuscrita); font-weight: 400; margin: 0; }
-  h2 { font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.08; }
+</style>
+
+<style>
+  h1, h2 { font-family: var(--p-manuscrita); font-weight: 400; margin: 0; text-wrap: balance; }
+  h1 { font-size: clamp(2.6rem, 6vw, 4rem); line-height: 1.04; }
+  h2 { font-size: clamp(2rem, 4vw, 2.6rem); line-height: 1.08; }
   p { margin: 0; line-height: 1.7; font-size: 1.06rem; }
-  .suave { color: var(--muted); }
-  .mono { font: 400 0.82rem 'JetBrains Mono', monospace; }
-  .manuscrita { font-family: var(--manuscrita); font-size: 1.06rem; }
-  .pular { position: absolute; left: -9999px; top: 8px; background: var(--ink); color: var(--bg); padding: 10px 14px; border-radius: 10px; z-index: 30; }
+  .suave { color: var(--p-muted); }
+  .pequeno { font-size: 11px; }
+  .mono { font: 400 0.82rem var(--p-mono); }
+  .manuscrita { font-family: var(--p-manuscrita); font-size: 1.06rem; }
+  .pular { position: absolute; left: -9999px; top: 8px; background: var(--p-ink); color: var(--p-bg); padding: 10px 14px; border-radius: 10px; z-index: 60; }
   .pular:focus { left: 16px; }
 
-  .topo { max-width: 1180px; margin: 0 auto; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
-  .marca { display: inline-flex; align-items: center; gap: 12px; }
-  .logo { font-family: var(--manuscrita); font-size: 28px; }
-  .adesivo { font-family: var(--manuscrita); font-size: 15px; line-height: 1; padding: 6px 10px 5px; background: var(--sticky); color: #2b2620; border-radius: 4px; box-shadow: 0 2px 0 rgba(0,0,0,.08), 0 4px 10px rgba(0,0,0,.1); transform: rotate(-4deg); animation: colar .7s .9s cubic-bezier(.2,.9,.3,1.2) both; }
-  .controles { display: flex; align-items: center; gap: 10px; }
-  .idiomas { display: inline-flex; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); }
-  .idiomas a { font: 600 12px Inter, sans-serif; text-decoration: none; padding: 7px 11px; border-radius: 999px; color: var(--muted); }
-  .idiomas a[aria-current] { background: var(--ink); color: var(--bg); }
-  .chave-tema { position: relative; width: 64px; height: 36px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); cursor: pointer; padding: 0; color: var(--muted); }
-  .chave-tema .sol { position: absolute; left: 10px; top: 9px; }
-  .chave-tema .lua { position: absolute; right: 10px; top: 9px; }
-  .bolinha { position: absolute; top: 3px; left: 3px; width: 28px; height: 28px; border-radius: 50%; background: var(--ink); transition: transform .3s cubic-bezier(.3,.7,.3,1); }
-  :root[data-theme='dark'] .bolinha { transform: translateX(28px); }
+  .topo { position: sticky; top: 12px; z-index: 20; max-width: 1180px; margin: 12px auto 0; padding: 0 16px; }
+  .barra { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding: 8px 10px 8px 16px; }
+  .marca { display: inline-flex; align-items: center; gap: 10px; }
+  .logo { font-family: var(--p-manuscrita); font-size: 26px; }
+  .adesivo { animation: colar 0.7s 0.9s cubic-bezier(0.2, 0.9, 0.3, 1.2) both; }
+  .link-docs, .terciario { font-size: 15px; font-weight: 600; color: var(--p-ink); text-decoration: underline; text-underline-offset: 4px; }
+  .link-docs { margin-right: auto; }
+  .controles { display: flex; align-items: center; gap: 8px; }
 
-  .indice { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); z-index: 10; display: flex; flex-direction: column; gap: 4px; padding: 10px 8px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--sombra); }
-  .indice a { position: relative; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; }
-  .marca-indice { display: block; width: 7px; height: 7px; border-radius: 999px; background: var(--todo); transition: all .25s; }
-  .indice a[aria-current] .marca-indice { width: 10px; height: 22px; background: var(--wait); }
-  .indice .rotulo { position: absolute; right: 42px; white-space: nowrap; font: 600 13px Inter, sans-serif; background: var(--ink); color: var(--bg); padding: 6px 10px; border-radius: 8px; opacity: 0; transform: translateX(6px); transition: opacity .2s, transform .2s; pointer-events: none; }
-  .indice a:hover .rotulo, .indice a:focus-visible .rotulo { opacity: 1; transform: none; }
-  @media (max-width: 720px) { .indice { display: none; } }
-
-  .secao { max-width: 1180px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 28px; }
-  .faixa { background: var(--faixa); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .duas-colunas { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 48px; }
-  .duas-colunas > * { flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
-  .cabecalho { display: flex; flex-direction: column; gap: 12px; max-width: 760px; }
-  .heroi { padding-top: 40px; gap: 36px; }
+  main { max-width: 1180px; margin: 0 auto; padding: 0 16px 48px; display: flex; flex-direction: column; gap: 28px; }
+  .heroi { padding: 64px 8px 24px; display: flex; flex-direction: column; gap: 36px; }
   .heroi-texto { display: flex; flex-direction: column; gap: 14px; max-width: 880px; }
-  .kicker { font-family: var(--manuscrita); font-size: 26px; color: var(--muted); }
-  h1 { font-size: clamp(2.6rem, 6vw, 4.1rem); line-height: 1.04; }
-  .resposta { font-size: 1.25rem; color: var(--muted); }
+  .kicker { font-family: var(--p-manuscrita); font-size: 26px; color: var(--p-muted); }
+  .resposta { font-size: 1.25rem; color: var(--p-muted); }
   .digita { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; max-width: 100%; animation: digitar 1.6s 1.2s steps(40) both; }
   .botoes { display: flex; flex-wrap: wrap; gap: 10px; }
-  .botao { font: 600 15px Inter, sans-serif; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 13px 20px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); text-decoration: none; cursor: pointer; }
-  .botao.primario { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-  .respostas, .grade { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .grande { min-height: 48px; padding: 0 20px; }
+  .grade { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
   .formas { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
-  .cartao { background: var(--card); border: 1px solid var(--line); border-radius: var(--raio); padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+  .cartao { padding: 20px; display: flex; flex-direction: column; gap: 8px; }
   .cartao strong { font-size: 1.08rem; line-height: 1.4; }
   .cartao .suave { font-size: 0.92rem; line-height: 1.55; }
-  .cartao.destaque { border-color: var(--wait); }
-  .rotulo-cartao { font: 600 12px Inter, sans-serif; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
-  .selo { align-self: flex-start; font: 600 12px Inter, sans-serif; padding: 4px 10px; border-radius: 999px; color: var(--wait-text); background: var(--aviso-fundo); }
+  .rotulo-cartao { font-size: 13px; font-weight: 600; color: var(--p-muted); }
+  .estado { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--p-muted); }
+  .icone { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; border: 1px solid var(--p-line); background: var(--p-solid); }
 
-  .fluxos { position: relative; height: 300px; }
+  .folha { padding: clamp(24px, 4vw, 48px); display: flex; flex-wrap: wrap; gap: 40px; align-items: center; }
+  .coluna { flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+  .secao { padding: 56px 8px 16px; display: flex; flex-direction: column; gap: 24px; }
+  .cabecalho { display: flex; flex-direction: column; gap: 12px; max-width: 780px; }
+
+  .fluxos { position: relative; flex: 1 1 460px; min-width: 0; height: 300px; }
   .fluxos svg { position: absolute; inset: 0; width: 100%; height: 300px; }
-  .traco { stroke: var(--line); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 900; stroke-dashoffset: 0; }
-  .fluxo { position: absolute; left: 0; display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; background: var(--card); border: 1px solid var(--line); border-radius: var(--raio); box-shadow: var(--sombra); }
-  .medir { position: absolute; right: 0; top: 112px; width: 92px; height: 76px; border-radius: 14px; background: var(--aviso-fundo); border: 1.5px solid var(--wait); color: var(--aviso-texto); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 11px; }
+  .traco { stroke: var(--p-line); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 900; stroke-dashoffset: 0; }
+  .fluxo { position: absolute; left: 0; display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; }
+  .medir { position: absolute; right: 0; top: 108px; width: 96px; height: 84px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
   .medir .manuscrita { font-size: 22px; }
+  .anel { position: absolute; inset: -6px; border-radius: 18px; border: 1.5px dashed var(--p-ink); animation: girar 6s linear infinite; }
 
-  .fio { position: relative; }
-  .fio::before { content: ''; position: absolute; left: 10px; top: 6px; bottom: 6px; width: 1.5px; background: var(--line); }
+  .legenda { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--p-muted); }
+  .legenda li { display: inline-flex; align-items: center; gap: 6px; }
+  .fio { position: relative; flex: 1 1 460px; min-width: 0; }
+  .fio::before { content: ''; position: absolute; left: 10px; top: 6px; bottom: 6px; width: 1.5px; background: var(--p-line); }
   .fio ol { list-style: none; margin: 0; padding: 0 0 0 38px; }
-  .fio li { position: relative; padding-bottom: 30px; }
+  .fio li { position: relative; padding-bottom: 26px; }
   .fio .marco-titulo { font-weight: 700; margin-top: 4px; }
   .fio .suave { font-size: 0.92rem; line-height: 1.55; }
-  .no { position: absolute; left: -36px; top: 2px; width: 16px; height: 16px; border-radius: 50%; box-shadow: 0 0 0 4px var(--bg); }
-  .no.feito { background: var(--done); }
-  .no.agora { background: var(--wait); animation: pulsar 2s ease-in-out infinite; }
-  .no.depois { background: var(--bg); border: 2px solid var(--todo); }
-  .mono.agora { color: var(--wait-text); }
+  .no { position: absolute; left: -36px; top: 2px; width: 16px; height: 16px; box-shadow: 0 0 0 4px var(--p-solid); background-color: var(--p-solid); }
+  .no.feito { background: var(--p-done); }
+  .mono.agora { color: var(--p-run); }
 
-  .rodape { border-top: 1px solid var(--line); max-width: 100%; padding: 22px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--muted); }
+  .pe { max-width: 1180px; margin: 0 auto; padding: 0 16px 24px; }
+  .rodape { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 16px 20px; font-size: 13px; color: var(--p-muted); }
+  .rodape strong, .rodape a { color: var(--p-ink); }
+  .rodape a { text-underline-offset: 3px; }
 
-  .aparece { opacity: 0; animation: surgir .7s ease-out forwards; }
+  .aparece { opacity: 0; animation: surgir 0.7s ease-out forwards; }
   @keyframes surgir { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
-  @keyframes colar { 0% { opacity: 0; transform: scale(1.5) rotate(-4deg); } 60% { opacity: 1; transform: scale(.94) rotate(-4deg); } 100% { opacity: 1; transform: scale(1) rotate(-4deg); } }
-  @keyframes pulsar { 0%, 100% { box-shadow: 0 0 0 4px var(--bg), 0 0 0 4px rgba(240,140,0,.5); } 50% { box-shadow: 0 0 0 4px var(--bg), 0 0 0 10px rgba(240,140,0,0); } }
+  @keyframes colar { 0% { opacity: 0; transform: scale(1.5) rotate(-4deg); } 60% { opacity: 1; transform: scale(0.94) rotate(-4deg); } 100% { opacity: 1; transform: rotate(-4deg); } }
   @keyframes digitar { from { max-width: 0; } to { max-width: 100%; } }
   @keyframes desenhar { from { stroke-dashoffset: 900; } to { stroke-dashoffset: 0; } }
+  @keyframes girar { to { transform: rotate(360deg); } }
   @supports (animation-timeline: view()) {
     .revela { animation: surgir linear both; animation-timeline: view(); animation-range: entry 0% cover 24%; }
     .traco { animation: desenhar linear both; animation-timeline: view(); animation-range: entry 10% cover 45%; }
   }
+  @media (max-width: 720px) {
+    .link-docs { margin-right: 0; }
+    .medir { display: none; }
+    .digita { white-space: normal; animation: none; }
+  }
   @media (prefers-reduced-motion: reduce) {
-    .adesivo, .aparece, .revela, .digita, .no.agora, .traco { animation: none !important; opacity: 1; stroke-dashoffset: 0; }
-    .bolinha, .marca-indice, .indice .rotulo { transition: none; }
+    .adesivo, .aparece, .revela, .digita, .traco, .anel { animation: none !important; opacity: 1; stroke-dashoffset: 0; }
   }
 </style>
 </body>

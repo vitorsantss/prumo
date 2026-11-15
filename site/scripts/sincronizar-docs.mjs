@@ -7,6 +7,7 @@ const origem = join(aqui, '..', '..', 'docs');
 const destino = join(aqui, '..', 'src', 'content', 'docs');
 const repositorio = 'https://github.com/vitorsantss/prumo/blob/main/';
 const ignorar = new Set(['design']);
+const marcaIA = /^> \*\*Translated by AI/m;
 
 function listarMarkdown(pasta, base = '') {
   return readdirSync(pasta).flatMap((nome) => {
@@ -48,7 +49,8 @@ function converter(rel) {
   const titulo = indiceTitulo >= 0 ? linhas[indiceTitulo].slice(2).trim() : rel;
   if (indiceTitulo >= 0) linhas.splice(indiceTitulo, 1);
   const corpo = reescreverLinks(linhas.join('\n').trimStart(), rel);
-  const frontmatter = ['---', `title: ${JSON.stringify(titulo)}`, `editUrl: ${JSON.stringify(repositorio.replace('/blob/', '/edit/') + 'docs/' + rel)}`, '---', ''];
+  const traducao = rel.startsWith('en/') ? (marcaIA.test(corpo) ? 'ia' : 'revisada') : null;
+  const frontmatter = ['---', `title: ${JSON.stringify(titulo)}`, ...(traducao ? [`traducao: ${traducao}`] : []), ...(rel.endsWith('0000-modelo.md') ? ['sidebar:', '  hidden: true', 'pagefind: false'] : []), `editUrl: ${JSON.stringify(repositorio.replace('/blob/', '/edit/') + 'docs/' + rel)}`, '---', ''];
   return frontmatter.join('\n') + corpo;
 }
 

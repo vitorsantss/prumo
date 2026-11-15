@@ -11,6 +11,7 @@ O site é feito com **Starlight** (Astro, MIT), na pasta `site/`:
 - `docs/` continua sendo a fonte. Um script (`site/scripts/sincronizar-docs.mjs`) copia os Markdown pro site no build, gera o título a partir do primeiro cabeçalho e reescreve os links. Ninguém edita a cópia.
 - Páginas em inglês ficam em `docs/en/`, com o mesmo nome do arquivo em português. Página sem tradução aparece em português, com o aviso do próprio Starlight.
 - A página inicial é própria (`site/src/components/Landing.astro`), com o visual do design system. O que muda com o projeto (hipóteses, linha do tempo) vem de `site/src/data/landing.json`.
+- Cabeçalho, busca, seletor de idioma, tema e aviso de página sem tradução são componentes nossos, no visual do design system (regras em `docs/design/site.md`). A busca usa a API do Pagefind direto, pra página inicial e documentação terem o mesmo modal.
 - Endereço e caminho base vêm das variáveis `PRUMO_SITE_URL` e `PRUMO_SITE_BASE`, pra publicar no GitHub Pages ou em outro serviço sem mudar código.
 
 Alternativas avaliadas: Astro puro, sem o Starlight (visual todo nosso, mas busca, rotas de idioma e sidebar viram código pra manter; custo inicial 3 a 4 vezes maior), Hugo com Hextra (sem Node, mas templates numa linguagem a mais), VitePress (ecossistema Vue, diferente do React planejado pra interface) e Zensical (sucessor do Material, ainda novo).

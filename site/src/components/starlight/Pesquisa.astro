@@ -1,0 +1,6 @@
+---
+import Busca from '../Busca.astro';
+
+const en = Astro.locals.starlightRoute.locale === 'en';
+---
+<Busca idioma={en ? 'en' : 'pt'} />
