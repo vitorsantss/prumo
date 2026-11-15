@@ -13,7 +13,7 @@ O site é feito com **Starlight** (Astro, MIT), na pasta `site/`:
 - A página inicial é própria (`site/src/components/Landing.astro`), com o visual do design system. O que muda com o projeto (hipóteses, linha do tempo) vem de `site/src/data/landing.json`.
 - Endereço e caminho base vêm das variáveis `PRUMO_SITE_URL` e `PRUMO_SITE_BASE`, pra publicar no GitHub Pages ou em outro serviço sem mudar código.
 
-Alternativas avaliadas: Hugo com Hextra (sem Node, mas templates numa linguagem a mais), VitePress (ecossistema Vue, diferente do React planejado pra interface) e Zensical (sucessor do Material, ainda novo).
+Alternativas avaliadas: Astro puro, sem o Starlight (visual todo nosso, mas busca, rotas de idioma e sidebar viram código pra manter; custo inicial 3 a 4 vezes maior), Hugo com Hextra (sem Node, mas templates numa linguagem a mais), VitePress (ecossistema Vue, diferente do React planejado pra interface) e Zensical (sucessor do Material, ainda novo).
 
 ## Consequências
 - O repositório passa a ter Node, só dentro de `site/`. A interface futura do Prumo também será TypeScript e React, então não é uma dependência a mais no longo prazo.
@@ -21,7 +21,11 @@ Alternativas avaliadas: Hugo com Hextra (sem Node, mas templates numa linguagem 
 - A busca (Pagefind) roda no próprio site, sem serviço externo.
 - Publicar depende de um serviço de hospedagem. O caminho livre é o GitHub Pages (ADR-0005); enquanto o Actions da conta estiver parado, ver a issue de hospedagem.
 
+## Quando reavaliar
+O Starlight ainda está na versão 0.x e muda entre versões. A versão fica travada no `package.json` e só sobe de propósito, lendo o changelog. Migrar pra Astro puro entra em pauta se uma atualização quebrar um componente trocado duas vezes seguidas, se precisarmos trocar mais da metade dos componentes, ou se uma necessidade do Prumo não couber no Starlight. Acompanhamento na issue #58.
+
 ## Fontes
 - Starlight · https://starlight.astro.build
 - Material for MkDocs, aviso de fim da vida · https://github.com/squidfunk/mkdocs-material/issues/8523
 - Pagefind · https://pagefind.app
+- Starlight, componentes substituíveis · https://starlight.astro.build/reference/overrides
