@@ -11,4 +11,5 @@ Referência: https://cognitect.com/blog/2011/11/15/documenting-architecture-deci
 | 0004 | [Licença do projeto: AGPL-3.0](0004-licenca-agpl-3.md) | Aceito |
 | 0005 | [Integrações terceirizadas, sempre com caminho nativo](0005-integracoes-terceirizadas-caminho-nativo.md) | Proposto |
 | 0006 | [Execução local-first e divisão da stack (núcleo em Go)](0006-execucao-local-first-e-stack.md) | Aceito |
+| 0007 | [Modelo de execução: workspace, worktree por tarefa e rastro por etapa](0007-modelo-de-execucao.md) | Aceito |
 | 0008 | [Merge só por squash](0008-merge-por-squash.md) | Aceito |

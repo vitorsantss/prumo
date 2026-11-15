@@ -1,6 +1,6 @@
 # 0001 · Arquivos em tasks/<id>/ como fonte da verdade
 
-- **Status:** Aceito
+- **Status:** Aceito (local e retenção detalhados no ADR-0007)
 - **Data:** 2026-11-14
 
 ## Contexto
@@ -11,7 +11,7 @@ O Prumo roda na máquina de quem usa (ADR-0006), quer ser estudado e auditado po
 
 ## Decisão
 
-O estado de cada tarefa mora em **arquivos de texto** numa pasta própria:
+O estado de cada tarefa mora em **arquivos de texto** numa pasta própria, fora do repositório do projeto e sem versionamento (local exato e retenção no ADR-0007):
 
 ```
 tasks/<id>/
@@ -20,6 +20,8 @@ tasks/<id>/
   plan.md        # saída da etapa PLAN
   gates.jsonl    # uma linha por decisão de gate (aprovar, pedir ajuste, refazer)
   usage.jsonl    # uma linha por chamada de IA (etapa, modelo, tokens, custo)
+  etapas/<n>-<nome>/etapa.json  # rastro de cada etapa (ADR-0007)
+  tarefa.json    # agregado das etapas
   entrega.md     # resumo final
 ```
 
@@ -31,7 +33,7 @@ Qualquer banco ou índice que vier depois (pra tela, busca ou relatórios) é **
 
 ## Consequências
 
-- Dá pra ler, versionar com git, comparar e revisar tudo com ferramentas comuns. Quem estuda vê exatamente o que cada etapa produziu.
+- Dá pra ler, comparar e revisar tudo com ferramentas comuns. Quem estuda vê exatamente o que cada etapa produziu.
 - O C1 não precisa de banco.
 - Escrita concorrente na mesma tarefa precisa de cuidado (uma etapa por vez por tarefa no C1).
 - Mudança no formato dos arquivos é mudança de contrato: exige ADR e migração.

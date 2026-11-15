@@ -13,3 +13,4 @@ Fecha #
 - [ ] Nenhum segredo, dado de cliente ou código de terceiros sem licença compatível
 - [ ] Decisão de arquitetura nova tem ADR em `docs/adr/`
 - [ ] Dependência nova é livre (ADR-0005)
+- [ ] Sem links de sessão, conversa ou conta privada
