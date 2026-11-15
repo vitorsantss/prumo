@@ -22,7 +22,7 @@ Em fase de decisão (checkpoint C0). Nada roda ainda.
 | C1 · Esqueleto andando | 03/12/2026 | CLI que roda 3 etapas numa tarefa real, com 1 gate manual |
 | C2 · Primeiro valor | 17/12/2026 | Research + PLAN + risk gate, usado em 3 tarefas |
 
-As decisões de arquitetura ficam em [`docs/adr/`](docs/adr/).
+As decisões de arquitetura ficam em [`docs/adr/`](docs/adr/) e o jeito de trabalhar em [`docs/processo.md`](docs/processo.md).
 
 ## Como contribuir
 
