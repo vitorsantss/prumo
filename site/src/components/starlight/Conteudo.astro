@@ -1,0 +1,78 @@
+---
+import '@astrojs/starlight/style/markdown.css';
+
+const rota = Astro.locals.starlightRoute;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const emPortugues = `${base}${rota.id.replace(/^en\//, '')}/`;
+const ajuda = `${base}docs/traduzir/`;
+const soPortugues = rota.locale === 'en' && rota.isFallback;
+const porIA = (rota.entry.data as { traducao?: string }).traducao === 'ia';
+---
+{soPortugues ? (
+  <div class="so-portugues">
+    <p class="titulo">This page is only in Portuguese.</p>
+    <p>Nobody has translated it yet. You can read the original, or help translate it.</p>
+    <div class="acoes">
+      <a class="p-botao primario" href={emPortugues} hreflang="pt-BR" lang="en">Read in Portuguese</a>
+      <a class="p-botao" href={ajuda}>Help translate</a>
+    </div>
+  </div>
+) : (
+  <>
+    {porIA && (
+      <aside class="aviso-ia" aria-label="Translation">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h9M8 4v2c0 4-2 7-4 8M6 10c1 2 3 3 5 4M13 20l4-9 4 9M14.5 17h5"></path></svg>
+        <p>This page was translated by AI and is waiting for a human review. <a href={ajuda}>Help review it</a></p>
+      </aside>
+    )}
+    <div class="sl-markdown-content"><slot /></div>
+  </>
+)}
+
+<style>
+  .so-portugues {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    border: 1px dashed var(--p-line);
+    border-radius: 12px;
+  }
+  .so-portugues p {
+    margin: 0;
+    color: var(--p-muted);
+  }
+  .so-portugues .titulo {
+    color: var(--p-ink);
+    font-weight: 700;
+    font-size: 1.125rem;
+  }
+  .acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .aviso-ia {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    padding: 12px 14px;
+    border: 1px dashed var(--p-line);
+    border-radius: 12px;
+    color: var(--p-muted);
+    font-size: 14px;
+  }
+  .aviso-ia svg {
+    flex: 0 0 auto;
+    margin-top: 2px;
+  }
+  .aviso-ia p {
+    margin: 0;
+  }
+  .aviso-ia a {
+    color: var(--p-ink);
+    font-weight: 600;
+  }
+</style>

@@ -22,10 +22,13 @@ export default defineConfig({
       customCss: ['./src/estilos/tokens.css', './src/estilos/prumo.css'],
       lastUpdated: false,
       pagination: false,
+      routeMiddleware: './src/idiomaDaRota.ts',
       components: {
         PageFrame: './src/components/starlight/Moldura.astro',
         TwoColumnContent: './src/components/starlight/Colunas.astro',
         EditLink: './src/components/starlight/Origem.astro',
+        MarkdownContent: './src/components/starlight/Conteudo.astro',
+        PageTitle: './src/components/starlight/Titulo.astro',
         Header: './src/components/starlight/Cabecalho.astro',
         Search: './src/components/starlight/Pesquisa.astro',
         LanguageSelect: './src/components/starlight/Idioma.astro',

@@ -8,12 +8,10 @@ const comoMudar = `${base}${en ? 'en/' : ''}docs/como-mudar-o-site/`;
 {origem && (
   <div class="origem">
     <p>
-      {en ? 'This page comes from' : 'Esta página vem de'} <code>{origem}</code> ·
-      <a href={comoMudar}>{en ? 'How to suggest a change' : 'Como sugerir uma mudança'}</a>
+      {en ? 'This page comes from' : 'Esta página vem de'} <code>{origem}</code>{' · '}<a href={comoMudar}>{en ? 'How to suggest a change' : 'Como sugerir uma mudança'}</a>
     </p>
     <p>
-      {en ? 'Maintained by' : 'Mantido por'} <strong>Vitor Santos</strong> · <a href="https://github.com/vitorsantss">GitHub</a> · <a href="https://www.linkedin.com/in/vitorsantss/">LinkedIn</a> ·
-      {en ? 'project questions in' : 'dúvidas sobre o projeto em'} <a href="https://github.com/vitorsantss/prumo/discussions">Discussions</a>
+      {en ? 'Maintained by' : 'Mantido por'} <strong>Vitor Santos</strong> · <a href="https://github.com/vitorsantss">GitHub</a> · <a href="https://www.linkedin.com/in/vitorsantss/">LinkedIn</a>{' · '}{en ? 'project questions in' : 'dúvidas sobre o projeto em'} <a href="https://github.com/vitorsantss/prumo/discussions">Discussions</a>
     </p>
   </div>
 )}

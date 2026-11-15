@@ -7,7 +7,7 @@ const origem = join(aqui, '..', '..', 'docs');
 const destino = join(aqui, '..', 'src', 'content', 'docs');
 const repositorio = 'https://github.com/vitorsantss/prumo/blob/main/';
 const ignorar = new Set(['design']);
-const marcaIA = /^> \*\*Translated by AI/m;
+const marcaIA = /^> \*\*Translated by AI[^\n]*\n?/m;
 
 function listarMarkdown(pasta, base = '') {
   return readdirSync(pasta).flatMap((nome) => {
@@ -50,8 +50,9 @@ function converter(rel) {
   if (indiceTitulo >= 0) linhas.splice(indiceTitulo, 1);
   const corpo = reescreverLinks(linhas.join('\n').trimStart(), rel);
   const traducao = rel.startsWith('en/') ? (marcaIA.test(corpo) ? 'ia' : 'revisada') : null;
+  const texto = corpo.replace(marcaIA, '').trimStart();
   const frontmatter = ['---', `title: ${JSON.stringify(titulo)}`, ...(traducao ? [`traducao: ${traducao}`] : []), ...(rel.endsWith('0000-modelo.md') ? ['sidebar:', '  hidden: true', 'pagefind: false'] : []), ...(/^(en\/)?adr\/README\.md$/.test(rel) ? ['sidebar:', '  label: ' + (rel.startsWith('en/') ? '"All decisions"' : '"Todas as decisões"'), '  order: 0'] : []), `origem: ${JSON.stringify('docs/' + rel)}`, `editUrl: ${JSON.stringify(repositorio + 'docs/' + rel)}`, '---', ''];
-  return frontmatter.join('\n') + corpo;
+  return frontmatter.join('\n') + texto;
 }
 
 rmSync(destino, { recursive: true, force: true });

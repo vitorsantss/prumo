@@ -18,7 +18,8 @@ O design system do Prumo nasceu pro canvas do app. Esta camada aplica as mesmas 
 5. **Manuscrito só em destaque.** Architects Daughter no logo, títulos e no adesivo "em estudo". Texto corrido em Inter, código em JetBrains Mono.
 6. **Sempre claro e escuro.** Toda mudança visual é conferida nos dois temas.
 7. **Três larguras.** Confira em celular (390 px), notebook (1440 px) e tela larga (2560 px). O conteúdo fica num contêiner centralizado de até 1400 px; nada estica até a borda.
-8. **Editar é um caminho, não um botão.** O rodapé de cada página mostra de qual arquivo ela vem e leva pra "Como mudar o site e a documentação", que explica o fluxo e aponta pra issue.
+8. **O seletor diz o idioma do que está na tela.** Página sem tradução nunca aparece em português disfarçada de inglês: na barra lateral em inglês ela fica em "Only in Portuguese", com selo PT e `lang="pt-BR"`, e o link leva pro endereço em português. Quem abre o endereço em inglês vê "This page is only in Portuguese" com os botões pra ler o original ou ajudar a traduzir. Tradução por IA ganha o aviso tracejado no topo. Base: WCAG 3.1.2 (idioma de cada trecho identificado) e a orientação do W3C de marcar o idioma de links que levam pra outro idioma.
+9. **Editar é um caminho, não um botão.** O rodapé de cada página mostra de qual arquivo ela vem e leva pra "Como mudar o site e a documentação", que explica o fluxo e aponta pra issue.
 
 ## Componentes (em `site/src/components/`)
 | Componente | O que faz |
@@ -44,3 +45,5 @@ Tudo desligado com `prefers-reduced-motion`.
 - Meng, Steinhardt e Schubert, How developers use API documentation (ACM SIGDOC) · https://sigdoc.acm.org/cdq/how-developers-use-api-documentation-an-observation-study/
 - Seletor de idioma sem bandeira · https://www.smartling.com/blog/language-selector-best-practices
 - View Transitions API · https://developer.mozilla.org/docs/Web/API/View_Transition_API
+- WCAG 2.2, critério 3.1.2 Language of Parts · https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts
+- W3C, idioma em links de navegação · https://w3c.studio24.net/docs/internationalization-approach-agreed/

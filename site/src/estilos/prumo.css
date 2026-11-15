@@ -127,3 +127,12 @@ main h1#_top {
 .mobile-preferences {
   gap: 8px;
 }
+
+.sidebar-content .selo-idioma {
+  font: 600 10px var(--p-texto);
+  color: var(--p-muted);
+  background: transparent;
+  border: 1px solid var(--p-line);
+  border-radius: 4px;
+  padding: 1px 4px;
+}
