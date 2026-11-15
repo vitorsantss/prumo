@@ -1,0 +1,42 @@
+---
+const rota = Astro.locals.starlightRoute;
+const en = rota.locale === 'en';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const origem = (rota.entry.data as { origem?: string }).origem;
+const comoMudar = `${base}${en ? 'en/' : ''}docs/como-mudar-o-site/`;
+---
+{origem && (
+  <div class="origem">
+    <p>
+      {en ? 'This page comes from' : 'Esta página vem de'} <code>{origem}</code>{' · '}<a href={comoMudar}>{en ? 'How to suggest a change' : 'Como sugerir uma mudança'}</a>
+    </p>
+    <p>
+      {en ? 'Maintained by' : 'Mantido por'} <strong>Vitor Santos</strong> · <a href="https://github.com/vitorsantss">GitHub</a> · <a href="https://www.linkedin.com/in/vitorsantss/">LinkedIn</a>{' · '}{en ? 'project questions in' : 'dúvidas sobre o projeto em'} <a href="https://github.com/vitorsantss/prumo/discussions">Discussions</a>
+    </p>
+  </div>
+)}
+
+<style>
+  .origem {
+    padding-top: 16px;
+    border-top: 1px dashed var(--p-line);
+    font-size: 13px;
+    color: var(--p-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .origem p {
+    margin: 0;
+  }
+  .origem a,
+  .origem strong {
+    color: var(--p-ink);
+  }
+  .origem a {
+    text-underline-offset: 3px;
+  }
+  .origem code {
+    font: 400 12px var(--p-mono);
+  }
+</style>

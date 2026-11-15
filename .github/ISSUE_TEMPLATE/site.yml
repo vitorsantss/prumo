@@ -1,0 +1,29 @@
+name: Mudança no site ou na documentação
+description: Visual, componente, navegação ou estrutura da página inicial e da documentação
+labels: ["area:ux", "documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: "Antes de abrir, leia [Como mudar o site](https://github.com/vitorsantss/prumo/blob/main/docs/como-mudar-o-site.md). Correção de texto não precisa de issue: abra o PR direto."
+  - type: textarea
+    attributes:
+      label: O problema
+      description: O que está confuso, quebrado ou faltando, e onde.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: A proposta
+      description: Como fica. Anexe imagens nos temas claro e escuro.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Design system
+      description: Alguma regra de docs/design/site.md muda ou é quebrada? Qual e por quê?
+  - type: checkboxes
+    attributes:
+      label: Antes de programar
+      options:
+        - label: Vou esperar a aprovação da proposta nesta issue antes de abrir o PR
+          required: true

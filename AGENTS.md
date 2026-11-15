@@ -22,6 +22,7 @@ Plataforma local-first que conduz tarefas de software em etapas com portões (ga
 | `.github/` | Modelos de issue e PR, dono do código, CI |
 | `.claude/commands/` | Comandos do Claude Code pro dia a dia (ver `docs/fluxos/`) |
 | `docs/fluxos/` | Jeitos de trabalhar neste projeto, um arquivo por ferramenta |
+| `site/` | Site (Starlight): página inicial e documentação gerada a partir de `docs/` (ADR-0010) |
 | `cmd/prumo/` | Ponto de entrada da CLI |
 | `internal/pipeline/` | Leitura e validação do `pipeline.yml` |
 | `internal/coordenador/` | Decide o que roda e grava o rastro (ADR-0007) |
@@ -38,6 +39,7 @@ Núcleo em Go (ADR-0006); a interface web (TypeScript/React) ainda não existe.
 - Testes: `go test ./...` (sempre antes de abrir PR)
 - Formatação: `gofmt -w .`
 - Análise: `go vet ./...`
+- Site: `cd site && npm install && npm run dev` (precisa de Node 22+)
 - Rodar sem IA: `go run ./cmd/prumo executar --pipeline exemplos/pipeline.yml --tarefa exemplos/rinha-2024q1/tarefa.md`
 
 ## Jeitos de trabalhar
@@ -51,6 +53,8 @@ O estado do projeto mora no GitHub (issues, PRs, ADRs, docs); este arquivo é o 
 - **Nunca** coloque em código, PR, issue ou prompt: segredos, dados pessoais, dados de terceiros ou código sem licença compatível com a AGPL-3.0 (ADR-0003).
 - **Commits**: mensagem em português dizendo o porquê. Pode incluir `Co-Authored-By` do agente usado. **Não inclua links de sessão, de conversa ou de conta privada** em commits, PRs ou issues.
 - **PR**: preencha o modelo, inclusive "Como foi feito" (com ou sem IA, e qual). Nada vai direto pra `main`.
+- **Citações**: toda afirmação de fora tem fonte com link (nota de rodapé na documentação); ADRs e issues citados como `ADR-0007` e `#50` viram link no site.
+- **Site e visual**: siga [docs/como-mudar-o-site.md](docs/como-mudar-o-site.md) e as regras de [docs/design/site.md](docs/design/site.md).
 - **Documentação muda junto com o código.** Se o comportamento mudou e a documentação não, o PR está incompleto.
 
 ## Idioma

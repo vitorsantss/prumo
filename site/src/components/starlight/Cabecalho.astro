@@ -1,0 +1,81 @@
+---
+import Search from 'virtual:starlight/components/Search';
+import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
+import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+
+const en = Astro.locals.starlightRoute.locale === 'en';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+<div class="p-ilha cabecalho">
+  <a class="marca" href={en ? `${base}en/` : base}>
+    <span class="logo" translate="no">prumo</span>
+    <span class="p-adesivo">{en ? 'in study' : 'em estudo'}</span>
+  </a>
+  <span class="divisor" aria-hidden="true"></span>
+  <a class="secao" href={`${base}${en ? 'en/' : ''}docs/comece-aqui/`}>{en ? 'docs' : 'documentação'}</a>
+  <div class="busca"><Search /></div>
+  <div class="direita">
+    <LanguageSelect />
+    <ThemeSelect />
+  </div>
+</div>
+
+<style>
+  .cabecalho {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px 16px;
+    padding: 6px 10px 6px 16px;
+  }
+  .marca {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--p-ink);
+    text-decoration: none;
+  }
+  .logo {
+    font-family: var(--p-manuscrita);
+    font-size: 24px;
+  }
+  .marca .p-adesivo {
+    white-space: nowrap;
+  }
+  .divisor {
+    width: 1px;
+    height: 22px;
+    background: var(--p-line);
+  }
+  .secao {
+    font-size: 14px;
+    color: var(--p-muted);
+    text-decoration: none;
+  }
+  .busca {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  .direita {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  @media (max-width: 50rem) {
+    .divisor,
+    .secao,
+    .direita {
+      display: none;
+    }
+    .busca {
+      justify-content: flex-end;
+    }
+    .busca :global(.rotulo) {
+      display: none;
+    }
+    .busca :global(prumo-busca) {
+      flex: 0 0 auto;
+    }
+  }
+</style>

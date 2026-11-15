@@ -1,0 +1,6 @@
+---
+import ChaveTema from '../ChaveTema.astro';
+
+const en = Astro.locals.starlightRoute.locale === 'en';
+---
+<ChaveTema rotulo={en ? 'Dark theme' : 'Tema escuro'} />

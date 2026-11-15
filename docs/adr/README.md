@@ -1,6 +1,6 @@
 # Decisões de arquitetura (ADR)
 
-Uma decisão por arquivo, no formato de Michael Nygard: título, status, contexto, decisão, consequências.
+Uma decisão por arquivo, no [formato de Michael Nygard](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions): título, status, contexto, decisão, consequências.
 Referência: https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions
 
 | Nº | Título | Status |

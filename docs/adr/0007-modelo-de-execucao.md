@@ -51,5 +51,5 @@ Restrições: guardar tudo pesa; o repositório de quem usa não pode virar dep�
 - XDG Base Directory Specification 0.8 · https://specifications.freedesktop.org/basedir-spec/latest/
 - OpenTelemetry, convenções semânticas de GenAI (spans) · https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/
 - git-worktree · https://git-scm.com/docs/git-worktree
-- Shaw e Garlan, *Software Architecture: Perspectives on an Emerging Discipline* (1996), estilo pipes and filters
+- Shaw e Garlan, *Software Architecture: Perspectives on an Emerging Discipline* (1996), estilo pipes and filters · https://openlibrary.org/works/OL2982368W
 - Dex Horthy, *Advanced Context Engineering for Coding Agents* · https://humanlayer.dev/blog/advanced-context-engineering

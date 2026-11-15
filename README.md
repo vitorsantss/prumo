@@ -48,6 +48,11 @@ Issues abertas, ideias e correções são bem-vindas, com ou sem IA. Comece pelo
 
 O Prumo foi feito pra educação e pro setor público: pra quem quer estudar, contribuir e praticar como se constrói software, e pra universidades, institutos federais e órgãos públicos que criam software pra sociedade.
 
+## Quem mantém
+Mantido por **Vitor Santos** ([GitHub](https://github.com/vitorsantss) · [LinkedIn](https://www.linkedin.com/in/vitorsantss/)), que revisa e aprova as mudanças. Dúvidas e ideias sobre o projeto vão nas [Discussions](https://github.com/vitorsantss/prumo/discussions) ou em issues, pra que a resposta fique à vista de quem tiver a mesma dúvida.
+
+Pra citar o Prumo num trabalho, use o botão "Cite this repository" do GitHub (vem do arquivo `CITATION.cff`).
+
 ## Licença
 
 [AGPL-3.0](LICENSE). Quem modificar o Prumo e oferecer a versão modificada, inclusive pela rede, precisa abrir o código das mudanças. O porquê está no [ADR-0004](docs/adr/0004-licenca-agpl-3.md).

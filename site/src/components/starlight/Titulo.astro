@@ -1,0 +1,16 @@
+---
+const rota = Astro.locals.starlightRoute;
+const soPortugues = rota.locale === 'en' && rota.isFallback;
+---
+<h1 id="_top" lang={soPortugues ? 'pt-BR' : undefined}>{rota.entry.data.title}</h1>
+
+<style>
+  h1 {
+    margin-top: 1rem;
+    font-family: var(--p-manuscrita);
+    font-size: var(--sl-text-h1);
+    font-weight: 400;
+    line-height: var(--sl-line-height-headings);
+    color: var(--p-ink);
+  }
+</style>
