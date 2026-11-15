@@ -1,0 +1,51 @@
+---
+import '@astrojs/starlight/style/markdown.css';
+
+const rota = Astro.locals.starlightRoute;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const ajuda = `${base}en/docs/traduzir/`;
+const soPortugues = rota.locale === 'en' && rota.isFallback;
+const porIA = (rota.entry.data as { traducao?: string }).traducao === 'ia';
+const emPortugues = rota.locale !== 'en' || soPortugues;
+const html = (await Astro.slots.render('default'))
+  .replace('id="footnote-label">Footnotes</h2>', `id="footnote-label">${emPortugues ? 'Fontes' : 'Sources'}</h2>`)
+  .replace(/\s*<a[^>]*data-footnote-backref[^>]*>[\s\S]*?<\/a>/g, '');
+---
+{soPortugues && (
+  <aside class="aviso" aria-label="Translation">
+    <span class="p-adesivo" aria-hidden="true">PT</span>
+    <p>This page has not been translated yet, so the content below is in Portuguese. Translating it is a good first contribution. <a href={ajuda}>How to translate</a></p>
+  </aside>
+)}
+{porIA && (
+  <aside class="aviso" aria-label="Translation">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h9M8 4v2c0 4-2 7-4 8M6 10c1 2 3 3 5 4M13 20l4-9 4 9M14.5 17h5"></path></svg>
+    <p>This page was translated by AI and is waiting for a human review. <a href={ajuda}>Help review it</a></p>
+  </aside>
+)}
+<div class="sl-markdown-content" lang={soPortugues ? 'pt-BR' : undefined} set:html={html} />
+
+<style>
+  .aviso {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 12px 14px;
+    border: 1px dashed var(--p-line);
+    border-radius: 12px;
+    color: var(--p-muted);
+    font-size: 14px;
+  }
+  .aviso svg,
+  .aviso .p-adesivo {
+    flex: 0 0 auto;
+  }
+  .aviso p {
+    margin: 0;
+  }
+  .aviso a {
+    color: var(--p-ink);
+    font-weight: 600;
+  }
+</style>
