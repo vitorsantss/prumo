@@ -48,6 +48,19 @@ const { hasSidebar } = Astro.locals.starlightRoute;
     height: var(--sl-nav-height);
     box-sizing: border-box;
   }
+  .topo::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 100vw;
+    height: 12px;
+    transform: translateX(-50%);
+    background: var(--p-bg);
+  }
+  .topo :global(.cabecalho) {
+    background-color: var(--p-solid);
+  }
   .corpo {
     max-width: 1400px;
     margin: 0 auto;
