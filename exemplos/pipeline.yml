@@ -1,0 +1,20 @@
+# Pipeline mínimo do esqueleto (C1): tarefa → SPEC → Entrega.
+nome: esqueleto
+etapas:
+  - id: spec
+    nome: SPEC
+    tipo: ia
+    instrucoes: |
+      Transforme a tarefa numa especificação objetiva com estas seções:
+      Objetivo, Regras de negócio, Contratos (entradas e saídas), Critérios de aceite verificáveis e Fora do escopo.
+      Não invente requisitos: o que estiver ambíguo vai numa seção "Perguntas em aberto".
+    entradas: [tarefa.md]
+    saida: spec.md
+    gate: manual
+
+  - id: entrega
+    nome: Entrega
+    tipo: modelo
+    entradas: [tarefa.md, spec.md]
+    saida: entrega.md
+    gate: automatico
