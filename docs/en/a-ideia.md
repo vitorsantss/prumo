@@ -37,7 +37,7 @@ Nobody knows the right way to build software with AI yet: new patterns keep appe
 
 ## Sources
 
-[^1]: Barry Boehm, *Software Engineering Economics* (1981): the cost of fixing a defect grows with the phase in which it is found.
+[^1]: Barry Boehm, *Software Engineering Economics* (1981): the cost of fixing a defect grows with the phase in which it is found · https://openlibrary.org/books/OL4267874M
 [^2]: Design Council, *The Double Diamond* · https://www.designcouncil.org.uk/our-resources/the-double-diamond/
 [^3]: Marty Cagan, *Dual-Track Agile* (2012) · https://www.svpg.com/dual-track-agile/
 [^4]: Dex Horthy, *Advanced Context Engineering for Coding Agents* · https://humanlayer.dev/blog/advanced-context-engineering
