@@ -12,8 +12,10 @@ Restrições: guardar tudo pesa; o repositório de quem usa não pode virar dep�
 ## Decisão
 
 ### Workspace e tarefas
-1. **Cada projeto é um workspace**: um repositório git registrado no Prumo.
-2. **Cada tarefa roda num `git worktree` próprio**, num branch próprio. Tarefas em paralelo não pisam umas nas outras, e a saída de código de uma tarefa vira um PR.
+1. **Cada projeto é um workspace**: uma pasta registrada no Prumo com **um ou mais repositórios git** (ex.: front, back e infra em repositórios separados). Isso é escolhido ao criar ou importar o workspace, e o formato dos arquivos já guarda uma lista de repositórios. O C1 implementa só o caso de um repositório.
+2. **Cada tarefa roda num `git worktree` próprio de cada repositório que ela toca**, todos no mesmo branch e dentro da pasta da tarefa, pra que o agente enxergue o ambiente inteiro. Tarefas em paralelo não pisam umas nas outras, e a saída de código vira um PR por repositório, ligados entre si.
+   - Num workspace com vários repositórios, quem decide quais a tarefa toca é a etapa de PLAN, e o gate humano confirma.
+   - Arquivos da pasta do workspace que estão fora de qualquer repositório (ex.: um `docker-compose.yml` que sobe tudo) são **só leitura** para as tarefas: o agente pode ler, mas mudança neles não tem branch nem PR, então não é feita pela esteira.
 3. O que é do projeto inteiro (documentação, convenções, mapa de risco) é **contexto compartilhado, só leitura** pras etapas; mudar isso é PR como qualquer outro.
 4. No C1, **uma tarefa por vez**, com o limite de concorrência já configurável.
 
@@ -41,6 +43,7 @@ Restrições: guardar tudo pesa; o repositório de quem usa não pode virar dep�
 - Uma etapa com entradas e saídas declaradas pode, no futuro, rodar em outra máquina (runner) sem mudar o modelo: é o que torna as fases 2 e 3 da infraestrutura possíveis.
 - O núcleo em Go separa desde já, por interface, o **coordenador** (decide o que roda, guarda o estado) do **executor de etapa** (roda uma etapa e devolve o `etapa.json`). No C1 os dois ficam no mesmo processo.
 - Atualiza o ADR-0001: os arquivos continuam sendo a fonte da verdade, mas ficam na pasta de dados do Prumo, legíveis e não versionados.
+- O gate de review, num workspace com vários repositórios, precisa mostrar o diff somando todos eles. O suporte a vários repositórios vem depois do C2.
 - As convenções GenAI do OpenTelemetry ainda estão em desenvolvimento; nomes podem mudar e o rastro precisa acompanhar.
 
 ## Fontes
