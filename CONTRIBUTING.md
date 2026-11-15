@@ -6,9 +6,9 @@ O Prumo é feito pra ser estudado e construído junto. Estudante, professor, dev
 
 1. Leia o [README](README.md) e os [ADRs](docs/adr/) pra entender o que já foi decidido e por quê.
 2. Procure uma issue aberta:
-   - `boa-primeira-issue`: pequena e bem explicada, boa pra começar.
+   - `good first issue`: pequena e bem explicada, boa pra começar.
    - `caminho-nativo`: trocar uma dependência paga ou proprietária por uma livre (ADR-0005).
-   - `ajuda-bem-vinda`: precisa de alguém, não importa a experiência.
+   - `help wanted`: precisa de alguém, não importa a experiência.
 3. Comente na issue que vai pegar ela, pra ninguém fazer o mesmo trabalho em dobro.
 
 Não achou uma issue que sirva? Abra uma com o modelo **Ideia** e conte o que pensou.
