@@ -20,6 +20,8 @@ Plataforma local-first que conduz tarefas de software em etapas com portões (ga
 | `docs/processo.md` | Como o projeto é conduzido |
 | `CONTRIBUTING.md` | Fluxo de contribuição |
 | `.github/` | Modelos de issue e PR, dono do código, CI |
+| `.claude/commands/` | Comandos do Claude Code pro dia a dia (ver `docs/fluxos/`) |
+| `docs/fluxos/` | Jeitos de trabalhar neste projeto, um arquivo por ferramenta |
 | `site/` | Site (Starlight): página inicial e documentação gerada a partir de `docs/` (ADR-0010) |
 | `cmd/prumo/` | Ponto de entrada da CLI |
 | `internal/pipeline/` | Leitura e validação do `pipeline.yml` |
@@ -39,6 +41,10 @@ Núcleo em Go (ADR-0006); a interface web (TypeScript/React) ainda não existe.
 - Análise: `go vet ./...`
 - Site: `cd site && npm install && npm run dev` (precisa de Node 22+)
 - Rodar sem IA: `go run ./cmd/prumo executar --pipeline exemplos/pipeline.yml --tarefa exemplos/rinha-2024q1/tarefa.md`
+
+## Jeitos de trabalhar
+
+O estado do projeto mora no GitHub (issues, PRs, ADRs, docs); este arquivo é o contrato; cada ferramenta é só um adaptador. Guias por ferramenta em [docs/fluxos/](docs/fluxos/).
 
 ## Regras
 
