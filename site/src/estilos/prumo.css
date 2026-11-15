@@ -158,3 +158,11 @@ main h1#_top {
 .sl-markdown-content [data-footnote-backref] {
   text-decoration: none;
 }
+
+.sl-markdown-content .sl-heading-wrapper:has(#footnote-label) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
