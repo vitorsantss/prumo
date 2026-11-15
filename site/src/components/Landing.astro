@@ -221,7 +221,7 @@ const dadosEstruturados = {
   .pular:focus { left: 16px; }
 
   .topo { position: sticky; top: 12px; z-index: 20; max-width: 1180px; margin: 12px auto 0; padding: 0 16px; }
-  .barra { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding: 8px 10px 8px 16px; }
+  .barra { background-color: var(--p-solid); display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding: 8px 10px 8px 16px; }
   .marca { display: inline-flex; align-items: center; gap: 10px; }
   .logo { font-family: var(--p-manuscrita); font-size: 26px; }
   .adesivo { animation: colar 0.7s 0.9s cubic-bezier(0.2, 0.9, 0.3, 1.2) both; }
@@ -288,7 +288,13 @@ const dadosEstruturados = {
   }
   @media (max-width: 720px) {
     .link-docs { margin-right: 0; }
-    .medir { display: none; }
+    .topo { position: static; }
+    .fluxos { height: auto; display: flex; flex-direction: column; gap: 12px; padding-left: 22px; }
+    .fluxos::before { content: ''; position: absolute; left: 7px; top: 24px; bottom: 42px; border-left: 2px solid var(--p-line); }
+    .fluxos svg { display: none; }
+    .fluxo, .medir { position: relative; top: auto !important; left: auto; right: auto; }
+    .fluxo::before, .medir::before { content: ''; position: absolute; left: -15px; top: 50%; width: 15px; border-top: 2px solid var(--p-line); }
+    .medir { width: auto; height: auto; flex-direction: row; justify-content: flex-start; gap: 10px; padding: 12px 16px; margin-top: 8px; }
     .digita { white-space: normal; animation: none; }
   }
   @media (prefers-reduced-motion: reduce) {
