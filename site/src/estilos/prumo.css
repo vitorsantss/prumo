@@ -129,10 +129,13 @@ main h1#_top {
 }
 
 .sidebar-content .selo-idioma {
-  font: 600 10px var(--p-texto);
-  color: var(--p-muted);
-  background: transparent;
-  border: 1px solid var(--p-line);
-  border-radius: 4px;
-  padding: 1px 4px;
+  font: 400 12px var(--p-manuscrita);
+  line-height: 1;
+  color: #2b2620;
+  background: var(--p-sticky);
+  border: none;
+  border-radius: 3px;
+  padding: 3px 5px 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  transform: rotate(-4deg);
 }

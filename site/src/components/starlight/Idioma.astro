@@ -19,4 +19,4 @@ const textos = en
   ? { original: 'original', ia: 'translated by AI, awaiting review', revisada: 'reviewed translation', falta: 'not translated yet', ajuda: 'Why, and how to help →' }
   : { original: 'original', ia: 'traduzida por IA, aguardando revisão', revisada: 'tradução revisada', falta: 'ainda sem tradução', ajuda: 'Por que e como ajudar →' };
 ---
-<SeletorIdioma opcoes={opcoes} rotulo={en ? 'Language of this page' : 'Idioma desta página'} textos={textos} ajudaHref={`${base}docs/traduzir/`} />
+<SeletorIdioma opcoes={opcoes} rotulo={en ? 'Language of this page' : 'Idioma desta página'} textos={textos} ajudaHref={`${base}${en ? 'en/' : ''}docs/traduzir/`} />

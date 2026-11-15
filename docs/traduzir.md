@@ -14,7 +14,7 @@ O seletor de idioma, no topo de cada página, mostra um destes estados pro ingl�
 | --- | --- |
 | tradução revisada | Uma pessoa leu e corrigiu. |
 | traduzida por IA, aguardando revisão | Dá pra ler, mas ninguém conferiu ainda. |
-| ainda sem tradução | Em inglês, a página fica no grupo "Only in Portuguese" da barra lateral, com o selo PT, e o link abre a versão em português. |
+| ainda sem tradução | Em inglês, a página aparece na barra lateral com o adesivo PT e abre em português, com um aviso em inglês e o link pra esta página. |
 
 ## Como ajudar
 
