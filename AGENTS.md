@@ -47,6 +47,7 @@ Núcleo em Go (ADR-0006); a interface web (TypeScript/React) ainda não existe.
 - **Nunca** coloque em código, PR, issue ou prompt: segredos, dados pessoais, dados de terceiros ou código sem licença compatível com a AGPL-3.0 (ADR-0003).
 - **Commits**: mensagem em português dizendo o porquê. Pode incluir `Co-Authored-By` do agente usado. **Não inclua links de sessão, de conversa ou de conta privada** em commits, PRs ou issues.
 - **PR**: preencha o modelo, inclusive "Como foi feito" (com ou sem IA, e qual). Nada vai direto pra `main`.
+- **Citações**: toda afirmação de fora tem fonte com link (nota de rodapé na documentação); ADRs e issues citados como `ADR-0007` e `#50` viram link no site.
 - **Site e visual**: siga [docs/como-mudar-o-site.md](docs/como-mudar-o-site.md) e as regras de [docs/design/site.md](docs/design/site.md).
 - **Documentação muda junto com o código.** Se o comportamento mudou e a documentação não, o PR está incompleto.
 

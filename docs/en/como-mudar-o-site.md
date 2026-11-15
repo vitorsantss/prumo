@@ -10,6 +10,11 @@ Fixed a mistake, made something clearer, added a source? The footer of each page
 
 Prefer to just report it? [Open an issue](https://github.com/vitorsantss/prumo/issues/new?template=site.yml) saying which page and what is wrong.
 
+## How to write
+
+- **Every citation has a link.** A claim about the world carries its source, preferably as a footnote (`text[^1]` and, at the end, `[^1]: Author, *Title* · URL`). A project, tool or challenge mentioned by name links to its page.
+- **Internal citations too.** Write `ADR-0007` or `#50` as usual: the site turns them into links to the ADR and the issue. If the ADR is not merged yet, the build warns and the link appears by itself after the merge.
+
 ## Home page content
 
 Hypotheses, the timeline and the home page texts live in `site/src/data/landing.json`, in Portuguese and English. If the project state changed (a hypothesis was tested, a milestone was reached), update that file in the same PR. Checking this automatically is issue #50.

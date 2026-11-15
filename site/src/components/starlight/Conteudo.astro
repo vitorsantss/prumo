@@ -6,10 +6,12 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const ajuda = `${base}en/docs/traduzir/`;
 const soPortugues = rota.locale === 'en' && rota.isFallback;
 const porIA = (rota.entry.data as { traducao?: string }).traducao === 'ia';
+const voltar = '<svg class="voltar" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>';
 const emPortugues = rota.locale !== 'en' || soPortugues;
 const html = (await Astro.slots.render('default'))
   .replace('id="footnote-label">Footnotes</h2>', `id="footnote-label">${emPortugues ? 'Fontes' : 'Sources'}</h2>`)
-  .replaceAll('aria-label="Back to reference', `aria-label="${emPortugues ? 'Voltar ao texto' : 'Back to text'}`);
+  .replaceAll('aria-label="Back to reference', `aria-label="${emPortugues ? 'Voltar ao texto' : 'Back to text'}`)
+  .replace(/(data-footnote-backref[^>]*>)↩(\uFE0E)?/g, `$1${voltar}`);
 ---
 {soPortugues && (
   <aside class="aviso" aria-label="Translation">

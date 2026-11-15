@@ -24,7 +24,7 @@ Each idea becomes a hypothesis with a measure. None has been tested yet.
 | H2 | Cost per approved stage drops with a human gate. | Tokens and time until approval. | not tested yet |
 | H3 | The best flow changes from person to person. | The same task in different flows. | not tested yet |
 
-The first study case comes from a public challenge, the Brazilian Rinha de Backend (2024/Q1 edition): a banking API that records transactions and shows a statement.
+The first study case comes from a public challenge, the Brazilian [Rinha de Backend (2024/Q1 edition)](https://github.com/zanfranceschi/rinha-de-backend-2024-q1): a banking API that records transactions and shows a statement.
 
 ## Timeline
 

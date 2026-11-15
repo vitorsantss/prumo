@@ -156,7 +156,22 @@ main h1#_top {
 }
 
 .sl-markdown-content [data-footnote-backref] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin-inline-start: 4px;
+  vertical-align: middle;
+  border: 1px solid var(--p-line);
+  border-radius: 6px;
+  color: var(--p-muted);
   text-decoration: none;
+}
+
+.sl-markdown-content [data-footnote-backref]:hover {
+  color: var(--p-ink);
+  background: var(--p-soft);
 }
 
 .sl-markdown-content .sl-heading-wrapper:has(#footnote-label) {

@@ -22,7 +22,7 @@ Cada ideia vira uma hipótese com uma medida. Nenhuma foi testada ainda.
 | H2 | O custo por etapa aprovada cai com o portão humano. | Tokens e tempo até a aprovação. | ainda não testada |
 | H3 | O melhor fluxo muda de pessoa pra pessoa. | A mesma tarefa em fluxos diferentes. | ainda não testada |
 
-O primeiro caso de estudo vem de um desafio público, a Rinha de Backend (edição 2024/Q1): uma API de banco que registra transações e mostra o extrato.
+O primeiro caso de estudo vem de um desafio público, a [Rinha de Backend (edição 2024/Q1)](https://github.com/zanfranceschi/rinha-de-backend-2024-q1): uma API de banco que registra transações e mostra o extrato.
 
 ## Linha do tempo
 

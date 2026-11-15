@@ -42,13 +42,40 @@ function reescreverLinks(texto, rel) {
   });
 }
 
+const adrs = new Map(
+  readdirSync(join(origem, 'adr'))
+    .filter((nome) => /^\d{4}-.+\.md$/.test(nome))
+    .map((nome) => [nome.slice(0, 4), nome]),
+);
+const issues = 'https://github.com/vitorsantss/prumo/issues/';
+const adrsSemArquivo = new Set();
+
+function ligarCitacoes(texto, rel) {
+  const pasta = posix.dirname(rel);
+  const prefixoAdr = rel.startsWith('en/') ? 'en/adr/' : 'adr/';
+  const ligar = (trecho) =>
+    trecho
+      .replace(/(?<![\w/-])ADR-(\d{4})(?![\w-])/g, (todo, numero) => {
+        const arquivo = adrs.get(numero);
+        if (!arquivo) adrsSemArquivo.add(`${todo} (em docs/${rel})`);
+        if (!arquivo || rel.endsWith(arquivo)) return todo;
+        return `[${todo}](${posix.relative(pasta, prefixoAdr + arquivo)})`;
+      })
+      .replace(/(?<![\w/&\[])#(\d{1,4})\b/g, (todo, numero) => `[${todo}](${issues}${numero})`);
+  const protegido = /(\[[^\]]*\]\([^)]*\)|`[^`\n]*`|<[^>\n]+>|https?:\/\/\S+)/;
+  return texto
+    .split(/(^```[\s\S]*?^```)/m)
+    .map((bloco) => (bloco.startsWith('```') ? bloco : bloco.split(protegido).map((parte, i) => (i % 2 ? parte : ligar(parte))).join('')))
+    .join('');
+}
+
 function converter(rel) {
   const bruto = readFileSync(join(origem, rel), 'utf8').replace(/\r\n/g, '\n');
   const linhas = bruto.split('\n');
   const indiceTitulo = linhas.findIndex((l) => l.startsWith('# '));
   const titulo = indiceTitulo >= 0 ? linhas[indiceTitulo].slice(2).trim() : rel;
   if (indiceTitulo >= 0) linhas.splice(indiceTitulo, 1);
-  const corpo = reescreverLinks(linhas.join('\n').trimStart(), rel);
+  const corpo = reescreverLinks(ligarCitacoes(linhas.join('\n').trimStart(), rel), rel);
   const traducao = rel.startsWith('en/') ? (marcaIA.test(corpo) ? 'ia' : 'revisada') : null;
   const texto = corpo.replace(marcaIA, '').trimStart();
   const frontmatter = ['---', `title: ${JSON.stringify(titulo)}`, ...(traducao ? [`traducao: ${traducao}`] : []), ...(rel.endsWith('0000-modelo.md') ? ['sidebar:', '  hidden: true', 'pagefind: false'] : []), ...(/^(en\/)?adr\/README\.md$/.test(rel) ? ['sidebar:', '  label: ' + (rel.startsWith('en/') ? '"All decisions"' : '"Todas as decisões"'), '  order: 0'] : []), `origem: ${JSON.stringify('docs/' + rel)}`, `editUrl: ${JSON.stringify(repositorio + 'docs/' + rel)}`, '---', ''];
@@ -63,3 +90,4 @@ for (const rel of listarMarkdown(origem)) {
   writeFileSync(saida, converter(rel));
 }
 console.log(`docs sincronizados em ${relative(process.cwd(), destino)}`);
+if (adrsSemArquivo.size) console.warn(`ADRs citados que ainda não existem em docs/adr (ficam sem link):\n  ${[...adrsSemArquivo].join('\n  ')}`);
