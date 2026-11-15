@@ -32,36 +32,6 @@ body {
   color: var(--p-ink);
 }
 
-header.header {
-  background: transparent;
-  border: none;
-}
-
-.sidebar-pane {
-  padding: 0.75rem 0 0.75rem 0.75rem;
-}
-
-.sidebar-content {
-  box-sizing: border-box;
-  background-color: var(--p-card);
-  background-image: repeating-linear-gradient(135deg, var(--p-hatch) 0 1px, transparent 1px 7px);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid var(--p-line);
-  border-radius: var(--p-raio);
-  box-shadow: var(--p-sombra);
-  height: auto;
-  min-height: auto;
-  padding: 1rem 0.5rem;
-}
-
-@media (max-width: 50rem) {
-  .sidebar-pane {
-    background: var(--p-bg);
-    padding: 0.75rem;
-  }
-}
-
 .sidebar-content .top-level > li > details > summary .group-label .large,
 .sidebar-content .group-label .large {
   font-size: 0.875rem;
@@ -87,34 +57,38 @@ header.header {
   font-weight: 600;
 }
 
-@media (min-width: 50rem) {
-  .main-pane main {
-    margin: 0.75rem 0 2rem;
-    background: var(--p-solid);
-    border: 1px solid var(--p-line);
-    border-radius: 16px;
-    box-shadow: var(--p-sombra);
-  }
+.main-pane main {
+  background: var(--p-solid);
+  border: 1px solid var(--p-line);
+  border-radius: 16px;
+  box-shadow: var(--p-sombra);
+  padding-block: 1rem;
+}
 
-  .right-sidebar {
-    border-inline-start: none;
-  }
+.main-pane .sl-container {
+  max-width: none;
+}
 
-  .right-sidebar-panel {
-    box-sizing: border-box;
-    max-width: calc(100% - 1.5rem);
-    margin: 0.75rem;
-    padding: 1rem;
-    background-color: var(--p-card);
-    background-image: repeating-linear-gradient(135deg, var(--p-hatch) 0 1px, transparent 1px 7px);
-    border: 1px solid var(--p-line);
-    border-radius: var(--p-raio);
-    box-shadow: var(--p-sombra);
-  }
+.main-pane .content-panel {
+  padding: 1.25rem clamp(1.25rem, 4vw, 3rem);
+}
+
+.right-sidebar-panel {
+  box-sizing: border-box;
+  padding: 1rem;
+  background-color: var(--p-card);
+  background-image: repeating-linear-gradient(135deg, var(--p-hatch) 0 1px, transparent 1px 7px);
+  border: 1px solid var(--p-line);
+  border-radius: var(--p-raio);
+  box-shadow: var(--p-sombra);
+}
+
+.right-sidebar-panel .sl-container {
+  width: auto;
 }
 
 .content-panel + .content-panel {
-  border-top: 1px dashed var(--p-line);
+  border-top: none;
 }
 
 .sl-markdown-content h1,

@@ -17,6 +17,8 @@ O design system do Prumo nasceu pro canvas do app. Esta camada aplica as mesmas 
 4. **Sem pílula nem barra segmentada.** Idioma é um popover; tema é um botão de ícone.
 5. **Manuscrito só em destaque.** Architects Daughter no logo, títulos e no adesivo "em estudo". Texto corrido em Inter, código em JetBrains Mono.
 6. **Sempre claro e escuro.** Toda mudança visual é conferida nos dois temas.
+7. **Três larguras.** Confira em celular (390 px), notebook (1440 px) e tela larga (2560 px). O conteúdo fica num contêiner centralizado de até 1400 px; nada estica até a borda.
+8. **Editar é um caminho, não um botão.** O rodapé de cada página mostra de qual arquivo ela vem e leva pra "Como mudar o site e a documentação", que explica o fluxo e aponta pra issue.
 
 ## Componentes (em `site/src/components/`)
 | Componente | O que faz |
@@ -24,7 +26,7 @@ O design system do Prumo nasceu pro canvas do app. Esta camada aplica as mesmas 
 | `Busca` | Modal no meio da tela, abre com Ctrl K (⌘K no Mac). Usa o índice do Pagefind gerado no build, sem serviço externo. |
 | `SeletorIdioma` | Popover com o nome de cada idioma escrito nele mesmo, sem bandeira, e o estado da tradução: original, traduzida por IA, revisada ou ainda sem tradução. Sem tradução, a opção leva pra "Ajude a traduzir". |
 | `ChaveTema` | Botão de ícone; o tema novo se espalha num círculo a partir do botão. Guarda a escolha em `starlight-theme`, a mesma chave da documentação. |
-| `starlight/*` | Substituem cabeçalho, busca, idioma, tema e aviso de página sem tradução do Starlight, usando os componentes acima. |
+| `starlight/*` | Substituem moldura da página, colunas, cabeçalho, rodapé da página, busca, idioma, tema e aviso de página sem tradução do Starlight. |
 
 Tokens: `site/src/estilos/tokens.css` (valores de `docs/design/sistema/tokens.json`).
 

@@ -21,7 +21,11 @@ export default defineConfig({
       social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/vitorsantss/prumo' }],
       customCss: ['./src/estilos/tokens.css', './src/estilos/prumo.css'],
       lastUpdated: false,
+      pagination: false,
       components: {
+        PageFrame: './src/components/starlight/Moldura.astro',
+        TwoColumnContent: './src/components/starlight/Colunas.astro',
+        EditLink: './src/components/starlight/Origem.astro',
         Header: './src/components/starlight/Cabecalho.astro',
         Search: './src/components/starlight/Pesquisa.astro',
         LanguageSelect: './src/components/starlight/Idioma.astro',

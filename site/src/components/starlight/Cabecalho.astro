@@ -39,6 +39,9 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     font-family: var(--p-manuscrita);
     font-size: 24px;
   }
+  .marca .p-adesivo {
+    white-space: nowrap;
+  }
   .divisor {
     width: 1px;
     height: 22px;
@@ -67,6 +70,12 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     }
     .busca {
       justify-content: flex-end;
+    }
+    .busca :global(.rotulo) {
+      display: none;
+    }
+    .busca :global(prumo-busca) {
+      flex: 0 0 auto;
     }
   }
 </style>

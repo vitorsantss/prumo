@@ -50,7 +50,7 @@ function converter(rel) {
   if (indiceTitulo >= 0) linhas.splice(indiceTitulo, 1);
   const corpo = reescreverLinks(linhas.join('\n').trimStart(), rel);
   const traducao = rel.startsWith('en/') ? (marcaIA.test(corpo) ? 'ia' : 'revisada') : null;
-  const frontmatter = ['---', `title: ${JSON.stringify(titulo)}`, ...(traducao ? [`traducao: ${traducao}`] : []), ...(rel.endsWith('0000-modelo.md') ? ['sidebar:', '  hidden: true', 'pagefind: false'] : []), `editUrl: ${JSON.stringify(repositorio.replace('/blob/', '/edit/') + 'docs/' + rel)}`, '---', ''];
+  const frontmatter = ['---', `title: ${JSON.stringify(titulo)}`, ...(traducao ? [`traducao: ${traducao}`] : []), ...(rel.endsWith('0000-modelo.md') ? ['sidebar:', '  hidden: true', 'pagefind: false'] : []), ...(/^(en\/)?adr\/README\.md$/.test(rel) ? ['sidebar:', '  label: ' + (rel.startsWith('en/') ? '"All decisions"' : '"Todas as decisões"'), '  order: 0'] : []), `origem: ${JSON.stringify('docs/' + rel)}`, `editUrl: ${JSON.stringify(repositorio + 'docs/' + rel)}`, '---', ''];
   return frontmatter.join('\n') + corpo;
 }
 
