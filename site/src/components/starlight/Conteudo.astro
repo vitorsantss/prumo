@@ -9,7 +9,15 @@ const porIA = (rota.entry.data as { traducao?: string }).traducao === 'ia';
 const emPortugues = rota.locale !== 'en' || soPortugues;
 const html = (await Astro.slots.render('default'))
   .replace('id="footnote-label">Footnotes</h2>', `id="footnote-label">${emPortugues ? 'Fontes' : 'Sources'}</h2>`)
-  .replace(/\s*<a[^>]*data-footnote-backref[^>]*>[\s\S]*?<\/a>/g, '');
+  .replace(/\s*<a[^>]*data-footnote-backref[^>]*>[\s\S]*?<\/a>/g, '')
+  .replace(/<table>([\s\S]*?)<\/table>/g, (_, corpo: string) => {
+    const rotulos = [...corpo.matchAll(/<th[^>]*>([\s\S]*?)<\/th>/g)].map((m) => m[1].replace(/<[^>]+>/g, '').replace(/"/g, '&quot;').trim());
+    const comRotulos = corpo.replace(/<tr>([\s\S]*?)<\/tr>/g, (linha: string, celulas: string) => {
+      let i = 0;
+      return `<tr>${celulas.replace(/<td([^>]*)>/g, (_t: string, attrs: string) => `<td${attrs} data-rotulo="${rotulos[i++] ?? ''}">`)}</tr>`;
+    });
+    return `<table class="empilha">${comRotulos}</table>`;
+  });
 ---
 {soPortugues && (
   <aside class="aviso" aria-label="Translation">

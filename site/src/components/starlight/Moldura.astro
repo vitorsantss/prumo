@@ -98,8 +98,20 @@ const { hasSidebar } = Astro.locals.starlightRoute;
     }
   }
   @media (max-width: 50rem) {
-    .topo {
-      padding-inline-end: calc(16px + var(--sl-menu-button-size) + 8px);
+    .topo :global(.cabecalho) {
+      padding-inline-end: calc(var(--sl-menu-button-size) + 20px);
+    }
+    .lateral :global(.sl-menu-button) {
+      top: calc(12px + (var(--sl-nav-height) - var(--sl-menu-button-size)) / 2);
+      inset-inline-end: 26px;
+      border: 1px solid var(--p-line);
+      border-radius: 10px;
+      background: var(--p-solid);
+      color: var(--p-ink);
+      box-shadow: none;
+    }
+    .corpo {
+      padding-inline: 12px;
     }
   }
 </style>
