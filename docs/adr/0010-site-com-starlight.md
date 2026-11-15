@@ -4,7 +4,7 @@
 - **Data:** 2026-11-15
 
 ## Contexto
-O projeto precisa de uma página que explique a ideia e de uma documentação navegável, com busca, em português e inglês, sem esconder que ainda está em estudo. Os textos já vivem em Markdown em `docs/` e devem continuar legíveis direto no GitHub. O Material for MkDocs, opção mais comum até pouco tempo, chegou ao fim da vida em 05/11/2026.
+O projeto precisa de uma página que explique a ideia e de uma documentação navegável, com busca, em português e inglês, sem esconder que ainda está em estudo. Os textos já vivem em Markdown em `docs/` e devem continuar legíveis direto no GitHub. O Material for MkDocs, opção mais comum até pouco tempo, entrou em modo de manutenção: só correções críticas e de segurança por pelo menos 12 meses, sem recursos novos, e o próprio time recomenda migrar pro Zensical.
 
 ## Decisão
 O site é feito com **Starlight** (Astro, MIT), na pasta `site/`:
@@ -27,6 +27,6 @@ O Starlight ainda está na versão 0.x e muda entre versões. A versão fica tra
 
 ## Fontes
 - Starlight · https://starlight.astro.build
-- Material for MkDocs, aviso de fim da vida · https://github.com/squidfunk/mkdocs-material/issues/8523
+- Material for MkDocs, aviso de modo de manutenção · https://github.com/squidfunk/mkdocs-material/issues/8523
 - Pagefind · https://pagefind.app
 - Starlight, componentes substituíveis · https://starlight.astro.build/reference/overrides

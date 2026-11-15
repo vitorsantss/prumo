@@ -39,5 +39,5 @@ Ninguém sabe ainda qual é o jeito certo de construir software com IA: surgem p
 [^2]: Design Council, *The Double Diamond* · https://www.designcouncil.org.uk/our-resources/the-double-diamond/
 [^3]: Marty Cagan, *Dual-Track Agile* (2012) · https://www.svpg.com/dual-track-agile/
 [^4]: Dex Horthy, *Advanced Context Engineering for Coding Agents* · https://humanlayer.dev/blog/advanced-context-engineering
-[^5]: Anthropic, *Claude Code: Best practices for agentic coding* · https://www.anthropic.com/engineering/claude-code-best-practices
+[^5]: Anthropic, *Best practices for Claude Code* · https://code.claude.com/docs/en/best-practices
 [^6]: GitHub, *Spec Kit* · https://github.com/github/spec-kit

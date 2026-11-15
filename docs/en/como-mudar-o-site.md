@@ -13,6 +13,13 @@ Prefer to just report it? [Open an issue](https://github.com/vitorsantss/prumo/i
 ## How to write
 
 - **Every citation has a link.** A claim about the world carries its source, preferably as a footnote (`text[^1]` and, at the end, `[^1]: Author, *Title* · URL`). A project, tool or challenge mentioned by name links to its page.
+- **Which link to use.** The official page when there is one (project, specification, docs). Paper or standard: the DOI (`https://doi.org/...`). Book: its [Open Library](https://openlibrary.org) record, which shows the ISBN and where to find it. Prefer the primary source over a text that comments on it.
+- **A source without a link: how to tell if it is reliable.**
+  1. Look for an identifier: DOI, ISBN, arXiv or standard number. Found one, use it as the link.
+  2. Check who published it: an author with recognized work in the field, a publisher, a peer-reviewed journal, an official body or the project owner.
+  3. Check it still holds: a page marked "no longer maintained", an inactive standard or an old version changes what we can claim.
+  4. Read the passage: does the source really say what we claim? A third-party summary does not count.
+  5. Did not pass? Do not cite it. If it is our own experience, write it as our experience, without attributing it to anyone.
 - **Internal citations too.** Write `ADR-0007` or `#50` as usual: the site turns them into links to the ADR and the issue. If the ADR is not merged yet, the build warns and the link appears by itself after the merge.
 
 ## Home page content

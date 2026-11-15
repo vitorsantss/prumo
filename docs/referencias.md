@@ -15,7 +15,7 @@ Todas as fontes que sustentam as decisões do Prumo, agrupadas por assunto, com 
 | Fonte | Onde usamos |
 | --- | --- |
 | Dex Horthy, *Advanced Context Engineering for Coding Agents* · https://humanlayer.dev/blog/advanced-context-engineering | Etapa de Research; etapas como sessões separadas (ADR-0007) |
-| Anthropic, *Claude Code: Best practices for agentic coding* · https://www.anthropic.com/engineering/claude-code-best-practices | Explorar e planejar antes de codar |
+| Anthropic, *Best practices for Claude Code* · https://code.claude.com/docs/en/best-practices | Explorar e planejar antes de codar |
 | Design Council, *The Double Diamond* · https://www.designcouncil.org.uk/our-resources/the-double-diamond/ | Descoberta antes da entrega |
 | Marty Cagan, *Dual-Track Agile* · https://www.svpg.com/dual-track-agile/ | Descoberta e entrega como trilhas separadas |
 | GitHub, *Spec Kit* · https://github.com/github/spec-kit | Desenvolvimento guiado por especificação, referência de comparação |

@@ -10,6 +10,13 @@ Prefere só avisar? [Abra uma issue](https://github.com/vitorsantss/prumo/issues
 ## Como escrever
 
 - **Toda citação tem link.** Afirmação sobre o mundo leva a fonte, de preferência como nota de rodapé (`texto[^1]` e, no fim, `[^1]: Autor, *Título* · URL`). Projeto, ferramenta ou desafio citado pelo nome leva link pra página dele.
+- **Que link usar.** Página oficial quando existir (projeto, especificação, documentação). Artigo ou norma: o DOI (`https://doi.org/...`). Livro: o registro no [Open Library](https://openlibrary.org), que mostra ISBN e onde encontrar. Prefira a fonte primária ao texto que comenta ela.
+- **Fonte sem link: como saber se é confiável.**
+  1. Procure um identificador: DOI, ISBN, número do arXiv ou da norma. Achou, use como link.
+  2. Veja quem publicou: autor com trabalho reconhecido na área, editora, periódico com revisão por pares, órgão oficial ou o próprio dono do projeto.
+  3. Confira se ainda vale: página marcada como "não mantida", norma inativa ou versão antiga mudam o que dá pra afirmar.
+  4. Leia o trecho: a fonte diz mesmo o que estamos afirmando? Resumo de terceiro não conta.
+  5. Não passou? Não cite. Se é experiência nossa, escreva como experiência nossa, sem atribuir a ninguém.
 - **Citação interna também.** Escreva `ADR-0007` ou `#50` normalmente: o site transforma em link pro ADR e pra issue. Se o ADR ainda não foi mergeado, o build avisa e o link aparece sozinho depois do merge.
 - **Português do Brasil, frases curtas, um assunto por parágrafo.**
 
