@@ -29,11 +29,16 @@ Decisão que muda arquitetura, dependência, formato de arquivo ou forma de trab
 
 Referência: Michael Nygard, *Documenting Architecture Decisions* (2011) · https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions
 
+## Desenhos
+
+Diagramas são bem-vindos quando ajudam e opcionais sempre. Qualquer ferramenta vale se o desenho aparecer no GitHub e a fonte editável ficar no repositório (ADR-0009).
+
 ## Revisão
 
 - Nada entra na `main` sem PR e sem aprovação de um mantenedor.
 - No Review, quem reprova classifica a causa e diz pra onde a tarefa volta: regra de negócio → SPEC, implementação → PLAN, ajuste visual → fluxo curto (ADR-0002). Por enquanto, quem revisa é o mantenedor.
 - Todo PR diz se usou IA e qual. Quem envia responde por cada linha.
+- Cada PR sai direto da `main`. Evite empilhar PRs: depois do squash de um, o seguinte entra em conflito.
 
 ## Onde as coisas moram
 
@@ -42,3 +47,4 @@ Referência: Michael Nygard, *Documenting Architecture Decisions* (2011) · http
 | Código, ADRs e documentação | Este repositório |
 | Tarefas e checkpoints | Issues e milestones |
 | Perguntas e conversas abertas | Discussions |
+| Rascunhos e ideias cruas | Onde cada pessoa preferir. Só passam a existir pro projeto quando viram issue ou ADR |
