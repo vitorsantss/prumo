@@ -78,12 +78,14 @@ func (t Terminal) pedirComentario() (string, error) {
 	}
 }
 
+const marcaBOM = "\uFEFF"
+
 func lerLinha(r *bufio.Reader) (string, error) {
 	linha, err := r.ReadString('\n')
 	if err != nil && linha == "" {
 		return "", fmt.Errorf("entrada encerrada antes da decisão do gate: %w", err)
 	}
-	return strings.TrimSpace(linha), nil
+	return strings.TrimSpace(strings.TrimPrefix(linha, marcaBOM)), nil
 }
 
 func previa(conteudo string, linhas int) string {
