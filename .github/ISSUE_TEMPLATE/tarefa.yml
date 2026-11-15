@@ -1,0 +1,21 @@
+name: Tarefa
+description: Um trabalho concreto a fazer
+labels: []
+body:
+  - type: textarea
+    attributes:
+      label: O que fazer
+      description: Descreva o resultado esperado, não só a atividade.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Pronto quando
+      description: Critérios verificáveis pra considerar a tarefa feita.
+      placeholder: "- [ ] ..."
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Contexto e referências
+      description: ADRs, issues ou links que ajudam.

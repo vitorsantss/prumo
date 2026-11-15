@@ -1,0 +1,15 @@
+name: Ideia
+description: Uma sugestão ou proposta pra discutir
+labels: ["ideia"]
+body:
+  - type: textarea
+    attributes:
+      label: Qual a ideia
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Que problema resolve
+      description: Pra quem e em que situação isso ajuda.
+    validations:
+      required: true

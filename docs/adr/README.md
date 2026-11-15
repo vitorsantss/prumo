@@ -1,0 +1,12 @@
+# Decisões de arquitetura (ADR)
+
+Uma decisão por arquivo, no formato de Michael Nygard: título, status, contexto, decisão, consequências.
+Referência: https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions
+
+| Nº | Título | Status |
+| --- | --- | --- |
+| 0001 | Arquivos em `tasks/<id>/` como fonte da verdade | Proposto |
+| 0002 | Review reprovado volta pela causa | Proposto |
+| 0003 | Dado de cliente nunca passa pela IA | Proposto |
+| 0004 | [Licença do projeto: AGPL-3.0](0004-licenca-agpl-3.md) | Aceito |
+| 0005 | [Integrações terceirizadas, sempre com caminho nativo](0005-integracoes-terceirizadas-caminho-nativo.md) | Proposto |
