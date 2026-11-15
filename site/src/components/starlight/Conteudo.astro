@@ -6,6 +6,10 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const ajuda = `${base}en/docs/traduzir/`;
 const soPortugues = rota.locale === 'en' && rota.isFallback;
 const porIA = (rota.entry.data as { traducao?: string }).traducao === 'ia';
+const emPortugues = rota.locale !== 'en' || soPortugues;
+const html = (await Astro.slots.render('default'))
+  .replace('id="footnote-label">Footnotes</h2>', `id="footnote-label">${emPortugues ? 'Fontes' : 'Sources'}</h2>`)
+  .replaceAll('aria-label="Back to reference', `aria-label="${emPortugues ? 'Voltar ao texto' : 'Back to text'}`);
 ---
 {soPortugues && (
   <aside class="aviso" aria-label="Translation">
@@ -19,7 +23,7 @@ const porIA = (rota.entry.data as { traducao?: string }).traducao === 'ia';
     <p>This page was translated by AI and is waiting for a human review. <a href={ajuda}>Help review it</a></p>
   </aside>
 )}
-<div class="sl-markdown-content" lang={soPortugues ? 'pt-BR' : undefined}><slot /></div>
+<div class="sl-markdown-content" lang={soPortugues ? 'pt-BR' : undefined} set:html={html} />
 
 <style>
   .aviso {

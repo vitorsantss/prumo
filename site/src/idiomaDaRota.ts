@@ -19,6 +19,7 @@ const marcar = (entrada: Entrada, traduzidas: Set<string>): Entrada => {
 
 export const onRequest = defineRouteMiddleware(async (contexto) => {
   const rota = contexto.locals.starlightRoute;
+  if (rota.toc) rota.toc.items = rota.toc.items.filter((item) => item.slug !== 'footnote-label');
   if (rota.locale !== 'en') return;
   const traduzidas = new Set((await getCollection('docs', (e) => e.id.startsWith('en/'))).map((e) => e.id));
   rota.sidebar = rota.sidebar.map((entrada) => marcar(entrada, traduzidas));

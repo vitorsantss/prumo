@@ -2,7 +2,7 @@
 
 ## O problema
 
-Pedir código a uma IA é rápido. Saber se ele resolve o problema certo, do jeito certo, é difícil. Um pedido mal entendido vira uma especificação errada, que vira um plano errado, que vira muito código errado; e, sem etapas, isso só aparece no fim, quando corrigir custa mais [1].
+Pedir código a uma IA é rápido. Saber se ele resolve o problema certo, do jeito certo, é difícil. Um pedido mal entendido vira uma especificação errada, que vira um plano errado, que vira muito código errado; e, sem etapas, isso só aparece no fim, quando corrigir custa mais[^1].
 
 ## A hipótese
 
@@ -18,7 +18,7 @@ Cada tarefa percorre **etapas**, e cada etapa entrega **um arquivo** que a próx
 
 ### Por que começar pelo Research
 
-Pesquisar antes de construir é prática antiga, com nomes diferentes: no design, a fase de **descoberta** vem antes da entrega [2][3]; no trabalho com agentes de código, o fluxo **Research → Plan → Implement** separa entender, planejar e implementar em sessões diferentes, porque um erro na pesquisa se multiplica nas etapas seguintes [4]; e o guia de boas práticas do Claude Code recomenda explorar e planejar antes de codar [5]. O Prumo trata essa pesquisa como uma etapa com arquivo próprio e portão.
+O Research nasceu do jeito de trabalhar de quem mantém o Prumo: antes de escrever código, entender o pedido, o sistema e o negócio. Depois fomos ver se a literatura sustentava essa prática, e sustenta. No design, a fase de **descoberta** vem antes da entrega: o Double Diamond, do Design Council, separa explorar o problema de construir a solução[^2]. Em produto, Marty Cagan chama isso de *dual-track*: descobrir o que vale construir corre em paralelo a entregar[^3]. No trabalho com agentes de código, o mesmo aparece no fluxo **Research → Plan → Implement**, porque um erro na pesquisa se multiplica nas etapas seguintes[^4], e no guia de boas práticas do Claude Code, que recomenda explorar e planejar antes de codar[^5]. O Prumo trata essa pesquisa como uma etapa com arquivo próprio e portão.
 
 ## O portão
 
@@ -26,7 +26,7 @@ A IA faz o trabalho; o portão é humano. As três decisões possíveis (aprovar
 
 ## Um padrão que se adapta a você
 
-Ninguém sabe ainda qual é o jeito certo de construir software com IA: surgem padrões novos o tempo todo, como o desenvolvimento guiado por especificação [6], e quase ninguém mede. O Prumo quer ser o lugar onde dá pra **montar fluxos diferentes, rodar a mesma tarefa em cada um e medir** qual funciona pro jeito de cada pessoa trabalhar.
+Ninguém sabe ainda qual é o jeito certo de construir software com IA: surgem padrões novos o tempo todo, como o desenvolvimento guiado por especificação[^6], e quase ninguém mede. O Prumo quer ser o lugar onde dá pra **montar fluxos diferentes, rodar a mesma tarefa em cada um e medir** qual funciona pro jeito de cada pessoa trabalhar.
 
 ## O que o Prumo é, e o que não é
 
@@ -35,9 +35,9 @@ Ninguém sabe ainda qual é o jeito certo de construir software com IA: surgem p
 
 ## Fontes
 
-1. Barry Boehm, *Software Engineering Economics* (1981): o custo de corrigir um defeito cresce com a fase em que é encontrado.
-2. Design Council, *The Double Diamond* · https://www.designcouncil.org.uk/our-resources/the-double-diamond/
-3. Marty Cagan, *Dual-Track Agile* (2012) · https://www.svpg.com/dual-track-agile/
-4. Dex Horthy, *Advanced Context Engineering for Coding Agents* · https://humanlayer.dev/blog/advanced-context-engineering
-5. Anthropic, *Claude Code: Best practices for agentic coding* · https://www.anthropic.com/engineering/claude-code-best-practices
-6. GitHub, *Spec Kit* · https://github.com/github/spec-kit
+[^1]: Barry Boehm, *Software Engineering Economics* (1981): o custo de corrigir um defeito cresce com a fase em que é encontrado.
+[^2]: Design Council, *The Double Diamond* · https://www.designcouncil.org.uk/our-resources/the-double-diamond/
+[^3]: Marty Cagan, *Dual-Track Agile* (2012) · https://www.svpg.com/dual-track-agile/
+[^4]: Dex Horthy, *Advanced Context Engineering for Coding Agents* · https://humanlayer.dev/blog/advanced-context-engineering
+[^5]: Anthropic, *Claude Code: Best practices for agentic coding* · https://www.anthropic.com/engineering/claude-code-best-practices
+[^6]: GitHub, *Spec Kit* · https://github.com/github/spec-kit

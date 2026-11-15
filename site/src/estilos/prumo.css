@@ -139,3 +139,22 @@ main h1#_top {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   transform: rotate(-4deg);
 }
+
+.sl-markdown-content sup a {
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0 2px;
+}
+
+.sl-markdown-content .footnotes {
+  font-size: 0.875rem;
+  color: var(--p-muted);
+}
+
+.sl-markdown-content .footnotes ol {
+  padding-inline-start: 1.25rem;
+}
+
+.sl-markdown-content [data-footnote-backref] {
+  text-decoration: none;
+}
