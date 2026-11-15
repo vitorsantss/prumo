@@ -111,11 +111,15 @@ main h1#_top {
 }
 
 .sl-markdown-content table {
+  display: table;
+  width: 100%;
+  overflow: visible;
   border-collapse: collapse;
 }
 
 .sl-markdown-content :is(th, td) {
   border-color: var(--p-line);
+  overflow-wrap: anywhere;
 }
 
 .pagination-links a {
@@ -162,4 +166,57 @@ main h1#_top {
   height: 1px;
   overflow: hidden;
   clip: rect(0 0 0 0);
+}
+
+@media (max-width: 50rem) {
+  .sl-markdown-content table.empilha,
+  .sl-markdown-content table.empilha tbody,
+  .sl-markdown-content table.empilha tr,
+  .sl-markdown-content table.empilha td {
+    display: block;
+    width: 100%;
+  }
+
+  .sl-markdown-content table.empilha thead {
+    display: none;
+  }
+
+  .sl-markdown-content table.empilha tr {
+    margin: 0;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--p-line);
+  }
+
+  .sl-markdown-content table.empilha td {
+    margin: 0;
+    padding: 0.2rem 0;
+    border: none;
+    overflow-wrap: anywhere;
+  }
+
+  .sl-markdown-content table.empilha td:first-child {
+    font-weight: 600;
+  }
+
+  .sl-markdown-content table.empilha td:first-child::before {
+    display: none;
+  }
+
+  .sl-markdown-content table.empilha td::before {
+    content: attr(data-rotulo);
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--p-muted);
+  }
+
+  .sl-markdown-content table.empilha code {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .main-pane .content-panel {
+    padding-inline: 1.25rem;
+  }
 }

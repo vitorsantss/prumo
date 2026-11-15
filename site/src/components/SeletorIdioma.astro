@@ -57,6 +57,12 @@ const id = `idiomas-${Math.random().toString(36).slice(2, 8)}`;
       const abrir = (sim: boolean) => {
         painel.hidden = !sim;
         gatilho.setAttribute('aria-expanded', String(sim));
+        painel.classList.remove('inicio', 'acima');
+        if (sim) {
+          const caixa = painel.getBoundingClientRect();
+          if (caixa.left < 8) painel.classList.add('inicio');
+          if (caixa.bottom > innerHeight - 8) painel.classList.add('acima');
+        }
         if (sim) painel.querySelector<HTMLElement>('a, [tabindex]')?.focus();
       };
       gatilho.addEventListener('click', () => abrir(painel.hidden));
@@ -104,6 +110,19 @@ const id = `idiomas-${Math.random().toString(36).slice(2, 8)}`;
     transform-origin: top right;
     animation: p-pop var(--p-pop) var(--p-curva) both;
     font-family: var(--p-texto);
+  }
+  .painel.inicio {
+    right: auto;
+    left: 0;
+    transform-origin: top left;
+  }
+  .painel.acima {
+    top: auto;
+    bottom: calc(100% + 10px);
+    transform-origin: bottom right;
+  }
+  .painel {
+    max-width: calc(100vw - 32px);
   }
   .titulo {
     margin: 0 0 6px;
