@@ -1,0 +1,32 @@
+<div class="colunas">
+  <div class="main-pane"><slot /></div>
+  {Astro.locals.starlightRoute.toc && (
+    <aside class="indice print:hidden">
+      <div class="right-sidebar"><slot name="right-sidebar" /></div>
+    </aside>
+  )}
+</div>
+
+<style>
+  .colunas {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .main-pane {
+    flex: 1 1 auto;
+    min-width: 0;
+    isolation: isolate;
+  }
+  .indice {
+    display: none;
+  }
+  @media (min-width: 72rem) {
+    .indice {
+      display: block;
+      flex: 0 0 220px;
+      position: sticky;
+      top: calc(var(--sl-nav-height) + 32px);
+    }
+  }
+</style>

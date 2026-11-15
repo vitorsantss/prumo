@@ -14,7 +14,23 @@ A ideia: decidir sem IA sempre que der (regras, heurísticas), usar IA só onde 
 
 ## Estado
 
-Em fase de decisão (checkpoint C0). Nada roda ainda.
+Esqueleto do C1 rodando: uma CLI em Go que lê o `pipeline.yml`, executa as etapas de uma tarefa com um gate manual e grava o rastro de cada etapa (ADR-0007).
+
+## Como rodar
+
+Precisa do [Go](https://go.dev/dl/) 1.24 ou mais novo.
+
+```sh
+go build -o prumo ./cmd/prumo
+./prumo validar exemplos/pipeline.yml
+./prumo executar --pipeline exemplos/pipeline.yml --tarefa exemplos/rinha-2024q1/tarefa.md
+```
+
+Por padrão as etapas de IA usam o **executor dublê**, que responde sem IA, pra testar o fluxo de graça. Pra usar o Claude Code (pago, ADR-0005), passe `--executor claude`. O caminho livre, com agente e modelo abertos, é a issue #13.
+
+No gate de cada etapa manual você escolhe: aprovar, pedir ajuste (a etapa roda de novo com o seu comentário) ou refazer. Tudo fica em `~/.local/share/prumo/<workspace>/tasks/<id>/` (ou em `$PRUMO_HOME`): a tarefa, a saída de cada etapa, o `etapa.json` com o que foi lido, escrito, tokens e tempo, e o `tarefa.json` com o resumo.
+
+Testes: `go test ./...`
 
 | Checkpoint | Até | O que entrega |
 | --- | --- | --- |
@@ -31,6 +47,11 @@ Issues abertas, ideias e correções são bem-vindas, com ou sem IA. Comece pelo
 ## Propósito
 
 O Prumo foi feito pra educação e pro setor público: pra quem quer estudar, contribuir e praticar como se constrói software, e pra universidades, institutos federais e órgãos públicos que criam software pra sociedade.
+
+## Quem mantém
+Mantido por **Vitor Santos** ([GitHub](https://github.com/vitorsantss) · [LinkedIn](https://www.linkedin.com/in/vitorsantss/)), que revisa e aprova as mudanças. Dúvidas e ideias sobre o projeto vão nas [Discussions](https://github.com/vitorsantss/prumo/discussions) ou em issues, pra que a resposta fique à vista de quem tiver a mesma dúvida.
+
+Pra citar o Prumo num trabalho, use o botão "Cite this repository" do GitHub (vem do arquivo `CITATION.cff`).
 
 ## Licença
 

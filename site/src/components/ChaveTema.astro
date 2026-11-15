@@ -1,0 +1,99 @@
+---
+interface Props {
+  rotulo: string;
+}
+
+const { rotulo } = Astro.props;
+---
+<prumo-chave-tema>
+  <button type="button" class="p-botao-icone chave" role="switch" aria-checked="false" aria-label={rotulo}>
+    <svg class="sol" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+    <svg class="lua" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg>
+  </button>
+</prumo-chave-tema>
+
+<script>
+  const chave = 'starlight-theme';
+  type Tema = 'light' | 'dark';
+
+  const temaAtual = (): Tema => (document.documentElement.dataset.theme === 'light' ? 'light' : 'dark');
+
+  const guardar = (tema: Tema) => {
+    try {
+      localStorage.setItem(chave, tema);
+    } catch {
+      return;
+    }
+  };
+
+  const sincronizar = () => {
+    const escuro = temaAtual() === 'dark';
+    document.querySelectorAll('prumo-chave-tema button').forEach((b) => b.setAttribute('aria-checked', String(escuro)));
+  };
+
+  const aplicar = (tema: Tema) => {
+    document.documentElement.dataset.theme = tema;
+    guardar(tema);
+    sincronizar();
+  };
+
+  const revelar = (origem: HTMLElement, tema: Tema) => {
+    const calmo = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!document.startViewTransition || calmo) {
+      aplicar(tema);
+      return;
+    }
+    const caixa = origem.getBoundingClientRect();
+    const x = caixa.left + caixa.width / 2;
+    const y = caixa.top + caixa.height / 2;
+    const raio = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    document.documentElement.dataset.vt = 'tema';
+    const transicao = document.startViewTransition(() => aplicar(tema));
+    transicao.ready
+      .then(() =>
+        document.documentElement.animate(
+          { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${raio}px at ${x}px ${y}px)`] },
+          { duration: 420, easing: 'cubic-bezier(0.3, 0.7, 0.3, 1)', pseudoElement: '::view-transition-new(root)' },
+        ),
+      )
+      .catch(() => undefined);
+    transicao.finished.finally(() => delete document.documentElement.dataset.vt);
+  };
+
+  class PrumoChaveTema extends HTMLElement {
+    connectedCallback() {
+      sincronizar();
+      const botao = this.querySelector('button');
+      botao?.addEventListener('click', () => revelar(botao, temaAtual() === 'dark' ? 'light' : 'dark'));
+    }
+  }
+
+  if (!customElements.get('prumo-chave-tema')) customElements.define('prumo-chave-tema', PrumoChaveTema);
+</script>
+
+<style>
+  .chave {
+    overflow: hidden;
+  }
+  .chave svg {
+    position: absolute;
+    transition: transform var(--p-sobe) var(--p-curva), opacity var(--p-pop);
+  }
+  .lua {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+  }
+  :root[data-theme='dark'] .sol {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+  }
+  :root[data-theme='dark'] .lua {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .chave svg {
+      transition: none;
+    }
+  }
+</style>

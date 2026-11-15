@@ -1,7 +1,6 @@
 # Decisões de arquitetura (ADR)
 
-Uma decisão por arquivo, no formato de Michael Nygard: título, status, contexto, decisão, consequências e fontes.
-Referência: https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions
+Uma decisão por arquivo, no [formato de Michael Nygard](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions): título, status, contexto, decisão, consequências e fontes.
 
 - Os arquivos são numerados em ordem (`0001-…`, `0002-…`); a listagem desta pasta no GitHub já é o índice.
 - O status de cada decisão (Proposto, Aceito, Substituído) fica no topo do próprio arquivo.

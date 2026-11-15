@@ -42,5 +42,5 @@ Qualquer banco ou índice que vier depois (pra tela, busca ou relatórios) é **
 ## Fontes
 
 - Local-first software, Kleppmann et al. (Ink & Switch, 2019) · https://www.inkandswitch.com/local-first/
-- Hunt e Thomas, *The Pragmatic Programmer*, tópico "The Power of Plain Text"
+- Hunt e Thomas, *The Pragmatic Programmer* (1999), tópico "The Power of Plain Text" · https://openlibrary.org/works/OL5748544W
 - JSON Lines · https://jsonlines.org

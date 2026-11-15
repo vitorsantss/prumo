@@ -62,3 +62,9 @@ Critérios usados: facilidade de distribuir pra quem usa, facilidade de quem che
 - Ports and Adapters, Alistair Cockburn · https://alistair.cockburn.us/hexagonal-architecture
 - Model Context Protocol · https://modelcontextprotocol.io
 - Tauri · https://tauri.app
+
+## Dependências do núcleo (checagem de licença, ADR-0005)
+
+| Dependência | Uso | Licença |
+| --- | --- | --- |
+| github.com/goccy/go-yaml | Ler o `pipeline.yml` com erros apontando linha e campo | MIT |

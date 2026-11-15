@@ -1,0 +1,299 @@
+---
+import '../estilos/tokens.css';
+import dados from '../data/landing.json';
+import Busca from './Busca.astro';
+import ChaveTema from './ChaveTema.astro';
+import SeletorIdioma from './SeletorIdioma.astro';
+
+interface Props {
+  idioma: 'pt' | 'en';
+}
+
+const { idioma } = Astro.props;
+const x = dados[idioma];
+const en = idioma === 'en';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const urlCanonica = new URL(en ? `${base}en/` : base, Astro.site).href;
+const docs = `${base}${x.docs}`;
+const repositorio = 'https://github.com/vitorsantss/prumo';
+const icones = [
+  'M4 5h7v14H4zM13 5h7v14h-7',
+  'M5 5h14v10H9l-4 4z',
+  'M4 6h9M8 4v2c0 4-2 7-4 8M6 10c1 2 3 3 5 4M13 20l4-9 4 9M14.5 17h5',
+  'M5 4h10l4 4v12H5zM9 12h6M9 16h4',
+  'M4 20l4-1 10-10-3-3L5 16zM14 6l3 3',
+  'M8 8l-4 4 4 4M16 8l4 4-4 4M13 6l-2 12',
+];
+const estadoDoMarco = { feito: 'feito', agora: 'andamento', depois: 'falta' } as const;
+const opcoesIdioma = [
+  { nome: 'Português', lang: 'pt-BR', href: base, atual: !en, estado: 'original' as const },
+  { nome: 'English', lang: 'en', href: `${base}en/`, atual: en, estado: 'ia' as const },
+];
+const textosIdioma = en
+  ? { original: 'original', ia: 'translated by AI, awaiting review', revisada: 'reviewed translation', falta: 'not translated yet', ajuda: 'Why, and how to help →' }
+  : { original: 'original', ia: 'traduzida por IA, aguardando revisão', revisada: 'tradução revisada', falta: 'ainda sem tradução', ajuda: 'Por que e como ajudar →' };
+const dadosEstruturados = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareSourceCode',
+  name: 'Prumo',
+  description: x.descricao,
+  codeRepository: repositorio,
+  license: 'https://www.gnu.org/licenses/agpl-3.0.html',
+  programmingLanguage: 'Go',
+  inLanguage: x.lang,
+  author: { '@type': 'Person', name: 'Vitor Santos', url: 'https://github.com/vitorsantss' },
+};
+---
+<!doctype html>
+<html lang={x.lang}>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{x.titulo}</title>
+<meta name="description" content={x.descricao} />
+<link rel="canonical" href={urlCanonica} />
+<link rel="alternate" hreflang="pt-BR" href={new URL(base, Astro.site).href} />
+<link rel="alternate" hreflang="en" href={new URL(`${base}en/`, Astro.site).href} />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={x.titulo} />
+<meta property="og:description" content={x.descricao} />
+<meta property="og:url" content={urlCanonica} />
+<meta name="twitter:card" content="summary" />
+<script type="application/ld+json" set:html={JSON.stringify(dadosEstruturados)} />
+<script is:inline>
+  (() => {
+    let salvo = null;
+    try { salvo = localStorage.getItem('starlight-theme'); } catch {}
+    const escuro = salvo ? salvo === 'dark' : !matchMedia('(prefers-color-scheme: light)').matches;
+    document.documentElement.dataset.theme = escuro ? 'dark' : 'light';
+  })();
+</script>
+</head>
+<body class="p-canvas">
+<a class="pular" href="#conteudo">{x.pular}</a>
+
+<header class="topo">
+  <div class="p-ilha barra">
+    <span class="marca"><span class="logo" translate="no">prumo</span><span class="p-adesivo adesivo">{x.adesivo}</span></span>
+    <a class="link-docs" href={docs}>{en ? 'Docs' : 'Documentação'}</a>
+    <Busca idioma={idioma} />
+    <div class="controles">
+      <SeletorIdioma opcoes={opcoesIdioma} rotulo={x.idiomaRotulo} textos={textosIdioma} ajudaHref={`${base}docs/traduzir/`} />
+      <ChaveTema rotulo={x.temaRotulo} />
+    </div>
+  </div>
+</header>
+
+<main id="conteudo">
+  <section id="pergunta" class="heroi" aria-labelledby="titulo">
+    <div class="heroi-texto">
+      <span class="kicker">{x.kicker}</span>
+      <h1 id="titulo">{x.pergunta}</h1>
+      <p class="resposta"><span class="digita">{x.resposta}</span></p>
+      <div class="botoes">
+        <a class="p-botao primario grande" href={docs}>{x.cta1}</a>
+        <button type="button" class="p-botao grande" data-compartilhar data-copiado={x.copiado}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"></path></svg>
+          <span>{x.compartilhar}</span>
+        </button>
+      </div>
+    </div>
+    <ul class="grade respostas">
+      {x.respostas.map(([rotulo, titulo, texto], i) => (
+        <li class="p-ilha cartao aparece" style={`animation-delay: ${0.4 + i * 0.15}s`}>
+          <span class="rotulo-cartao">{rotulo}</span><strong>{titulo}</strong><span class="suave">{texto}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section id="ideia" class="p-folha folha" aria-labelledby="t-ideia">
+    <div class="revela coluna">
+      <h2 id="t-ideia">{x.ideiaTitulo}</h2>
+      <p class="suave">{x.ideiaTexto1}</p>
+      <p>{x.ideiaTexto2}</p>
+      <a class="terciario" href={`${base}${en ? 'en/' : ''}docs/a-ideia/`}>{en ? 'Read the full idea' : 'Ler a ideia completa'}</a>
+    </div>
+    <div class="fluxos" aria-hidden="true">
+      <svg viewBox="0 0 560 300" fill="none" preserveAspectRatio="none">
+        <path class="traco" d="M20 50 C 180 50, 300 50, 470 150"></path>
+        <path class="traco" d="M20 150 C 180 150, 300 150, 470 150"></path>
+        <path class="traco" d="M20 250 C 180 250, 300 250, 470 150"></path>
+      </svg>
+      {x.fluxos.map(([nome, etapas], i) => (
+        <div class="p-ilha fluxo revela" style={`top: ${14 + i * 100}px`}><span class="rotulo-cartao">{nome}</span><span class="manuscrita">{etapas}</span></div>
+      ))}
+      <div class="p-ilha medir revela"><span class="anel"></span><span class="manuscrita">{x.medir}</span><span class="suave pequeno">{x.qualServe}</span></div>
+    </div>
+  </section>
+
+  <section id="hipoteses" class="secao" aria-labelledby="t-lab">
+    <div class="revela cabecalho">
+      <h2 id="t-lab">{x.labTitulo}</h2>
+      <p class="suave">{x.labTexto}</p>
+    </div>
+    <ol class="grade">
+      {dados.hipoteses.map((h) => (
+        <li class="p-ilha cartao revela"><span class="mono suave">{h.id}</span><strong>{h[idioma][0]}</strong><span class="suave">{h[idioma][1]}</span><span class="estado"><span class="p-ponto falta" aria-hidden="true"></span>{x.naoTestada}</span></li>
+      ))}
+    </ol>
+  </section>
+
+  <section id="hoje" class="p-folha folha" aria-labelledby="t-hoje">
+    <div class="revela coluna">
+      <h2 id="t-hoje">{x.hojeTitulo}</h2>
+      <p class="suave">{x.hojeTexto}</p>
+      <ul class="legenda">
+        <li><span class="p-ponto feito" aria-hidden="true"></span>{en ? 'done' : 'feito'}</li>
+        <li><span class="p-ponto andamento" aria-hidden="true"></span>{en ? 'in progress' : 'em andamento'}</li>
+        <li><span class="p-ponto falta" aria-hidden="true"></span>{en ? 'not yet' : 'ainda não'}</li>
+      </ul>
+    </div>
+    <div class="fio">
+      <ol>
+        {dados.marcos.map((m) => (
+          <li class="revela">
+            <span class:list={['p-ponto', 'no', estadoDoMarco[m.tipo as keyof typeof estadoDoMarco]]} aria-hidden="true"></span>
+            <span class:list={['mono', { agora: m.tipo === 'agora' }]}>{m.quando[idioma]}</span>
+            <p class="marco-titulo">{m[idioma][0]}</p>
+            <p class="suave">{m[idioma][1]}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section id="parte" class="secao" aria-labelledby="t-parte">
+    <div class="revela cabecalho">
+      <h2 id="t-parte">{x.parteTitulo}</h2>
+      <p class="suave">{x.parteTexto}</p>
+    </div>
+    <ul class="grade formas">
+      {x.formas.map(([nome, texto], i) => (
+        <li class="p-ilha cartao revela"><span class="icone" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={icones[i]}></path></svg></span><strong>{nome}</strong><span class="suave">{texto}</span></li>
+      ))}
+    </ul>
+    <div class="botoes">
+      <a class="p-botao primario grande" href={docs}>{x.cta3}</a>
+      <button type="button" class="p-botao grande" data-compartilhar data-copiado={x.copiado}><span>{x.compartilhar}</span></button>
+    </div>
+  </section>
+</main>
+
+<footer class="pe">
+  <div class="p-ilha rodape">
+    <span>{x.mantido} <strong>Vitor Santos</strong> · <a href="https://github.com/vitorsantss">GitHub</a> · <a href="https://www.linkedin.com/in/vitorsantss/">LinkedIn</a></span>
+    <span>{x.rodape1}</span>
+    <span>{x.rodape2}</span>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-compartilhar]').forEach((botao) => {
+    botao.addEventListener('click', async () => {
+      const url = location.href.split('#')[0];
+      if (navigator.share) {
+        await navigator.share({ title: document.title, url }).catch(() => undefined);
+        return;
+      }
+      await navigator.clipboard?.writeText(url).catch(() => undefined);
+      const rotulo = botao.querySelector('span');
+      if (rotulo) rotulo.textContent = botao.dataset.copiado ?? '';
+    });
+  });
+</script>
+
+<style is:global>
+  body { margin: 0; font-family: var(--p-texto); color: var(--p-ink); overflow-x: hidden; }
+  a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; border-radius: 8px; }
+</style>
+
+<style>
+  h1, h2 { font-family: var(--p-manuscrita); font-weight: 400; margin: 0; text-wrap: balance; }
+  h1 { font-size: clamp(2.6rem, 6vw, 4rem); line-height: 1.04; }
+  h2 { font-size: clamp(2rem, 4vw, 2.6rem); line-height: 1.08; }
+  p { margin: 0; line-height: 1.7; font-size: 1.06rem; }
+  .suave { color: var(--p-muted); }
+  .pequeno { font-size: 11px; }
+  .mono { font: 400 0.82rem var(--p-mono); }
+  .manuscrita { font-family: var(--p-manuscrita); font-size: 1.06rem; }
+  .pular { position: absolute; left: -9999px; top: 8px; background: var(--p-ink); color: var(--p-bg); padding: 10px 14px; border-radius: 10px; z-index: 60; }
+  .pular:focus { left: 16px; }
+
+  .topo { position: sticky; top: 12px; z-index: 20; max-width: 1180px; margin: 12px auto 0; padding: 0 16px; }
+  .barra { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding: 8px 10px 8px 16px; }
+  .marca { display: inline-flex; align-items: center; gap: 10px; }
+  .logo { font-family: var(--p-manuscrita); font-size: 26px; }
+  .adesivo { animation: colar 0.7s 0.9s cubic-bezier(0.2, 0.9, 0.3, 1.2) both; }
+  .link-docs, .terciario { font-size: 15px; font-weight: 600; color: var(--p-ink); text-decoration: underline; text-underline-offset: 4px; }
+  .link-docs { margin-right: auto; }
+  .controles { display: flex; align-items: center; gap: 8px; }
+
+  main { max-width: 1180px; margin: 0 auto; padding: 0 16px 48px; display: flex; flex-direction: column; gap: 28px; }
+  .heroi { padding: 64px 8px 24px; display: flex; flex-direction: column; gap: 36px; }
+  .heroi-texto { display: flex; flex-direction: column; gap: 14px; max-width: 880px; }
+  .kicker { font-family: var(--p-manuscrita); font-size: 26px; color: var(--p-muted); }
+  .resposta { font-size: 1.25rem; color: var(--p-muted); }
+  .digita { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; max-width: 100%; animation: digitar 1.6s 1.2s steps(40) both; }
+  .botoes { display: flex; flex-wrap: wrap; gap: 10px; }
+  .grande { min-height: 48px; padding: 0 20px; }
+  .grade { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .formas { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+  .cartao { padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+  .cartao strong { font-size: 1.08rem; line-height: 1.4; }
+  .cartao .suave { font-size: 0.92rem; line-height: 1.55; }
+  .rotulo-cartao { font-size: 13px; font-weight: 600; color: var(--p-muted); }
+  .estado { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--p-muted); }
+  .icone { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; border: 1px solid var(--p-line); background: var(--p-solid); }
+
+  .folha { padding: clamp(24px, 4vw, 48px); display: flex; flex-wrap: wrap; gap: 40px; align-items: center; }
+  .coluna { flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+  .secao { padding: 56px 8px 16px; display: flex; flex-direction: column; gap: 24px; }
+  .cabecalho { display: flex; flex-direction: column; gap: 12px; max-width: 780px; }
+
+  .fluxos { position: relative; flex: 1 1 460px; min-width: 0; height: 300px; }
+  .fluxos svg { position: absolute; inset: 0; width: 100%; height: 300px; }
+  .traco { stroke: var(--p-line); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 900; stroke-dashoffset: 0; }
+  .fluxo { position: absolute; left: 0; display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; }
+  .medir { position: absolute; right: 0; top: 108px; width: 96px; height: 84px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+  .medir .manuscrita { font-size: 22px; }
+  .anel { position: absolute; inset: -6px; border-radius: 18px; border: 1.5px dashed var(--p-ink); animation: girar 6s linear infinite; }
+
+  .legenda { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--p-muted); }
+  .legenda li { display: inline-flex; align-items: center; gap: 6px; }
+  .fio { position: relative; flex: 1 1 460px; min-width: 0; }
+  .fio::before { content: ''; position: absolute; left: 10px; top: 6px; bottom: 6px; width: 1.5px; background: var(--p-line); }
+  .fio ol { list-style: none; margin: 0; padding: 0 0 0 38px; }
+  .fio li { position: relative; padding-bottom: 26px; }
+  .fio .marco-titulo { font-weight: 700; margin-top: 4px; }
+  .fio .suave { font-size: 0.92rem; line-height: 1.55; }
+  .no { position: absolute; left: -36px; top: 2px; width: 16px; height: 16px; box-shadow: 0 0 0 4px var(--p-solid); background-color: var(--p-solid); }
+  .no.feito { background: var(--p-done); }
+  .mono.agora { color: var(--p-run); }
+
+  .pe { max-width: 1180px; margin: 0 auto; padding: 0 16px 24px; }
+  .rodape { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 16px 20px; font-size: 13px; color: var(--p-muted); }
+  .rodape strong, .rodape a { color: var(--p-ink); }
+  .rodape a { text-underline-offset: 3px; }
+
+  .aparece { opacity: 0; animation: surgir 0.7s ease-out forwards; }
+  @keyframes surgir { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+  @keyframes colar { 0% { opacity: 0; transform: scale(1.5) rotate(-4deg); } 60% { opacity: 1; transform: scale(0.94) rotate(-4deg); } 100% { opacity: 1; transform: rotate(-4deg); } }
+  @keyframes digitar { from { max-width: 0; } to { max-width: 100%; } }
+  @keyframes desenhar { from { stroke-dashoffset: 900; } to { stroke-dashoffset: 0; } }
+  @keyframes girar { to { transform: rotate(360deg); } }
+  @supports (animation-timeline: view()) {
+    .revela { animation: surgir linear both; animation-timeline: view(); animation-range: entry 0% cover 24%; }
+    .traco { animation: desenhar linear both; animation-timeline: view(); animation-range: entry 10% cover 45%; }
+  }
+  @media (max-width: 720px) {
+    .link-docs { margin-right: 0; }
+    .medir { display: none; }
+    .digita { white-space: normal; animation: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .adesivo, .aparece, .revela, .digita, .traco, .anel { animation: none !important; opacity: 1; stroke-dashoffset: 0; }
+  }
+</style>
+</body>
+</html>

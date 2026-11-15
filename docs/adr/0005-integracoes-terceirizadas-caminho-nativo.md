@@ -27,4 +27,4 @@ Construir tudo em casa desde o início travaria a entrega. Depender de algo prop
 ## Fontes
 
 - Ports and Adapters (arquitetura hexagonal), Alistair Cockburn · https://alistair.cockburn.us/hexagonal-architecture
-- Strategy, em *Design Patterns* (Gamma, Helm, Johnson e Vlissides, 1994)
+- Strategy, em *Design Patterns: Elements of Reusable Object-Oriented Software* (Gamma, Helm, Johnson e Vlissides, 1994) · https://www.hillside.net/elements-of-reusable-object-oriented-software-book
