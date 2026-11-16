@@ -58,7 +58,7 @@ export default defineConfig({
         {
           label: 'Consulte',
           translations: { en: 'Look up' },
-          items: ['docs/estado-atual', 'docs/publicacao', 'docs/referencias', 'docs'],
+          items: ['docs/estado-atual', 'docs/publicacao', 'docs/privacidade', 'docs/referencias', 'docs'],
         },
       ],
     }),
