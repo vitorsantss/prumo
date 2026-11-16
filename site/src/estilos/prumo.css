@@ -450,3 +450,13 @@ html {
     overflow-wrap: anywhere;
   }
 }
+
+.mobile-preferences a[rel='me'] {
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--p-line);
+  border-radius: 10px;
+  color: var(--p-ink);
+}
