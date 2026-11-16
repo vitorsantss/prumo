@@ -1,8 +1,33 @@
 ---
 const rota = Astro.locals.starlightRoute;
 const soPortugues = rota.locale === 'en' && rota.isFallback;
+const secoes = rota.toc?.items.flatMap((item) => [item, ...item.children]).filter((item) => item.slug !== '_top') ?? [];
 ---
 <h1 id="_top" lang={soPortugues ? 'pt-BR' : undefined}>{rota.entry.data.title}</h1>
+{secoes.length > 1 && (
+  <details class="nesta-pagina print:hidden">
+    <summary>
+      <span class="rotulo">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"></path></svg>
+        {Astro.locals.t('tableOfContents.onThisPage')}
+      </span>
+      <svg class="seta" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+    </summary>
+    <ul>
+      {secoes.map((secao) => (
+        <li class={secao.depth > 2 ? 'sub' : undefined}><a href={`#${secao.slug}`}>{secao.text}</a></li>
+      ))}
+    </ul>
+  </details>
+)}
+
+<script>
+  document.querySelectorAll<HTMLDetailsElement>('.nesta-pagina').forEach((bloco) => {
+    bloco.addEventListener('click', (evento) => {
+      if ((evento.target as HTMLElement).closest('a')) bloco.open = false;
+    });
+  });
+</script>
 
 <style>
   h1 {
@@ -12,5 +37,69 @@ const soPortugues = rota.locale === 'en' && rota.isFallback;
     font-weight: 400;
     line-height: var(--sl-line-height-headings);
     color: var(--p-ink);
+  }
+  .nesta-pagina {
+    margin-top: 1rem;
+    padding: 0 14px;
+    border: 1px solid var(--p-line);
+    border-radius: 12px;
+    background: var(--p-solid);
+  }
+  summary {
+    list-style: none;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--p-ink);
+    cursor: pointer;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  .rotulo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .seta {
+    transition: transform 0.2s ease;
+  }
+  .nesta-pagina[open] .seta {
+    transform: rotate(180deg);
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 8px 24px;
+  }
+  li {
+    margin: 0;
+  }
+  li.sub {
+    padding-left: 12px;
+  }
+  a {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    font-size: 14px;
+    color: var(--p-muted);
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--p-ink);
+  }
+  @media (min-width: 72rem) {
+    .nesta-pagina {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .seta {
+      transition: none;
+    }
   }
 </style>

@@ -123,9 +123,25 @@ const { hasSidebar } = Astro.locals.starlightRoute;
       color: var(--p-ink);
       box-shadow: none;
     }
+    .lateral :global(.sl-menu-button:has(~ :popover-open)) {
+      background: var(--p-soft);
+    }
     .corpo {
-      padding-inline: 12px;
+      padding: 14px 0 0;
       gap: 0;
+    }
+    .sidebar-pane {
+      inset: calc(var(--sl-nav-height) + 20px) 12px auto;
+      width: auto;
+      max-height: calc(100dvh - var(--sl-nav-height) - 32px);
+      padding: 0;
+      background: transparent;
+    }
+    .sidebar-pane::backdrop {
+      background: rgb(0 0 0 / 0.28);
+    }
+    .sidebar-content {
+      background-color: var(--p-solid);
     }
   }
 </style>
