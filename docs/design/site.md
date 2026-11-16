@@ -44,10 +44,14 @@ Tokens: `site/src/estilos/tokens.css` (valores de `docs/design/tokens.json`).
 
 Tudo desligado com `prefers-reduced-motion`.
 
+A troca de página só começa quando o menu lateral, o título e o índice da página nova já chegaram (`<link rel="expect" blocking="render">` em `site/astro.config.mjs`). Sem isso, em rede lenta, a animação mostra a página nova ainda pela metade, com o menu vazio.
+
 ## Fontes
+
 - Diátaxis, organização da documentação pela necessidade de quem lê · https://diataxis.fr
 - Meng, Steinhardt e Schubert, How developers use API documentation (ACM SIGDOC) · https://sigdoc.acm.org/cdq/how-developers-use-api-documentation-an-observation-study/
 - Seletor de idioma sem bandeira · https://www.smartling.com/blog/language-selector-best-practices
 - View Transitions API · https://developer.mozilla.org/docs/Web/API/View_Transition_API
 - WCAG 2.2, critério 3.1.2 Language of Parts · https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts
 - W3C, idioma em links de navegação · https://w3c.studio24.net/docs/internationalization-approach-agreed/
+- Chrome for Developers, Consistent cross-document transitions · https://developer.chrome.com/docs/modern-web-guidance/guides/ui-behaviors/consistent-cross-document-transitions

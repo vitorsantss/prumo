@@ -20,6 +20,11 @@ export default defineConfig({
       },
       social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/vitorsantss/prumo' }],
       customCss: ['./src/estilos/tokens.css', './src/estilos/prumo.css'],
+      head: [
+        { tag: 'link', attrs: { rel: 'expect', href: '#starlight__sidebar', blocking: 'render', media: '(min-width: 50rem)' } },
+        { tag: 'link', attrs: { rel: 'expect', href: '#_top', blocking: 'render' } },
+        { tag: 'link', attrs: { rel: 'expect', href: '#starlight__on-this-page', blocking: 'render', media: '(min-width: 72rem)' } },
+      ],
       lastUpdated: false,
       pagination: false,
       routeMiddleware: './src/idiomaDaRota.ts',

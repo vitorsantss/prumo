@@ -12,7 +12,7 @@ O que o Prumo coleta de quem visita o site, hoje. A regra está no ADR-0012: qua
 - Cookies de rastreamento ou identificador salvo no seu navegador.
 - Gravação da sua sessão, cliques ou o que você digita.
 
-A busca do site roda no seu navegador: o que você procura não sai da página.
+A busca do site roda no seu navegador: o que você procura não sai da página. As fontes também vêm do próprio site, então abrir uma página não manda o seu endereço IP pra nenhum serviço de fontes.
 
 ## Preferências salvas no seu navegador
 O tema (claro ou escuro) fica guardado no seu navegador, só pra lembrar a sua escolha. Não é enviado pra lugar nenhum.
