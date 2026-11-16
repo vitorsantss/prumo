@@ -122,8 +122,12 @@ main h1#_top {
   overflow-wrap: break-word;
 }
 
-.sl-markdown-content td :is(a, code) {
+.sl-markdown-content td a {
   overflow-wrap: anywhere;
+}
+
+.sl-markdown-content :is(h1, h2, h3, h4) code {
+  font-size: 0.8em;
 }
 
 .tabela-tokens td:first-child code {
@@ -269,6 +273,7 @@ html {
 }
 
 .previa {
+  --p-borda-previa: var(--p-line);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
@@ -281,7 +286,7 @@ html {
   align-items: flex-start;
   gap: 10px;
   padding: 18px;
-  border: 1px solid var(--p-line);
+  border: 1px solid var(--p-borda-previa);
   border-radius: 12px;
   font-size: 14px;
 }
@@ -374,7 +379,7 @@ html {
 
 .amostra code {
   font-size: 12px;
-  overflow-wrap: normal;
+  white-space: nowrap;
 }
 
 .regua {

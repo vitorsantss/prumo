@@ -76,10 +76,11 @@ const folhas = (grupo) => Object.entries(grupo).filter(([nome]) => !nome.startsW
 const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const tabela = (cabecalho, linhas) =>
   `<table class="empilha tabela-tokens">\n<thead><tr>${cabecalho.map((c) => `<th>${c}</th>`).join('')}</tr></thead>\n<tbody>\n${linhas.map((l) => `<tr>${l.map((c, i) => `<td data-rotulo="${cabecalho[i]}">${c}</td>`).join('')}</tr>`).join('\n')}\n</tbody>\n</table>`;
-const amostra = (valor) => `<span class="amostra"><span class="cor" style="background: ${valor}" aria-hidden="true"></span><code>${esc(valor)}</code></span>`;
+const rotuloCor = ({ alpha, hex }) => (alpha === undefined || alpha === 1 ? hex : `${hex} · ${Math.round(alpha * 1000) / 10}%`);
+const amostra = (cor) => `<span class="amostra"><span class="cor" style="background: ${corCss(cor)}" aria-hidden="true"></span><code>${esc(rotuloCor(cor))}</code></span>`;
 
 const geradores = {
-  cor: () => tabela(['Token', 'Claro', 'Escuro', 'Uso'], folhas(tokens.cor.claro).map(([nome, t]) => [`<code>--p-${nome}</code>`, amostra(corCss(t.$value)), amostra(corCss(tokens.cor.escuro[nome].$value)), esc(t.$description)])),
+  cor: () => tabela(['Token', 'Claro', 'Escuro', 'Uso'], folhas(tokens.cor.claro).map(([nome, t]) => [`<code>--p-${nome}</code>`, amostra(t.$value), amostra(tokens.cor.escuro[nome].$value), esc(t.$description)])),
   espaco: () => tabela(['Token', 'Valor', 'Uso'], folhas(tokens.espaco).map(([nome, t]) => [`<code>--p-espaco-${nome}</code>`, `<span class="regua" style="width: ${medidaCss(t.$value)}" aria-hidden="true"></span> ${medidaCss(t.$value)}`, esc(t.$description)])),
   raio: () => tabela(['Token', 'Valor', 'Uso'], folhas(tokens.raio).map(([nome, t]) => [`<code>--p-raio-${nome}</code>`, `<span class="canto" style="border-radius: ${medidaCss(t.$value)}" aria-hidden="true"></span> ${medidaCss(t.$value)}`, esc(t.$description)])),
   sombra: () => tabela(['Token', 'Uso'], folhas(tokens.sombra.claro).map(([nome, t]) => [`<code>--p-sombra-${nome}</code>`, esc(t.$description)])),

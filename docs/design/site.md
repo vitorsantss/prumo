@@ -22,7 +22,10 @@ O design system do Prumo nasceu pro canvas do app. Esta camada aplica as mesmas 
 9. **Editar é um caminho, não um botão.** O rodapé de cada página mostra de qual arquivo ela vem e leva pra "Como mudar o site e a documentação", que explica o fluxo e aponta pra issue.
 10. **Rolagem discreta e sem rolagem lateral.** A barra de rolagem da página é fina, com o polegar na cor `--p-line` e trilho transparente, nos dois temas; painéis internos (navegação lateral) rolam sem barra visível. Nenhuma página rola pro lado: nada de `100vw` em elemento dentro da página, porque em sistemas com barra clássica (Windows) `100vw` inclui a largura da barra e cria rolagem horizontal. Tabela larga quebra o texto nas células; no celular, empilha.
 
-## Componentes (em `site/src/components/`)
+## Componentes
+
+Ficam em `site/src/components/`.
+
 | Componente | O que faz |
 | --- | --- |
 | `Busca` | Modal no meio da tela, abre com Ctrl K (⌘K no Mac). Usa o índice do Pagefind gerado no build, sem serviço externo. |
@@ -30,13 +33,13 @@ O design system do Prumo nasceu pro canvas do app. Esta camada aplica as mesmas 
 | `ChaveTema` | Botão de ícone; o tema novo se espalha num círculo a partir do botão. Guarda a escolha em `starlight-theme`, a mesma chave da documentação. |
 | `starlight/*` | Substituem moldura da página, colunas, cabeçalho, rodapé da página, busca, idioma, tema e aviso de página sem tradução do Starlight. |
 
-Tokens: `site/src/estilos/tokens.css` (valores de `docs/design/sistema/tokens.json`).
+Tokens: `site/src/estilos/tokens.css` (valores de `docs/design/tokens.json`).
 
 ## Movimento
 | O quê | Tempo | Como |
 | --- | --- | --- |
 | Tema | 420 ms | revelação circular a partir do botão (View Transitions API) |
-| Idioma e troca de página | 180 + 240 ms | o texto some e volta com leve desfoque |
+| Idioma e troca de página | 120 + 180 ms | só o conteúdo some e volta; cabeçalho e menus ficam parados |
 | Popover e busca | 240 ms | surge do ponto que abriu |
 
 Tudo desligado com `prefers-reduced-motion`.

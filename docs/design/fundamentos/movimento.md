@@ -5,7 +5,7 @@ Movimento explica de onde as coisas vêm. Nada se mexe só pra enfeitar.
 | O quê | Tempo | Como |
 | --- | --- | --- |
 | Tema | 420 ms | Revelação circular a partir do botão (View Transitions API) |
-| Idioma e troca de página | 180 + 240 ms | O texto some e volta com leve desfoque |
+| Idioma e troca de página | 120 + 180 ms | Só o conteúdo some e volta; cabeçalho e menus ficam parados |
 | Popover e busca | 240 ms | Surge do ponto que abriu |
 | Folha que sobe (celular) | 280 ms | Sobe da base |
 | Rolagem até uma seção | do navegador | Suave |
