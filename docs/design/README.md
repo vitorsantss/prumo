@@ -1,6 +1,6 @@
 # Design do Prumo
 
-Versão publicada do design system. **Não edite estes arquivos à mão**: a fonte é o design system no claude.ai, e cada mudança validada chega aqui por um PR "design: …" (ver [docs/fluxos/claude-ai.md](../fluxos/claude-ai.md)).
+As regras visuais do Prumo. **Esta pasta é a fonte** (ADR-0011): mudanças entram por PR, como o resto da documentação. O canvas do claude.ai serve de rascunho pra desenhar; o que vale é o que está aqui.
 
 | Arquivo | O que tem |
 | --- | --- |
@@ -8,4 +8,4 @@ Versão publicada do design system. **Não edite estes arquivos à mão**: a fon
 | [sistema/tokens.json](sistema/tokens.json) | Cores (claro e escuro), tipografia, espaçamento, raios, sombras e durações |
 | `sistema/components/*/preview.html` | Cada componente desenhado nos dois temas; abra no navegador |
 
-Quando a interface web existir, os tokens viram variáveis CSS no código e esta pasta passa a ser gerada a partir dele.
+A migração de todos os componentes pro molde do ADR-0011, com a seção própria no site, está na #65.
