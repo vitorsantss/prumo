@@ -238,3 +238,24 @@ html {
     scroll-behavior: smooth;
   }
 }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--p-line) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--p-line);
+  background-clip: content-box;
+  border: 3px solid transparent;
+  border-radius: 10px;
+}

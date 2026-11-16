@@ -19,6 +19,6 @@ Prumo é o fio com peso que o pedreiro usa pra ver se a parede está reta; no No
 pop 240ms (popovers e cards), sobe 420ms (sessão), troca de cor de linha 600ms. Tudo desligado com prefers-reduced-motion.
 
 ## O que evitar
-Neon, roxo em botão, barras de pílula ou segmentadas, scrollbar visível, fonte manuscrita em texto corrido, traço "desenhado à mão" exagerado.
+Neon, roxo em botão, barras de pílula ou segmentadas, scrollbar padrão do sistema (use a fina, com tokens), fonte manuscrita em texto corrido, traço "desenhado à mão" exagerado.
 
 Protótipo de referência: canvas "Prumo · simulação".

@@ -20,6 +20,7 @@ O design system do Prumo nasceu pro canvas do app. Esta camada aplica as mesmas 
 7. **Três larguras.** Confira em celular (390 px), notebook (1440 px) e tela larga (2560 px). O conteúdo fica num contêiner centralizado de até 1400 px; nada estica até a borda.
 8. **Idioma sempre declarado.** A interface segue o idioma escolhido; o conteúdo diz o dele. Página sem tradução continua no endereço em inglês, com a barra lateral e o cabeçalho em inglês, o adesivo **PT** (mesmo estilo do "em estudo": algo que dá pra fazer) e um aviso em inglês com link pra "Ajude a traduzir". O texto em português vai num bloco com `lang="pt-BR"`, pra leitor de tela pronunciar certo. Tradução por IA ganha o aviso tracejado no topo. Base: WCAG 3.1.2 e a orientação do W3C de marcar o idioma de links.
 9. **Editar é um caminho, não um botão.** O rodapé de cada página mostra de qual arquivo ela vem e leva pra "Como mudar o site e a documentação", que explica o fluxo e aponta pra issue.
+10. **Rolagem discreta e sem rolagem lateral.** A barra de rolagem da página é fina, com o polegar na cor `--p-line` e trilho transparente, nos dois temas; painéis internos (navegação lateral) rolam sem barra visível. Nenhuma página rola pro lado: nada de `100vw` em elemento dentro da página, porque em sistemas com barra clássica (Windows) `100vw` inclui a largura da barra e cria rolagem horizontal. Tabela larga quebra o texto nas células; no celular, empilha.
 
 ## Componentes (em `site/src/components/`)
 | Componente | O que faz |
