@@ -119,7 +119,15 @@ main h1#_top {
 
 .sl-markdown-content :is(th, td) {
   border-color: var(--p-line);
+  overflow-wrap: break-word;
+}
+
+.sl-markdown-content td :is(a, code) {
   overflow-wrap: anywhere;
+}
+
+.tabela-tokens td:first-child code {
+  white-space: nowrap;
 }
 
 .pagination-links a {
@@ -258,4 +266,187 @@ html {
   background-clip: content-box;
   border: 3px solid transparent;
   border-radius: 10px;
+}
+
+.previa {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-block: 1.25rem;
+}
+
+.previa > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 18px;
+  border: 1px solid var(--p-line);
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.previa-rotulo {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--p-muted);
+}
+
+.previa-linha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.previa-painel {
+  width: min(100%, 280px);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background-color: var(--p-solid);
+}
+
+.previa-titulo {
+  padding: 4px 8px 2px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--p-muted);
+}
+
+.previa-opcao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  line-height: 1.4;
+}
+
+.previa-opcao small {
+  font-size: 12px;
+  color: var(--p-muted);
+}
+
+.previa-opcao.atual {
+  background: var(--p-soft);
+}
+
+.previa-opcao.falta {
+  border: 1px dashed var(--p-line);
+}
+
+.previa-opcao.falta strong {
+  color: var(--p-muted);
+}
+
+.previa-opcao a {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--p-ink);
+}
+
+.previa-opcao .marca {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--p-ink);
+}
+
+.tabela-tokens td {
+  vertical-align: middle;
+}
+
+.amostra {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.amostra .cor {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 1px solid var(--p-line);
+}
+
+.amostra code {
+  font-size: 12px;
+  overflow-wrap: normal;
+}
+
+.regua {
+  display: inline-block;
+  height: 10px;
+  min-width: 2px;
+  vertical-align: middle;
+  border-radius: 2px;
+  background: var(--p-ink);
+}
+
+.canto {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  vertical-align: middle;
+  border: 2px solid var(--p-ink);
+  border-radius: 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 50rem) {
+  .previa {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 64rem) {
+  .sl-markdown-content table.tabela-tokens,
+  .sl-markdown-content table.tabela-tokens tbody,
+  .sl-markdown-content table.tabela-tokens tr,
+  .sl-markdown-content table.tabela-tokens td {
+    display: block;
+    width: 100%;
+  }
+
+  .sl-markdown-content table.tabela-tokens thead {
+    display: none;
+  }
+
+  .sl-markdown-content table.tabela-tokens tr {
+    margin: 0;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--p-line);
+  }
+
+  .sl-markdown-content table.tabela-tokens td {
+    margin: 0;
+    padding: 0.2rem 0;
+    border: none;
+    overflow-wrap: anywhere;
+  }
+
+  .sl-markdown-content table.tabela-tokens td:first-child {
+    font-weight: 600;
+  }
+
+  .sl-markdown-content table.tabela-tokens td:first-child::before {
+    display: none;
+  }
+
+  .sl-markdown-content table.tabela-tokens td::before {
+    content: attr(data-rotulo);
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--p-muted);
+  }
+
+  .sl-markdown-content table.tabela-tokens code {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
 }

@@ -54,7 +54,7 @@ O estado do projeto mora no GitHub (issues, PRs, ADRs, docs); este arquivo é o 
 - **Commits**: mensagem em português dizendo o porquê. Pode incluir `Co-Authored-By` do agente usado. **Não inclua links de sessão, de conversa ou de conta privada** em commits, PRs ou issues.
 - **PR**: preencha o modelo, inclusive "Como foi feito" (com ou sem IA, e qual). Nada vai direto pra `main`.
 - **Citações**: toda afirmação de fora tem fonte com link (nota de rodapé na documentação); ADRs e issues citados como `ADR-0007` e `#50` viram link no site.
-- **Site e visual**: siga [docs/como-mudar-o-site.md](docs/como-mudar-o-site.md) e as regras de [docs/design/site.md](docs/design/site.md).
+- **Site e visual**: siga [docs/como-mudar-o-site.md](docs/como-mudar-o-site.md) e o [design system](docs/design/README.md) (ADR-0011). Use só tokens (`var(--p-…)`); token novo entra em `docs/design/tokens.json`. Componente novo ou mudança visual só entra com a página do componente em `docs/design/componentes/` atualizada ([como propor](docs/design/como-propor-um-componente.md)).
 - **Documentação muda junto com o código.** Se o comportamento mudou e a documentação não, o PR está incompleto.
 
 ## Idioma

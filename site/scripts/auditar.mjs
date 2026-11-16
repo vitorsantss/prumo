@@ -3,7 +3,7 @@ import { mkdtempSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-const PAGINAS = ['', 'docs/a-ideia/', 'docs/estado-atual/', 'docs/referencias/', 'en/docs/adr/0001-arquivos-como-fonte-da-verdade/'];
+const PAGINAS = ['', 'docs/a-ideia/', 'docs/estado-atual/', 'docs/referencias/', 'docs/design/componentes/seletor-de-idioma/', 'en/docs/adr/0001-arquivos-como-fonte-da-verdade/'];
 const MODOS = ['mobile', 'desktop'];
 const MINIMO = 90;
 const base = (process.env.PRUMO_SITE_BASE ?? '/prumo').replace(/\/?$/, '/');

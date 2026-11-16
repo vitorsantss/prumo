@@ -52,7 +52,7 @@ cd site
 npm run build
 npm run auditar
 ```
-O comando sobe o `astro preview`, audita a página inicial e quatro páginas da documentação no modo celular e no modo computador, e falha se alguma nota ficar abaixo de 90. Precisa do Chrome instalado; se ele não for achado, aponte o caminho em `CHROME_PATH`. Pra medir o site publicado, passe o endereço: `npm run auditar -- https://prumo-docs.pages.dev/`.
+O comando sobe o `astro preview`, audita a página inicial e cinco páginas da documentação no modo celular e no modo computador, e falha se alguma nota ficar abaixo de 90. Precisa do Chrome instalado; se ele não for achado, aponte o caminho em `CHROME_PATH`. Pra medir o site publicado, passe o endereço: `npm run auditar -- https://prumo-docs.pages.dev/`.
 
 Também dá pra rodar à mão no Chrome: abra a página, `F12`, aba **Lighthouse**, **Analyze page load**.
 
