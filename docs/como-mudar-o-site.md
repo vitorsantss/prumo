@@ -33,7 +33,8 @@ Hipóteses, linha do tempo e textos da página inicial ficam em `site/src/data/l
    - `docs/design/site.md` atualizado, se surgiu regra ou componente novo;
    - um ADR, se entrou dependência ou padrão novo;
    - prints nos temas claro e escuro, em celular, notebook e tela larga;
-   - `cd site && npm run build` passando.
+   - `cd site && npm run build` passando;
+   - `npm run auditar` sem nota abaixo de 90 (ver abaixo).
 6. **Revisão e merge por squash**, como todo PR (ADR-0008).
 
 ## Testar no seu computador
@@ -43,3 +44,17 @@ npm install
 npm run dev
 ```
 A busca só funciona depois de `npm run build && npm run preview`, porque o índice é gerado no build.
+
+## Desempenho, acessibilidade e SEO
+O site é medido com o Lighthouse, a auditoria do Chrome[^lighthouse]: desempenho, acessibilidade, boas práticas, SEO e navegação por agentes de IA. Depois do build:
+```
+cd site
+npm run build
+npm run auditar
+```
+O comando sobe o `astro preview`, audita a página inicial e quatro páginas da documentação no modo celular e no modo computador, e falha se alguma nota ficar abaixo de 90. Precisa do Chrome instalado; se ele não for achado, aponte o caminho em `CHROME_PATH`. Pra medir o site publicado, passe o endereço: `npm run auditar -- https://prumo-docs.pages.dev/`.
+
+Também dá pra rodar à mão no Chrome: abra a página, `F12`, aba **Lighthouse**, **Analyze page load**.
+
+[^lighthouse]: Chrome for Developers, *Introduction to Lighthouse* · https://developer.chrome.com/docs/lighthouse/overview
+

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .fundo { fill: #1e1e1e; }
+    .fio, .peso { stroke: #fafafa; }
+    .peso { fill: #fafafa; }
+    @media (prefers-color-scheme: dark) {
+      .fundo { fill: #e3e3e8; }
+      .fio, .peso { stroke: #121212; }
+      .peso { fill: #121212; }
+    }
+  </style>
+  <rect class="fundo" width="32" height="32" rx="8"/>
+  <path class="fio" d="M16 5v11" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path class="peso" d="M16 15l-5 6 5 6 5-6z" stroke-width="1.5" stroke-linejoin="round"/>
+</svg>
