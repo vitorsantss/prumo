@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+@import './fontes.css';
 @import './tokens-gerados.css';
 
 :root,
@@ -152,11 +152,11 @@
 }
 
 @keyframes p-sair {
-  to { opacity: 0; filter: blur(3px); transform: translateY(-4px); }
+  to { opacity: 0; transform: translateY(-4px); }
 }
 
 @keyframes p-entrar {
-  from { opacity: 0; filter: blur(3px); transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(6px); }
 }
 
 @view-transition {
@@ -164,11 +164,62 @@
 }
 
 ::view-transition-old(root) {
-  animation: p-sair 180ms ease-in both;
+  animation: p-sair 120ms ease-in both;
 }
 
 ::view-transition-new(root) {
-  animation: p-entrar var(--p-pop) 60ms var(--p-curva) both;
+  animation: p-entrar 180ms 120ms var(--p-curva) both;
+}
+
+.pagina > .topo {
+  view-transition-name: prumo-topo;
+}
+
+.corpo > .lateral {
+  view-transition-name: prumo-lateral;
+}
+
+.colunas > .main-pane {
+  view-transition-name: prumo-conteudo;
+}
+
+.colunas > .indice {
+  view-transition-name: prumo-indice;
+}
+
+html[data-vt='tema'] :is(.topo, .lateral, .indice, .main-pane) {
+  view-transition-name: none;
+}
+
+::view-transition-group(prumo-topo),
+::view-transition-group(prumo-lateral),
+::view-transition-group(prumo-indice),
+::view-transition-group(prumo-conteudo) {
+  animation: none;
+}
+
+::view-transition-new(prumo-topo),
+::view-transition-new(prumo-lateral) {
+  animation: none;
+}
+
+::view-transition-old(prumo-topo),
+::view-transition-old(prumo-lateral) {
+  animation: none;
+  opacity: 0;
+}
+
+::view-transition-old(prumo-indice),
+::view-transition-old(prumo-conteudo),
+::view-transition-old(*):only-child {
+  opacity: 1;
+  animation: p-sair 120ms ease-in both;
+}
+
+::view-transition-new(prumo-indice),
+::view-transition-new(prumo-conteudo),
+::view-transition-new(*):only-child {
+  animation: p-entrar 180ms 120ms var(--p-curva) both;
 }
 
 html[data-vt='tema']::view-transition-old(root),
@@ -178,8 +229,8 @@ html[data-vt='tema']::view-transition-new(root) {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
     animation: none;
   }
 }

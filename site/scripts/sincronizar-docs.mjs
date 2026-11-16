@@ -2,19 +2,25 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, statSync, 
 import { join, dirname, relative, posix } from 'node:path';
 import { corCss, medidaCss } from './gerar-tokens.mjs';
 import { fileURLToPath } from 'node:url';
+import { menu } from '../sidebar.mjs';
 
 const aqui = dirname(fileURLToPath(import.meta.url));
 const origem = join(aqui, '..', '..', 'docs');
 const destino = join(aqui, '..', 'src', 'content', 'docs');
 const repositorio = 'https://github.com/vitorsantss/prumo/blob/main/';
-const ignorar = new Set(['design/sistema']);
+const naoPublicado = ['design/sistema', 'fluxos', 'como-o-prumo-e-construido.md', 'adr/0000-modelo.md'];
+const ignorado = (rel) => {
+  const semIdioma = rel.replace(/^en\//, '');
+  return naoPublicado.some((item) => semIdioma === item || semIdioma.startsWith(`${item}/`));
+};
 const marcaIA = /^> \*\*Translated by AI[^\n]*\n?/m;
 
 function listarMarkdown(pasta, base = '') {
   return readdirSync(pasta).flatMap((nome) => {
     const caminho = join(pasta, nome);
     const rel = posix.join(base, nome);
-    if (statSync(caminho).isDirectory()) return ignorar.has(rel) ? [] : listarMarkdown(caminho, rel);
+    if (ignorado(rel)) return [];
+    if (statSync(caminho).isDirectory()) return listarMarkdown(caminho, rel);
     return nome.endsWith('.md') ? [rel] : [];
   });
 }
@@ -35,6 +41,7 @@ function reescreverLinks(texto, rel) {
       return `](${repositorio}${noRepo}${ancora})`;
     }
     const ehPasta = alvo.endsWith('/');
+    if (ignorado(resolvido)) return `](${repositorio}docs/${resolvido}${ancora})`;
     if (!ehPasta && !resolvido.endsWith('.md')) return `](${repositorio}docs/${resolvido}${ancora})`;
     const destinoRota = ehPasta ? rota(posix.join(resolvido, 'README.md')) : rota(resolvido);
     let relativo = posix.relative(daqui, destinoRota) || '.';
@@ -76,10 +83,11 @@ const folhas = (grupo) => Object.entries(grupo).filter(([nome]) => !nome.startsW
 const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const tabela = (cabecalho, linhas) =>
   `<table class="empilha tabela-tokens">\n<thead><tr>${cabecalho.map((c) => `<th>${c}</th>`).join('')}</tr></thead>\n<tbody>\n${linhas.map((l) => `<tr>${l.map((c, i) => `<td data-rotulo="${cabecalho[i]}">${c}</td>`).join('')}</tr>`).join('\n')}\n</tbody>\n</table>`;
-const amostra = (valor) => `<span class="amostra"><span class="cor" style="background: ${valor}" aria-hidden="true"></span><code>${esc(valor)}</code></span>`;
+const rotuloCor = ({ alpha, hex }) => (alpha === undefined || alpha === 1 ? hex : `${hex} · ${Math.round(alpha * 1000) / 10}%`);
+const amostra = (cor) => `<span class="amostra"><span class="cor" style="background: ${corCss(cor)}" aria-hidden="true"></span><code>${esc(rotuloCor(cor))}</code></span>`;
 
 const geradores = {
-  cor: () => tabela(['Token', 'Claro', 'Escuro', 'Uso'], folhas(tokens.cor.claro).map(([nome, t]) => [`<code>--p-${nome}</code>`, amostra(corCss(t.$value)), amostra(corCss(tokens.cor.escuro[nome].$value)), esc(t.$description)])),
+  cor: () => tabela(['Token', 'Claro', 'Escuro', 'Uso'], folhas(tokens.cor.claro).map(([nome, t]) => [`<code>--p-${nome}</code>`, amostra(t.$value), amostra(tokens.cor.escuro[nome].$value), esc(t.$description)])),
   espaco: () => tabela(['Token', 'Valor', 'Uso'], folhas(tokens.espaco).map(([nome, t]) => [`<code>--p-espaco-${nome}</code>`, `<span class="regua" style="width: ${medidaCss(t.$value)}" aria-hidden="true"></span> ${medidaCss(t.$value)}`, esc(t.$description)])),
   raio: () => tabela(['Token', 'Valor', 'Uso'], folhas(tokens.raio).map(([nome, t]) => [`<code>--p-raio-${nome}</code>`, `<span class="canto" style="border-radius: ${medidaCss(t.$value)}" aria-hidden="true"></span> ${medidaCss(t.$value)}`, esc(t.$description)])),
   sombra: () => tabela(['Token', 'Uso'], folhas(tokens.sombra.claro).map(([nome, t]) => [`<code>--p-sombra-${nome}</code>`, esc(t.$description)])),
@@ -133,7 +141,31 @@ function converter(rel) {
 }
 
 rmSync(destino, { recursive: true, force: true });
-for (const rel of listarMarkdown(origem)) {
+function lugaresDoMenu(itens, lugares = { paginas: new Set(), pastas: [] }) {
+  for (const item of itens) {
+    if (typeof item === 'string') lugares.paginas.add(item);
+    else if (item.slug) lugares.paginas.add(item.slug);
+    else if (item.autogenerate) lugares.pastas.push(item.autogenerate.directory);
+    if (item.items) lugaresDoMenu(item.items, lugares);
+  }
+  return lugares;
+}
+
+function conferirMenu(paginas) {
+  const { paginas: noMenu, pastas } = lugaresDoMenu(menu);
+  const soltas = paginas.filter((rel) => {
+    const slug = rota(rel).replace(/^\/(en\/)?/, '').replace(/\/$/, '');
+    return !noMenu.has(slug) && !pastas.some((pasta) => slug === pasta || slug.startsWith(`${pasta}/`));
+  });
+  if (soltas.length) {
+    throw new Error(`Página publicada fora do menu: ${soltas.join(', ')}. Ponha no menu (site/sidebar.mjs) ou em naoPublicado (site/scripts/sincronizar-docs.mjs).`);
+  }
+}
+
+const paginas = listarMarkdown(origem);
+conferirMenu(paginas);
+
+for (const rel of paginas) {
   const saidaRel = rel.startsWith('en/') ? posix.join('en', 'docs', rel.slice(3)) : posix.join('docs', rel);
   const saida = join(destino, saidaRel.replace(/(^|\/)README\.md$/, '$1index.md'));
   mkdirSync(dirname(saida), { recursive: true });
