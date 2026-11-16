@@ -6,7 +6,8 @@
     "sincronizar": "node scripts/sincronizar-docs.mjs",
     "dev": "npm run sincronizar && astro dev",
     "build": "npm run sincronizar && astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "auditar": "node scripts/auditar.mjs"
   },
   "dependencies": {
     "@astrojs/starlight": "0.43.1",
