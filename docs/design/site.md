@@ -39,7 +39,7 @@ Tokens: `site/src/estilos/tokens.css` (valores de `docs/design/tokens.json`).
 | O quê | Tempo | Como |
 | --- | --- | --- |
 | Tema | 420 ms | revelação circular a partir do botão (View Transitions API) |
-| Idioma e troca de página | 120 + 180 ms | só o conteúdo some e volta; cabeçalho e menus ficam parados |
+| Idioma e troca de página | 120 + 180 ms | primeiro o conteúdo some, depois o novo aparece; cabeçalho e menus ficam parados |
 | Popover e busca | 240 ms | surge do ponto que abriu |
 
 Tudo desligado com `prefers-reduced-motion`.
