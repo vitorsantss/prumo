@@ -104,7 +104,11 @@
     "pruminhosTexto": "Além da hipótese principal, o Prumo abre frentes menores de pesquisa: os pruminhos. Cada um começa com uma pergunta, é testado aqui com o Prumo como cobaia e, se funcionar, vira biblioteca ou gate que outros projetos podem usar.",
     "pruminhosEntender": "Entender os pruminhos",
     "pruminhosPropor": "Propor um pruminho",
-    "pruminhosEstado": "em estudo"
+    "pruminhosEstado": "em estudo",
+    "relatar": "Algo estranho no site? Conte pra gente",
+    "pesquisaTitulo": "Como está a pesquisa",
+    "pesquisaTexto": "Ainda não há amostra. O primeiro experimento é a Rinha de Backend rodada em fluxos diferentes; os resultados parciais aparecem aqui e em Estado atual assim que existirem.",
+    "pesquisaLink": "Ver o estado atual"
   },
   "en": {
     "lang": "en",
@@ -211,7 +215,11 @@
     "pruminhosTexto": "Beyond the main hypothesis, Prumo opens smaller research fronts: the pruminhos. Each starts with a question, is tested here with Prumo as the guinea pig and, if it works, becomes a library or gate other projects can use.",
     "pruminhosEntender": "Understand pruminhos",
     "pruminhosPropor": "Propose a pruminho",
-    "pruminhosEstado": "being studied"
+    "pruminhosEstado": "being studied",
+    "relatar": "Something odd on the site? Tell us",
+    "pesquisaTitulo": "Where the research is",
+    "pesquisaTexto": "There is no sample yet. The first experiment is the Rinha de Backend run through different flows; partial results show up here and in Current state as soon as they exist.",
+    "pesquisaLink": "See the current state"
   },
   "hipoteses": [
     {
@@ -361,6 +369,23 @@
         "Standards monitor",
         "Can sourced standards become checks that open useful tasks?"
       ]
+    }
+  ],
+  "pesquisa": [
+    {
+      "estado": "feito",
+      "pt": "Esqueleto rodando, sem IA",
+      "en": "Skeleton running, without AI"
+    },
+    {
+      "estado": "falta",
+      "pt": "Rodar a Rinha de Backend nos fluxos A, B e C",
+      "en": "Run the Rinha de Backend through flows A, B and C"
+    },
+    {
+      "estado": "falta",
+      "pt": "Publicar os primeiros resultados parciais",
+      "en": "Publish the first partial results"
     }
   ]
 }

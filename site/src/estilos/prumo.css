@@ -228,3 +228,13 @@ main h1#_top {
     box-shadow: none;
   }
 }
+
+html {
+  scroll-padding-top: calc(var(--sl-nav-height) + 2rem);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

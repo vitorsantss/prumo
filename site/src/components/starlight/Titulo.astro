@@ -24,7 +24,14 @@ const secoes = rota.toc?.items.flatMap((item) => [item, ...item.children]).filte
 <script>
   document.querySelectorAll<HTMLDetailsElement>('.nesta-pagina').forEach((bloco) => {
     bloco.addEventListener('click', (evento) => {
-      if ((evento.target as HTMLElement).closest('a')) bloco.open = false;
+      const link = (evento.target as HTMLElement).closest<HTMLAnchorElement>('a');
+      if (!link) return;
+      const alvo = document.getElementById(decodeURIComponent(link.hash.slice(1)));
+      if (!alvo) return;
+      evento.preventDefault();
+      bloco.open = false;
+      history.pushState(null, '', link.hash);
+      requestAnimationFrame(() => alvo.scrollIntoView({ block: 'start' }));
     });
   });
 </script>

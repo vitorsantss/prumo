@@ -1,0 +1,32 @@
+name: Relato de quem usa o site
+description: Algo confuso, quebrado ou estranho no site? Conte do seu jeito, sem precisar saber programar.
+title: "Relato: "
+labels: ["feedback", "area:ux"]
+body:
+  - type: markdown
+    attributes:
+      value: "Obrigado por contar. Não coloque nome, e-mail ou outro dado pessoal aqui: a issue é pública."
+  - type: input
+    id: pagina
+    attributes:
+      label: Página
+      description: O endereço da página. Se você veio pelo link do site, já está preenchido.
+    validations:
+      required: true
+  - type: textarea
+    id: relato
+    attributes:
+      label: O que aconteceu
+      description: O que você tentou fazer, o que esperava e o que viu. Um print ajuda muito.
+    validations:
+      required: true
+  - type: dropdown
+    id: aparelho
+    attributes:
+      label: Onde você estava
+      options:
+        - Celular
+        - Tablet
+        - Computador
+    validations:
+      required: false

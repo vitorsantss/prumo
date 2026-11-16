@@ -59,8 +59,8 @@
   box-sizing: border-box;
   background-color: var(--p-card);
   background-image: repeating-linear-gradient(135deg, var(--p-hatch) 0 1px, transparent 1px 7px);
-  backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   border: 1px solid var(--p-line);
   border-radius: var(--p-raio);
   box-shadow: var(--p-sombra);
