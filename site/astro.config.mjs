@@ -30,6 +30,7 @@ export default defineConfig({
       pagination: false,
       routeMiddleware: './src/idiomaDaRota.ts',
       components: {
+        Head: './src/components/starlight/Cabeca.astro',
         PageFrame: './src/components/starlight/Moldura.astro',
         TwoColumnContent: './src/components/starlight/Colunas.astro',
         EditLink: './src/components/starlight/Origem.astro',

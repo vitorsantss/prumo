@@ -1,0 +1,6 @@
+---
+import Padrao from '@astrojs/starlight/components/Head.astro';
+import { fontesDaPrimeiraTela } from '../../fontes/primeira-tela';
+---
+{fontesDaPrimeiraTela.map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />)}
+<Padrao />

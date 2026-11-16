@@ -1,5 +1,6 @@
 ---
 import '../estilos/tokens.css';
+import { fontesDaPrimeiraTela } from '../fontes/primeira-tela';
 import dados from '../data/landing.json';
 import Busca from './Busca.astro';
 import ChaveTema from './ChaveTema.astro';
@@ -53,6 +54,7 @@ const dadosEstruturados = {
 <meta name="description" content={x.descricao} />
 <link rel="canonical" href={urlCanonica} />
 <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+{fontesDaPrimeiraTela.map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />)}
 <link rel="alternate" hreflang="pt-BR" href={new URL(base, Astro.site).href} />
 <link rel="alternate" hreflang="en" href={new URL(`${base}en/`, Astro.site).href} />
 <meta property="og:type" content="website" />
