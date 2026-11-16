@@ -47,14 +47,13 @@ export default defineConfig({
           items: [
             'docs/a-ideia',
             'docs/processo',
-            'docs/pruminhos',
             { label: 'Decisões (ADRs)', translations: { en: 'Decisions (ADRs)' }, collapsed: true, items: [{ autogenerate: { directory: 'docs/adr' } }] },
           ],
         },
         {
           label: 'Faça',
           translations: { en: 'Do' },
-          items: ['docs/formas-de-contribuir', 'docs/traduzir', 'docs/como-mudar-o-site'],
+          items: ['docs/formas-de-contribuir', 'docs/pruminhos', 'docs/traduzir', 'docs/como-mudar-o-site'],
         },
         {
           label: 'Consulte',
