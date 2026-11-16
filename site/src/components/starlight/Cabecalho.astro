@@ -5,6 +5,7 @@ import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
 
 const en = Astro.locals.starlightRoute.locale === 'en';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const noDesignSystem = /^(en\/)?docs\/design(\/|$)/.test(Astro.locals.starlightRoute.id);
 ---
 <div class="p-ilha cabecalho">
   <a class="marca" href={en ? `${base}en/` : base}>
@@ -12,7 +13,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     <span class="p-adesivo">{en ? 'in study' : 'em estudo'}</span>
   </a>
   <span class="divisor" aria-hidden="true"></span>
-  <a class="secao" href={`${base}${en ? 'en/' : ''}docs/comece-aqui/`}>{en ? 'docs' : 'documentação'}</a>
+  <a class="secao" href={`${base}${en ? 'en/' : ''}docs/comece-aqui/`} aria-current={noDesignSystem ? undefined : 'true'}>{en ? 'docs' : 'documentação'}</a>
+  <a class="secao" href={`${base}${en ? 'en/' : ''}docs/design/`} aria-current={noDesignSystem ? 'true' : undefined}>design system</a>
   <div class="busca"><Search /></div>
   <div class="direita">
     <LanguageSelect />
@@ -51,6 +53,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     font-size: 14px;
     color: var(--p-muted);
     text-decoration: none;
+    white-space: nowrap;
+  }
+  .secao[aria-current='true'] {
+    color: var(--p-ink);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 5px;
   }
   .busca {
     flex: 1;
@@ -61,6 +70,23 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     display: flex;
     align-items: center;
     gap: 8px;
+  }
+  @media (max-width: 64rem) {
+    .busca {
+      justify-content: flex-end;
+    }
+    .busca :global(.rotulo),
+    .busca :global(.atalho) {
+      display: none;
+    }
+    .busca :global(prumo-busca) {
+      flex: 0 0 auto;
+    }
+    .busca :global(.abrir) {
+      width: 44px;
+      padding: 0;
+      justify-content: center;
+    }
   }
   @media (max-width: 50rem) {
     .divisor,

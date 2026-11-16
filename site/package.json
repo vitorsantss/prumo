@@ -4,10 +4,11 @@
   "type": "module",
   "scripts": {
     "sincronizar": "node scripts/sincronizar-docs.mjs",
-    "dev": "npm run sincronizar && astro dev",
-    "build": "npm run sincronizar && astro build",
+    "dev": "npm run sincronizar && npm run tokens && astro dev",
+    "build": "npm run sincronizar && npm run tokens && astro build",
     "preview": "astro preview",
-    "auditar": "node scripts/auditar.mjs"
+    "auditar": "node scripts/auditar.mjs",
+    "tokens": "node scripts/gerar-tokens.mjs"
   },
   "dependencies": {
     "@astrojs/starlight": "0.43.1",
