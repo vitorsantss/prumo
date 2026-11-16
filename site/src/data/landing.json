@@ -9,8 +9,6 @@
     "pergunta": "Dá pra construir software com IA com qualidade, e provar?",
     "resposta": "Ainda não sabemos. O Prumo é a tentativa de descobrir, à vista.",
     "cta1": "Entender a ideia",
-    "compartilhar": "Compartilhar a ideia",
-    "copiado": "Link copiado",
     "respostas": [
       [
         "O que é",
@@ -108,7 +106,8 @@
     "relatar": "Algo estranho no site? Conte pra gente",
     "pesquisaTitulo": "Como está a pesquisa",
     "pesquisaTexto": "Ainda não há amostra. O primeiro experimento é a Rinha de Backend rodada em fluxos diferentes; os resultados parciais aparecem aqui e em Estado atual assim que existirem.",
-    "pesquisaLink": "Ver o estado atual"
+    "pesquisaLink": "Ver o estado atual",
+    "repositorio": "Repositório no GitHub"
   },
   "en": {
     "lang": "en",
@@ -120,8 +119,6 @@
     "pergunta": "Can we build software with AI, with quality, and prove it?",
     "resposta": "We don't know yet. Prumo is the attempt to find out, in the open.",
     "cta1": "Understand the idea",
-    "compartilhar": "Share the idea",
-    "copiado": "Link copied",
     "respostas": [
       [
         "What it is",
@@ -219,7 +216,8 @@
     "relatar": "Something odd on the site? Tell us",
     "pesquisaTitulo": "Where the research is",
     "pesquisaTexto": "There is no sample yet. The first experiment is the Rinha de Backend run through different flows; partial results show up here and in Current state as soon as they exist.",
-    "pesquisaLink": "See the current state"
+    "pesquisaLink": "See the current state",
+    "repositorio": "Repository on GitHub"
   },
   "hipoteses": [
     {

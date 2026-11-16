@@ -5,6 +5,7 @@ import dados from '../data/landing.json';
 import Busca from './Busca.astro';
 import ChaveTema from './ChaveTema.astro';
 import SeletorIdioma from './SeletorIdioma.astro';
+import LinkGithub from './LinkGithub.astro';
 
 interface Props {
   idioma: 'pt' | 'en';
@@ -81,6 +82,7 @@ const dadosEstruturados = {
     <a class="link-docs" href={docs}>{en ? 'Docs' : 'Documentação'}</a>
     <Busca idioma={idioma} />
     <div class="controles">
+      <LinkGithub rotulo={x.repositorio} />
       <SeletorIdioma opcoes={opcoesIdioma} rotulo={x.idiomaRotulo} textos={textosIdioma} ajudaHref={`${base}docs/traduzir/`} />
       <ChaveTema rotulo={x.temaRotulo} />
     </div>
@@ -99,10 +101,6 @@ const dadosEstruturados = {
       <p class="resposta"><span class="digita">{x.resposta}</span></p>
       <div class="botoes">
         <a class="p-botao primario grande" href={docs}>{x.cta1}</a>
-        <button type="button" class="p-botao grande" data-compartilhar data-copiado={x.copiado}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"></path></svg>
-          <span>{x.compartilhar}</span>
-        </button>
       </div>
     </div>
     <ul class="grade respostas">
@@ -194,7 +192,6 @@ const dadosEstruturados = {
     </ul>
     <div class="botoes">
       <a class="p-botao primario grande" href={docs}>{x.cta3}</a>
-      <button type="button" class="p-botao grande" data-compartilhar data-copiado={x.copiado}><span>{x.compartilhar}</span></button>
     </div>
   </section>
 
@@ -234,18 +231,6 @@ const dadosEstruturados = {
     botao.addEventListener('click', () => {
       const aberto = barra?.classList.toggle('aberta') ?? false;
       botao.setAttribute('aria-expanded', String(aberto));
-    });
-  });
-  document.querySelectorAll<HTMLButtonElement>('[data-compartilhar]').forEach((botao) => {
-    botao.addEventListener('click', async () => {
-      const url = location.href.split('#')[0];
-      if (navigator.share) {
-        await navigator.share({ title: document.title, url }).catch(() => undefined);
-        return;
-      }
-      await navigator.clipboard?.writeText(url).catch(() => undefined);
-      const rotulo = botao.querySelector('span');
-      if (rotulo) rotulo.textContent = botao.dataset.copiado ?? '';
     });
   });
 </script>
