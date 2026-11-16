@@ -47,6 +47,7 @@ export default defineConfig({
           items: [
             'docs/a-ideia',
             'docs/processo',
+            'docs/pruminhos',
             { label: 'Decisões (ADRs)', translations: { en: 'Decisions (ADRs)' }, collapsed: true, items: [{ autogenerate: { directory: 'docs/adr' } }] },
           ],
         },
