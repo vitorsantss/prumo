@@ -4,11 +4,15 @@ const en = rota.locale === 'en';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const origem = (rota.entry.data as { origem?: string }).origem;
 const comoMudar = `${base}${en ? 'en/' : ''}docs/como-mudar-o-site/`;
+const relatar = `https://github.com/vitorsantss/prumo/issues/new?template=relato.yml&pagina=${encodeURIComponent(new URL(Astro.url.pathname, Astro.site).href)}`;
 ---
 {origem && (
   <div class="origem">
     <p>
       {en ? 'This page comes from' : 'Esta página vem de'} <code>{origem}</code>{' · '}<a href={comoMudar}>{en ? 'How to suggest a change' : 'Como sugerir uma mudança'}</a>
+    </p>
+    <p>
+      {en ? 'Something confusing or broken on this page?' : 'Algo confuso ou quebrado nesta página?'} <a href={relatar}>{en ? 'Tell us' : 'Conte pra gente'}</a>
     </p>
     <p>
       {en ? 'Maintained by' : 'Mantido por'} <strong>Vitor Santos</strong> · <a href="https://github.com/vitorsantss">GitHub</a> · <a href="https://www.linkedin.com/in/vitorsantss/">LinkedIn</a>{' · '}{en ? 'project questions in' : 'dúvidas sobre o projeto em'} <a href="https://github.com/vitorsantss/prumo/discussions">Discussions</a>
