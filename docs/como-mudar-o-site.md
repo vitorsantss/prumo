@@ -7,6 +7,9 @@ Corrigiu um erro, deixou algo mais claro, acrescentou uma fonte? O rodapé de ca
 
 Prefere só avisar? [Abra uma issue](https://github.com/vitorsantss/prumo/issues/new?template=site.yml) dizendo a página e o que está errado.
 
+## Página nova
+Todo arquivo em `docs/` vira página do site, e toda página precisa de um lugar no menu (`site/sidebar.mjs`). Se ela ainda não está pronta pra sair, ponha o caminho em `naoPublicado`, em `site/scripts/sincronizar-docs.mjs`. Aí ela fica só no repositório, e os links pra ela levam pro GitHub. O build falha se aparecer uma página publicada fora do menu, porque a busca acharia uma página que ninguém decidiu publicar.
+
 ## Como escrever
 
 - **Toda citação tem link.** Afirmação sobre o mundo leva a fonte, de preferência como nota de rodapé (`texto[^1]` e, no fim, `[^1]: Autor, *Título* · URL`). Projeto, ferramenta ou desafio citado pelo nome leva link pra página dele.

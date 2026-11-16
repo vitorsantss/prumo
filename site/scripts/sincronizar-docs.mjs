@@ -2,19 +2,25 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, statSync, 
 import { join, dirname, relative, posix } from 'node:path';
 import { corCss, medidaCss } from './gerar-tokens.mjs';
 import { fileURLToPath } from 'node:url';
+import { menu } from '../sidebar.mjs';
 
 const aqui = dirname(fileURLToPath(import.meta.url));
 const origem = join(aqui, '..', '..', 'docs');
 const destino = join(aqui, '..', 'src', 'content', 'docs');
 const repositorio = 'https://github.com/vitorsantss/prumo/blob/main/';
-const ignorar = new Set(['design/sistema']);
+const naoPublicado = ['design/sistema', 'fluxos', 'como-o-prumo-e-construido.md', 'adr/0000-modelo.md'];
+const ignorado = (rel) => {
+  const semIdioma = rel.replace(/^en\//, '');
+  return naoPublicado.some((item) => semIdioma === item || semIdioma.startsWith(`${item}/`));
+};
 const marcaIA = /^> \*\*Translated by AI[^\n]*\n?/m;
 
 function listarMarkdown(pasta, base = '') {
   return readdirSync(pasta).flatMap((nome) => {
     const caminho = join(pasta, nome);
     const rel = posix.join(base, nome);
-    if (statSync(caminho).isDirectory()) return ignorar.has(rel) ? [] : listarMarkdown(caminho, rel);
+    if (ignorado(rel)) return [];
+    if (statSync(caminho).isDirectory()) return listarMarkdown(caminho, rel);
     return nome.endsWith('.md') ? [rel] : [];
   });
 }
@@ -35,6 +41,7 @@ function reescreverLinks(texto, rel) {
       return `](${repositorio}${noRepo}${ancora})`;
     }
     const ehPasta = alvo.endsWith('/');
+    if (ignorado(resolvido)) return `](${repositorio}docs/${resolvido}${ancora})`;
     if (!ehPasta && !resolvido.endsWith('.md')) return `](${repositorio}docs/${resolvido}${ancora})`;
     const destinoRota = ehPasta ? rota(posix.join(resolvido, 'README.md')) : rota(resolvido);
     let relativo = posix.relative(daqui, destinoRota) || '.';
@@ -134,7 +141,31 @@ function converter(rel) {
 }
 
 rmSync(destino, { recursive: true, force: true });
-for (const rel of listarMarkdown(origem)) {
+function lugaresDoMenu(itens, lugares = { paginas: new Set(), pastas: [] }) {
+  for (const item of itens) {
+    if (typeof item === 'string') lugares.paginas.add(item);
+    else if (item.slug) lugares.paginas.add(item.slug);
+    else if (item.autogenerate) lugares.pastas.push(item.autogenerate.directory);
+    if (item.items) lugaresDoMenu(item.items, lugares);
+  }
+  return lugares;
+}
+
+function conferirMenu(paginas) {
+  const { paginas: noMenu, pastas } = lugaresDoMenu(menu);
+  const soltas = paginas.filter((rel) => {
+    const slug = rota(rel).replace(/^\/(en\/)?/, '').replace(/\/$/, '');
+    return !noMenu.has(slug) && !pastas.some((pasta) => slug === pasta || slug.startsWith(`${pasta}/`));
+  });
+  if (soltas.length) {
+    throw new Error(`Página publicada fora do menu: ${soltas.join(', ')}. Ponha no menu (site/sidebar.mjs) ou em naoPublicado (site/scripts/sincronizar-docs.mjs).`);
+  }
+}
+
+const paginas = listarMarkdown(origem);
+conferirMenu(paginas);
+
+for (const rel of paginas) {
   const saidaRel = rel.startsWith('en/') ? posix.join('en', 'docs', rel.slice(3)) : posix.join('docs', rel);
   const saida = join(destino, saidaRel.replace(/(^|\/)README\.md$/, '$1index.md'));
   mkdirSync(dirname(saida), { recursive: true });
