@@ -183,6 +183,26 @@ const dadosEstruturados = {
       <button type="button" class="p-botao grande" data-compartilhar data-copiado={x.copiado}><span>{x.compartilhar}</span></button>
     </div>
   </section>
+
+  <section id="pruminhos" class="secao" aria-labelledby="t-pruminhos">
+    <div class="revela cabecalho">
+      <h2 id="t-pruminhos">{x.pruminhosTitulo}</h2>
+      <p class="suave">{x.pruminhosTexto}</p>
+    </div>
+    <ul class="grade">
+      {dados.pruminhos.map((p) => (
+        <li class="p-ilha cartao revela">
+          <a class="cartao-link" href={`https://github.com/vitorsantss/prumo/issues/${p.issue}`}><span class="mono suave">#{p.issue}</span><strong>{p[idioma][0]}</strong></a>
+          <span class="suave">{p[idioma][1]}</span>
+          <span class="estado"><span class="p-ponto andamento" aria-hidden="true"></span>{x.pruminhosEstado}</span>
+        </li>
+      ))}
+    </ul>
+    <div class="botoes">
+      <a class="terciario" href={`${base}${en ? 'en/' : ''}docs/pruminhos/`}>{x.pruminhosEntender}</a>
+      <a class="terciario" href="https://github.com/vitorsantss/prumo/issues/new?labels=pruminho">{x.pruminhosPropor}</a>
+    </div>
+  </section>
 </main>
 
 <footer class="pe">
@@ -255,6 +275,8 @@ const dadosEstruturados = {
   .cartao { padding: 20px; display: flex; flex-direction: column; gap: 8px; }
   .cartao strong { font-size: 1.08rem; line-height: 1.4; }
   .cartao .suave { font-size: 0.92rem; line-height: 1.55; }
+  .cartao-link { display: flex; flex-direction: column; gap: 8px; color: inherit; text-decoration: none; }
+  .cartao-link strong { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
   .rotulo-cartao { font-size: 13px; font-weight: 600; color: var(--p-muted); }
   .estado { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--p-muted); }
   .icone { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; border: 1px solid var(--p-line); background: var(--p-solid); }

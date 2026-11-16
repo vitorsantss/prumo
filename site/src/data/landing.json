@@ -99,7 +99,12 @@
         "Tarefas marcadas pra começar."
       ]
     ],
-    "mantido": "Mantido por"
+    "mantido": "Mantido por",
+    "pruminhosTitulo": "Pruminhos",
+    "pruminhosTexto": "Além da hipótese principal, o Prumo abre frentes menores de pesquisa: os pruminhos. Cada um começa com uma pergunta, é testado aqui com o Prumo como cobaia e, se funcionar, vira biblioteca ou gate que outros projetos podem usar.",
+    "pruminhosEntender": "Entender os pruminhos",
+    "pruminhosPropor": "Propor um pruminho",
+    "pruminhosEstado": "em estudo"
   },
   "en": {
     "lang": "en",
@@ -201,7 +206,12 @@
         "Tasks marked for newcomers."
       ]
     ],
-    "mantido": "Maintained by"
+    "mantido": "Maintained by",
+    "pruminhosTitulo": "Pruminhos",
+    "pruminhosTexto": "Beyond the main hypothesis, Prumo opens smaller research fronts: the pruminhos. Each starts with a question, is tested here with Prumo as the guinea pig and, if it works, becomes a library or gate other projects can use.",
+    "pruminhosEntender": "Understand pruminhos",
+    "pruminhosPropor": "Propose a pruminho",
+    "pruminhosEstado": "being studied"
   },
   "hipoteses": [
     {
@@ -316,6 +326,41 @@
         "Use it on real tasks, measure cost and quality, and only then say whether it works."
       ],
       "tipo": "depois"
+    }
+  ],
+  "pruminhos": [
+    {
+      "issue": 66,
+      "pt": [
+        "Observar o uso",
+        "Dá pra medir uso, erros e bugs sem tocar dado pessoal?"
+      ],
+      "en": [
+        "Watching usage",
+        "Can we measure usage, errors and bugs without touching personal data?"
+      ]
+    },
+    {
+      "issue": 70,
+      "pt": [
+        "Gate de qualidade web",
+        "Um gate de desempenho, acessibilidade e SEO ajuda sem atrapalhar?"
+      ],
+      "en": [
+        "Web quality gate",
+        "Does a performance, accessibility and SEO gate help without getting in the way?"
+      ]
+    },
+    {
+      "issue": 71,
+      "pt": [
+        "Monitor de padrões",
+        "Padrões com fonte viram verificações que geram tarefas úteis?"
+      ],
+      "en": [
+        "Standards monitor",
+        "Can sourced standards become checks that open useful tasks?"
+      ]
     }
   ]
 }

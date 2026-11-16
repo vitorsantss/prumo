@@ -10,5 +10,6 @@ Contribuir aqui é estudar fluxos de IA na prática. O que você aprende serve p
 | Escrever documentação | Deixar mais claro o que já existe | [Tarefas de documentação](https://github.com/vitorsantss/prumo/issues?q=is%3Aopen+label%3Adocumentation) |
 | Desenhar | Telas, diagramas, o visual do projeto | Diagramas seguem o ADR-0009 |
 | Programar | Tarefas pequenas, marcadas pra começar | [Tarefas pra começar](https://github.com/vitorsantss/prumo/issues?q=is%3Aopen+label%3A%22good+first+issue%22) |
+| Pesquisar | Tocar um pruminho: uma pergunta, as fontes, um teste no Prumo e o resultado | [Pruminhos](pruminhos.md) e as [frentes abertas](https://github.com/vitorsantss/prumo/issues?q=is%3Aopen+label%3Apruminho) |
 
 Pronto pra mandar a primeira? Siga o [passo a passo da primeira contribuição](primeira-contribuicao.md). Com ou sem IA, tudo vale, desde que você entenda e saiba explicar o que enviou.
