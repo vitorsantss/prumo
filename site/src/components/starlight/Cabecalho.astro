@@ -18,9 +18,9 @@ const noDesignSystem = /^(en\/)?docs\/design(\/|$)/.test(Astro.locals.starlightR
   <a class="secao" href={`${base}${en ? 'en/' : ''}docs/design/`} aria-current={noDesignSystem ? 'true' : undefined}>design system</a>
   <div class="busca"><Search /></div>
   <div class="direita">
-    <LinkGithub rotulo={en ? 'Repository on GitHub' : 'Repositório no GitHub'} />
     <LanguageSelect />
     <ThemeSelect />
+    <LinkGithub rotulo={en ? 'Repository on GitHub' : 'Repositório no GitHub'} />
   </div>
 </div>
 

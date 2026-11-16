@@ -175,8 +175,10 @@
   view-transition-name: prumo-topo;
 }
 
-.corpo > .lateral {
-  view-transition-name: prumo-lateral;
+@media (min-width: 50rem) {
+  .corpo > .lateral {
+    view-transition-name: prumo-lateral;
+  }
 }
 
 .colunas > .main-pane {
