@@ -16,8 +16,21 @@ Ideia nova não entra no checkpoint em andamento: vira issue com a label `ideia`
 
 Referência: Ryan Singer, *Shape Up*, cap. "Set Boundaries" · https://basecamp.com/shapeup/1.2-chapter-03
 
+### Entregas em fila
+
+Trabalho que não é do produto (site, qualidade, automação, métricas) anda em **entregas**, também como milestones, numa fila com ordem. A entrega ganha prazo quando começa, e então segue a mesma regra dos checkpoints: tempo fixo, escopo variável.
+
+**Uma entrega em andamento por vez,** além do checkpoint do produto. A próxima só começa quando a atual fecha. O motivo é matemático: pela Lei de Little, L = λW, o trabalho em andamento (L) é a vazão (λ) vezes o tempo de ciclo (W); então o tempo de ciclo é o trabalho em andamento dividido pela vazão[^little]. Com a mesma vazão, cada frente aberta a mais atrasa todas. A pesquisa do DORA recomenda o mesmo na prática: limitar o que está em andamento e focar em terminar poucas tarefas de alta prioridade[^dora-wip].
+
+Dentro de cada entrega, os PRs continuam pequenos: trabalhar em lotes pequenos permite testar rápido se uma mudança tem o efeito esperado e corrigir o rumo[^dora-lotes].
+
+[^little]: John D. C. Little, *Little's Law as Viewed on Its 50th Anniversary*, Operations Research 59(3), 2011, revendo a prova original de 1961 e o uso em gestão de operações · https://projectproduction.org/journal/reprint-littles-law-as-viewed-on-its-50th-anniversary/
+[^dora-wip]: DORA, *Work in process limits* · https://dora.dev/capabilities/wip-limits/
+[^dora-lotes]: DORA, *Working in small batches* · https://dora.dev/capabilities/working-in-small-batches/
+
 ## Issues
 
+- **Toda issue nova passa pela triagem humana** antes de alguém trabalhar nela, humano ou IA. Ela entra com `precisa-triagem` e sai com `triagem/aceita`, com `triagem/precisa-informacao` ou fechada. Se o risco for baixo, a triagem pode marcar também `pode-ser-automatica`, e aí uma IA abre o PR e um humano valida (ADR-0015).
 - Cada checkpoint tem uma **issue-mãe** com as tarefas como **sub-issues**.
 - Quando uma tarefa depende de outra, ela fica marcada como **bloqueada por** (`is:blocked` mostra todas). Não comece uma tarefa bloqueada.
 - Toda tarefa diz **o que fazer** e **pronto quando**, com critérios verificáveis.
