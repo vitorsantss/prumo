@@ -1,6 +1,6 @@
-# 0015 · Triagem humana antes de qualquer trabalho em issue, e automação só depois dela
+# 0015 · Triagem humana antes da IA: a primeira defesa do Prumo contra injeção de prompt
 
-- **Status:** Proposto
+- **Status:** Aceito
 - **Data:** 2026-11-16
 
 ## Contexto
@@ -22,9 +22,44 @@ As diretrizes de IA confiável da União Europeia separam os graus de supervisã
    É o fluxo do Kubernetes: issue nova recebe `needs-triage` automaticamente e, depois de avaliada, `triage/accepted`, que indica que está pronta pra ser trabalhada[^k8s-guia][^k8s-kep].
 3. **Aceita, a issue fica disponível pra humano ou IA.** A label `triagem/aceita` também mostra a quem quer contribuir o que está pronto pra pegar.
 4. **A IA só trabalha sozinha em issue com `pode-ser-automatica`,** label que a pessoa põe na triagem, junto com `triagem/aceita`, quando o risco é baixo: ajuste visual, texto, link quebrado. Assim, nenhuma IA processa texto público que um humano ainda não leu.
+
+   ```mermaid
+   flowchart LR
+     subgraph F["Texto não lido por humano: nenhuma IA toca"]
+       N["Issue nova<br/>precisa-triagem"]
+     end
+     N --> H{"Humano lê<br/>(triagem)"}
+     H -->|falta informação| I["triagem/precisa-informacao"]
+     H -->|não faz sentido| X["Fechada"]
+     H -->|aceita| A["triagem/aceita<br/>humano ou IA podem pegar"]
+     H -->|aceita, baixo risco| B["+ pode-ser-automatica"]
+     B --> IA["IA com privilégio mínimo<br/>sem segredos, só branch e PR"]
+     IA --> R["PR em rascunho<br/>prévia, capturas, testes"]
+     R --> V{"Humano valida"}
+     V -->|aprova| M["Merge, humano"]
+     V -->|recusa| IA
+   ```
+
 5. **A IA entrega um PR em rascunho, nunca o merge.** O PR traz a prévia, capturas do que mudou (claro, escuro e celular) e os testes passando. Se houver mais de um jeito de corrigir, as opções vêm lado a lado. A IA não aprova nem mescla o próprio trabalho. É o mesmo desenho do agente de código do GitHub: o PR em rascunho dele precisa ser revisado e mesclado por um humano, e o agente não consegue marcá-lo como pronto, aprovar nem mesclar[^copilot].
 6. **Merge é humano no laço,** porque muda o projeto: uma pessoa decide cada um. A rotina que reproduz o problema e tira as capturas é humano sobre o laço: a pessoa desenha a rotina e acompanha o que ela faz, sem aprovar cada passo[^hleg]. A OWASP recomenda o mesmo: aprovação humana pra ação de alto risco[^owasp].
 7. **O agente que trabalha em issue roda com o mínimo:** sem segredos, só com permissão pra criar branch e abrir PR, como recomenda a OWASP: privilégios do modelo restritos ao mínimo necessário[^owasp]. O modelo de ameaças (#93) detalha isso antes da rotina ligar.
+
+## Como isso protege contra injeção de prompt
+Este ADR abre o tema da injeção de prompt no Prumo. Cada decisão acima corresponde a uma das mitigações da OWASP pra LLM01[^owasp]:
+
+| Camada | Mitigação da OWASP | Onde está neste ADR |
+| --- | --- | --- |
+| Separar o texto não confiável | Segregar e identificar conteúdo externo | Decisões 1 e 4: nenhuma IA lê issue antes de um humano; a triagem é a fronteira |
+| Privilégio mínimo | Controle de privilégio e acesso mínimo | Decisão 7: sem segredos, só criar branch e abrir PR |
+| Humano no que é de alto risco | Aprovação humana pra ação de alto risco | Decisões 5 e 6: PR em rascunho, merge humano |
+| Ataque simulado | Testes adversariais | Ainda não existe; entra pelo modelo de ameaças (#93) |
+
+## O que este ADR ainda não cobre
+A triagem reduz o risco, mas não zera:
+- **O humano pode não ver a instrução.** A OWASP lembra que a entrada pode afetar o modelo mesmo sendo imperceptível pra uma pessoa: basta o modelo ler o conteúdo[^owasp]. A triagem pega o óbvio, não o escondido. Por isso o privilégio mínimo e o merge humano continuam valendo depois que a issue é aceita.
+- **Issue não é a única porta.** Comentário em PR, arquivos de um PR de outra pessoa (incluindo um `AGENTS.md` alterado, que um agente revisor carregaria como regra), páginas lidas na pesquisa e documentação de dependências também são texto de fora. A recuperação de conteúdo apaga a fronteira entre dado e instrução[^greshake]. O Claude Code, por exemplo, pede aprovação antes de importar arquivos de fora da pasta do projeto, pra proteger de arquivos que outras pessoas fazem commit num projeto compartilhado[^cc-imports].
+
+Cada porta nova, quando for tratada, vira ADR próprio citando este como base. O modelo de ameaças (#93) é onde elas são listadas.
 
 ## Consequências
 - O tempo do mantenedor vai pra decisões curtas: aceitar na triagem e conferir na validação. Investigar e corrigir saem da mão dele nas issues de baixo risco.
@@ -42,3 +77,4 @@ As diretrizes de IA confiável da União Europeia separam os graus de supervisã
 [^k8s-guia]: Kubernetes, *Issue Triage Guidelines* · https://kubernetes.dev/docs/guide/issue-triage
 [^k8s-kep]: Kubernetes, *KEP-1553: Issue Triage Workflow and Automation* · https://www.k8s.dev/resources/keps/1553/
 [^copilot]: GitHub Docs, *Risks and mitigations for GitHub Copilot cloud agent* · https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/agents/cloud-agent/risks-and-mitigations
+[^cc-imports]: Anthropic, *Claude Code: Manage memory* (imports externos) · https://code.claude.com/docs/en/memory?r=0
