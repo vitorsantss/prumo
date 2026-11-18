@@ -8,9 +8,9 @@ O Prumo é uma pesquisa sobre construir software com IA com qualidade, e uma das
 
 Já temos uma parte. Dentro do pipeline do Prumo, o `usage.jsonl` grava uma linha por chamada de IA (ADR-0001), com os nomes das convenções GenAI do OpenTelemetry (ADR-0007). Mas o próprio Prumo é construído fora do pipeline, em conversas com ferramentas como Claude Code, claude.ai, Orca ou Maestri. Esse gasto não é registrado em lugar nenhum.
 
-O que a pesquisa de 16/11 encontrou:
+O que a pesquisa feita pra este ADR encontrou (fontes nas notas de rodapé):
 - **A ferramenta mede por sessão, não por tarefa.** O Claude Code anexa `session.id` a todas as métricas que exporta[^cc-otel], e o uso que o app do Claude mostra também é da conversa inteira. Uma sessão costuma tocar vários PRs, e um PR pode levar várias sessões.
-- **Leitura de cache domina o gasto em trabalho com agentes.** Numa sessão de 16/11 foram 52,4 milhões de tokens lidos do cache contra 99 mil de saída. O benchmark do Akita mostra runs com 5 a 15 milhões de tokens de leitura de cache, e o custo saía subestimado enquanto esses tokens não eram contados[^akita-preco]. O nosso `usage.jsonl` hoje só tem entrada e saída: tem o mesmo buraco.
+- **Leitura de cache domina o gasto em trabalho com agentes.** Na sessão de trabalho que escreveu este ADR e o #110, o relatório de uso do app do Claude mostrou 52,4 milhões de tokens lidos do cache contra 99 mil de saída. O benchmark do Akita mostra runs com 5 a 15 milhões de tokens de leitura de cache, e o custo saía subestimado enquanto esses tokens não eram contados[^akita-preco]. O nosso `usage.jsonl` hoje só tem entrada e saída: tem o mesmo buraco.
 - **O resultado depende do conjunto todo.** Modelo, harness, prompt, ferramentas, contexto, execução e auditoria influem juntos[^akita-metodo]. Registrar só o modelo não basta.
 
 ## Decisão
@@ -57,11 +57,11 @@ O que a pesquisa de 16/11 encontrou:
    | `prumo.entrada_inclui_cache` | `true` quando a entrada segue a convenção |
    | `origem` | `medido`, `estimado` ou `sem_dado` |
    | `metodo_estimativa` | obrigatório quando `estimado` |
-   | `tarefas` | lista de `{ "ref": "#95", "peso": 0.5 }`, com pesos somando 1 |
+   | `tarefas` | lista de `{ "ref": "github:vitorsantss/prumo#95", "peso": 0.5 }`, com pesos somando 1. A referência diz de qual sistema vem, pra poder ser traduzida numa migração; quando existirem as tarefas do próprio Prumo (`tasks/<id>/`), vira `prumo:<id>` |
    | `custo` | `{ "tipo": "assinatura" \| "api", "equivalente_usd", "tarifa_em" }` |
    | `periodo` | `inicial` nos registros do período de exceção |
 
-9. **O período inicial é uma exceção declarada.** Tudo o que veio antes deste ADR ser aceito entra com `periodo: "inicial"`, `origem` honesta (quase sempre `estimado` ou `sem_dado`) e o método escrito. Dali pra frente, toda sessão de IA que gerar PR registra o uso no mesmo PR. Quem ler os dados sabe onde começa o número medido.
+9. **O período inicial é uma exceção declarada.** Tudo o que veio antes deste ADR ser aceito entra com `periodo: "inicial"`, `origem` honesta (quase sempre `estimado` ou `sem_dado`) e o método escrito. Dali pra frente, toda sessão de IA que gerar PR registra o uso na mesma mudança que entrega o trabalho. Quem ler os dados sabe onde começa o número medido.
 
 10. **Custo com data, e assinatura com custo marginal zero.** Custo convertido leva a tarifa e a data em que ela foi conferida, porque a tarifa muda e um número antigo não se compara com um atual[^akita-preco]. Em plano de assinatura, o custo marginal é 0, com o equivalente em API ao lado, como no benchmark do Akita[^akita-metodo].
 
