@@ -41,7 +41,9 @@ As diretrizes de IA confiável da União Europeia separam os graus de supervisã
    ```
 
 5. **A IA entrega um PR em rascunho, nunca o merge.** O PR traz a prévia, capturas do que mudou (claro, escuro e celular) e os testes passando. Se houver mais de um jeito de corrigir, as opções vêm lado a lado. A IA não aprova nem mescla o próprio trabalho. É o mesmo desenho do agente de código do GitHub: o PR em rascunho dele precisa ser revisado e mesclado por um humano, e o agente não consegue marcá-lo como pronto, aprovar nem mesclar[^copilot].
-6. **Merge é humano no laço,** porque muda o projeto: uma pessoa decide cada um. A rotina que reproduz o problema e tira as capturas é humano sobre o laço: a pessoa desenha a rotina e acompanha o que ela faz, sem aprovar cada passo[^hleg]. A OWASP recomenda o mesmo: aprovação humana pra ação de alto risco[^owasp].
+6. **Cada merge passa por uma pessoa; a rotina da IA, não passo a passo.**
+   - **Merge:** uma pessoa aprova cada um, porque o merge muda o projeto. É o que a OWASP recomenda pra ação de alto risco[^owasp], e o que as diretrizes da UE chamam de humano *no* laço: intervir em cada decisão[^hleg].
+   - **Rotina da IA** (reproduzir o problema, tirar capturas, rodar testes): a pessoa define as regras e as permissões da rotina e confere o resultado, sem aprovar cada passo. É o humano *sobre* o laço: intervir no desenho e acompanhar a operação[^hleg].
 7. **O agente que trabalha em issue roda com o mínimo:** sem segredos, só com permissão pra criar branch e abrir PR, como recomenda a OWASP: privilégios do modelo restritos ao mínimo necessário[^owasp]. O modelo de ameaças (#93) detalha isso antes da rotina ligar.
 
 ## Como isso protege contra injeção de prompt
