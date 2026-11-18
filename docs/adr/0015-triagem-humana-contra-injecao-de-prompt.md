@@ -44,7 +44,7 @@ As diretrizes de IA confiável da União Europeia separam os graus de supervisã
 6. **Cada merge passa por uma pessoa; a rotina da IA, não passo a passo.**
    - **Merge:** uma pessoa aprova cada um, porque o merge muda o projeto. É o que a OWASP recomenda pra ação de alto risco[^owasp], e o que as diretrizes da UE chamam de humano *no* laço: intervir em cada decisão[^hleg].
    - **Rotina da IA** (reproduzir o problema, tirar capturas, rodar testes): a pessoa define as regras e as permissões da rotina e confere o resultado, sem aprovar cada passo. É o humano *sobre* o laço: intervir no desenho e acompanhar a operação[^hleg].
-7. **O agente que trabalha em issue roda com o mínimo:** sem segredos, só com permissão pra criar branch e abrir PR, como recomenda a OWASP: privilégios do modelo restritos ao mínimo necessário[^owasp]. O modelo de ameaças (#93) detalha isso antes da rotina ligar.
+7. **O agente que trabalha em issue roda com o mínimo:** sem segredos, só com permissão pra criar branch e abrir PR, como recomenda a OWASP: privilégios do modelo restritos ao mínimo necessário[^owasp]. O modelo de ameaças ([#93](https://github.com/vitorsantss/prumo/issues/93)) detalha isso antes da rotina ligar.
 
 ## Como isso protege contra injeção de prompt
 Este ADR abre o tema da injeção de prompt no Prumo. Cada decisão acima corresponde a uma das mitigações da OWASP pra LLM01[^owasp]:
@@ -54,21 +54,21 @@ Este ADR abre o tema da injeção de prompt no Prumo. Cada decisão acima corres
 | Separar o texto não confiável | Segregar e identificar conteúdo externo | Decisões 1 e 4: nenhuma IA lê issue antes de um humano; a triagem é a fronteira |
 | Privilégio mínimo | Controle de privilégio e acesso mínimo | Decisão 7: sem segredos, só criar branch e abrir PR |
 | Humano no que é de alto risco | Aprovação humana pra ação de alto risco | Decisões 5 e 6: PR em rascunho, merge humano |
-| Ataque simulado | Testes adversariais | Ainda não existe; entra pelo modelo de ameaças (#93) |
+| Ataque simulado | Testes adversariais | Ainda não existe; entra pelo modelo de ameaças ([#93](https://github.com/vitorsantss/prumo/issues/93)) |
 
 ## O que este ADR ainda não cobre
 A triagem reduz o risco, mas não zera:
 - **O humano pode não ver a instrução.** A OWASP lembra que a entrada pode afetar o modelo mesmo sendo imperceptível pra uma pessoa: basta o modelo ler o conteúdo[^owasp]. A triagem pega o óbvio, não o escondido. Por isso o privilégio mínimo e o merge humano continuam valendo depois que a issue é aceita.
 - **Issue não é a única porta.** Comentário em PR, arquivos de um PR de outra pessoa (incluindo um `AGENTS.md` alterado, que um agente revisor carregaria como regra), páginas lidas na pesquisa e documentação de dependências também são texto de fora. A recuperação de conteúdo apaga a fronteira entre dado e instrução[^greshake]. O Claude Code, por exemplo, pede aprovação antes de importar arquivos de fora da pasta do projeto, pra proteger de arquivos que outras pessoas fazem commit num projeto compartilhado[^cc-imports].
 
-Cada porta nova, quando for tratada, vira ADR próprio citando este como base. O modelo de ameaças (#93) é onde elas são listadas.
+Cada porta nova, quando for tratada, vira ADR próprio citando este como base. O modelo de ameaças ([#93](https://github.com/vitorsantss/prumo/issues/93)) é onde elas são listadas.
 
 ## Consequências
 - O tempo do mantenedor vai pra decisões curtas: aceitar na triagem e conferir na validação. Investigar e corrigir saem da mão dele nas issues de baixo risco.
-- A rotina só liga depois dos testes do site no CI (#104). Menos supervisão pede mais teste[^hleg]; sem eles, a validação vira carimbo.
+- A rotina só liga depois dos testes do site no CI ([#104](https://github.com/vitorsantss/prumo/issues/104)). Menos supervisão pede mais teste[^hleg]; sem eles, a validação vira carimbo.
 - Toda issue nova ganha um passo a mais (a triagem), mas é o passo que fecha a porta da injeção de prompt.
 - Cada correção feita por IA registra o uso de tokens (ADR-0014).
-- As quatro labels já existem no repositório. A aplicação automática de `precisa-triagem` e a rotina entram pela #111.
+- As quatro labels já existem no repositório. A aplicação automática de `precisa-triagem` e a rotina entram pela [#111](https://github.com/vitorsantss/prumo/issues/111).
 
 ## Fontes
 [^relatos]: Issues com a label `feedback` no repositório (quinze relatos do design system e dois do site) · https://github.com/vitorsantss/prumo/issues?q=label%3Afeedback
