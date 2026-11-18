@@ -20,12 +20,12 @@ Referência: Ryan Singer, *Shape Up*, cap. "Set Boundaries" · https://basecamp.
 
 Trabalho que não é do produto (site, qualidade, automação, métricas) anda em **entregas**, também como milestones, numa fila com ordem. A entrega ganha prazo quando começa, e então segue a mesma regra dos checkpoints: tempo fixo, escopo variável.
 
-**Uma entrega em andamento por vez,** além do checkpoint do produto. A próxima só começa quando a atual fecha. O motivo é matemático: pela Lei de Little, o tempo de ciclo é o trabalho em andamento dividido pela vazão[^little]. Com a mesma vazão, cada frente aberta a mais atrasa todas. A pesquisa do DORA recomenda o mesmo na prática: limitar o que está em andamento e focar em terminar poucas tarefas de alta prioridade[^dora-wip].
+**Uma entrega em andamento por vez,** além do checkpoint do produto. A próxima só começa quando a atual fecha. O motivo é matemático: pela Lei de Little, L = λW, o trabalho em andamento (L) é a vazão (λ) vezes o tempo de ciclo (W); então o tempo de ciclo é o trabalho em andamento dividido pela vazão[^little]. Com a mesma vazão, cada frente aberta a mais atrasa todas. A pesquisa do DORA recomenda o mesmo na prática: limitar o que está em andamento e focar em terminar poucas tarefas de alta prioridade[^dora-wip].
 
 Dentro de cada entrega, os PRs continuam pequenos: trabalhar em lotes pequenos permite testar rápido se uma mudança tem o efeito esperado e corrigir o rumo[^dora-lotes].
 
-[^little]: Think Insights, *Kanban* (Lei de Little) · https://thinkinsights.net/consulting/kanban
-[^dora-wip]: Google Cloud, *DevOps capabilities* (Work in process limits) · https://docs.cloud.google.com/architecture/devops?authuser=01
+[^little]: John D. C. Little, *Little's Law as Viewed on Its 50th Anniversary*, Operations Research 59(3), 2011, revendo a prova original de 1961 e o uso em gestão de operações · https://projectproduction.org/journal/reprint-littles-law-as-viewed-on-its-50th-anniversary/
+[^dora-wip]: DORA, *Work in process limits* · https://dora.dev/capabilities/wip-limits/
 [^dora-lotes]: DORA, *Working in small batches* · https://dora.dev/capabilities/working-in-small-batches/
 
 ## Issues
