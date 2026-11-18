@@ -61,15 +61,16 @@ O estado do projeto mora no GitHub (issues, PRs, ADRs, docs); este arquivo é o 
 
 O Prumo é uma pesquisa: decisão sem prova contamina as decisões que vierem depois. Estas regras valem pra qualquer IA e pra qualquer pessoa. Cada uma nasceu de um erro real, citado entre parênteses.
 
-- **Fonte antes da tese.** Na etapa de Research, toda afirmação sobre o mundo e toda proposta de decisão vêm com referência. Opinião da IA não é prova. Se não achou fonte, diga "não achei fonte" e não apresente a ideia como decisão. (Em 16/11, "registrar por sessão" foi proposto sem referência e só ganhou fonte depois de cobrado.)
+- **Fonte antes da tese.** Na etapa de Research, toda afirmação sobre o mundo e toda proposta de decisão vêm com referência. Opinião da IA não é prova. Se não achou fonte, diga "não achei fonte" e não apresente a ideia como decisão. (Origem: "registrar por sessão" foi proposto sem referência na discussão do ADR-0014, #110, e só ganhou fonte depois de cobrado.)
 - **Raciocínio também precisa de prova.** Lógica ou matemática valem, mas escritas por extenso e apoiadas numa referência que mostre que o princípio é aceito. Exemplo: a equação do ADR-0014, apoiada na modelagem dimensional de Kimball.
-- **Link só depois de aberto ou encontrado numa busca.** Nunca monte URL de memória. Se a página não abriu, não cite. (Um link de decisão judicial e um link da W3C foram escritos de memória em 16/11.)
+- **Link só depois de aberto ou encontrado numa busca.** Nunca monte URL de memória. Se a página não abriu, não cite. (Origem: dois links escritos de memória durante o #110.)
+- **Origem aponta pra evidência, não pra data.** Ao dizer de onde algo veio (um erro, uma medição, uma pesquisa), aponte o PR, a issue, o commit ou a nota de rodapé onde dá pra conferir. Data solta não leva a lugar nenhum, fica ambígua sem o ano, e o GitHub já guarda quando cada coisa aconteceu. Se a evidência for privada, como uma conversa numa conta pessoal, descreva o que foi e qual instrumento mediu, sem link. (Origem: datas soltas e uma citação vaga a uma sentença, apontadas na revisão do #110.)
 - **Separe fonte de proposta.** Diga o que a fonte afirma e o que é conclusão sua a partir dela. Conclusão vira decisão do Prumo no ADR, com as fontes de onde partiu, nunca disfarçada de literatura.
 - **ADR aceito também se revalida.** Fonte nova, ADR novo no mesmo tema ou mudança no método de validação reabrem a checagem (#109).
 
 ## Fila de trabalho
 
-- **Ideia ou relato vira issue, não código.** Quando alguém despeja ideias ou relata um problema, anote em issues e só implemente quando pedirem. (Em 16/11, três relatos viraram PR sem ninguém pedir.)
+- **Ideia ou relato vira issue, não código.** Quando alguém despeja ideias ou relata um problema, anote em issues e só implemente quando pedirem. (Origem: três relatos viraram PR sem pedido, #103.)
 - **Siga a ordem combinada.** Se a prioridade foi definida, não puxe outra coisa por ser rápida ou urgente sem combinar antes.
 - **Procure antes de abrir.** Antes de criar issue ou ADR, busque se já existe. (A #107 duplicou a #40.)
 - **Uma sessão de IA por tarefa,** sempre que der: deixa o custo da tarefa exato (ADR-0014).
