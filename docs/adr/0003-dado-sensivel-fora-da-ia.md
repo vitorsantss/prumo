@@ -12,7 +12,7 @@ O agente de IA lê arquivos, roda comandos e manda texto pra um provedor externo
 Segredos, dados pessoais e dados de terceiros **nunca entram no contexto de um modelo**. Código, documentação e dados fictícios de teste podem entrar.
 
 ### Como é garantido
-1. **O agente não enxerga o que não precisa.** O container do agente (ADR-0007) monta só o worktree da tarefa, sem `~/.ssh`, sem `.env` e sem a pasta de dados do Prumo. É o menor privilégio aplicado a dados[^owasp-llm02], e é também o que limita o estrago de uma injeção de prompt ([ADR-0015](0015-triagem-humana-contra-injecao-de-prompt.md)): o agente não vaza o que nunca viu.
+1. **O agente não enxerga o que não precisa.** O container do agente ([ADR-0007](0007-modelo-de-execucao.md)) monta só o worktree da tarefa, sem `~/.ssh`, sem `.env` e sem a pasta de dados do Prumo. É o menor privilégio aplicado a dados[^owasp-llm02], e é também o que limita o estrago de uma injeção de prompt ([ADR-0015](0015-triagem-humana-contra-injecao-de-prompt.md)): o agente não vaza o que nunca viu.
 2. **`.prumoignore`**: lista de caminhos que nenhuma etapa lê nem recebe como entrada, no formato do `.gitignore`. Vem com um padrão (`.env*` exceto `.env.example`, `*.pem`, `*.key`, `secrets/`, dumps de banco) e cada projeto acrescenta o seu.
 3. **Diff que toca caminho ignorado é recusado** no gate, antes do commit.
 
