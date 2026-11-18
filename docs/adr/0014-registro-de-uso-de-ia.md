@@ -20,6 +20,23 @@ O que a pesquisa feita pra este ADR encontrou (fontes nas notas de rodapé):
 
 2. **Sessão compartilhada usa pesos que somam 1.** Quando uma sessão toca mais de uma tarefa, o registro lista as tarefas com um peso cada, somando 1, e o resultado de cada tarefa sai marcado como `rateado`. Copiar o total pra cada tarefa contaria o gasto duas vezes; o peso por linha evita isso[^kimball-ponte]. Com uma tarefa só, o peso é 1 e o custo é exato. Por isso a recomendação é **uma sessão por tarefa** sempre que der.
 
+   ```mermaid
+   flowchart LR
+     subgraph S["Sessões: o que a ferramenta mede"]
+       A["Sessão A<br/>total T_A, medido"]
+       B["Sessão B<br/>total T_B, medido"]
+     end
+     subgraph T["Tarefas: o que se quer saber"]
+       X["Tarefa X"]
+       Y["Tarefa Y"]
+     end
+     A -- "peso 1 · exato" --> X
+     B -- "peso 0,5 · rateado" --> X
+     B -- "peso 0,5 · rateado" --> Y
+   ```
+
+   custo(X) = 1·T_A + 0,5·T_B e custo(Y) = 0,5·T_B. Somando as tarefas volta T_A + T_B: nada é contado duas vezes. A sessão B só conhece o total, então o 0,5 é escolha e sai marcado `rateado`; a sessão A tem uma tarefa só, então o custo de X que veio dela é exato.
+
 3. **Os quatro tipos de token, com os nomes do OpenTelemetry:**
    - `gen_ai.usage.input_tokens`
    - `gen_ai.usage.output_tokens`

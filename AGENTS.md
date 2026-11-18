@@ -59,26 +59,25 @@ O estado do projeto mora no GitHub (issues, PRs, ADRs, docs); este arquivo é o 
 
 ## Pesquisa e prova
 
-O Prumo é uma pesquisa: decisão sem prova contamina as decisões que vierem depois. Estas regras valem pra qualquer IA e pra qualquer pessoa. Cada uma nasceu de um erro real, citado entre parênteses.
+O Prumo é uma pesquisa: decisão sem prova contamina as decisões que vierem depois. Estas regras valem pra qualquer IA e pra qualquer pessoa. Cada uma nasceu de um erro real, contado em [origem das regras](docs/origem-das-regras.md).
 
-- **Fonte antes da tese.** Na etapa de Research, toda afirmação sobre o mundo e toda proposta de decisão vêm com referência. Opinião da IA não é prova. Se não achou fonte, diga "não achei fonte" e não apresente a ideia como decisão. (Origem: "registrar por sessão" foi proposto sem referência na discussão do ADR-0014, #110, e só ganhou fonte depois de cobrado.)
+- **Fonte antes da tese.** Na etapa de Research, toda afirmação sobre o mundo e toda proposta de decisão vêm com referência. Opinião da IA não é prova. Se não achou fonte, diga "não achei fonte" e não apresente a ideia como decisão. ([origem](docs/origem-das-regras.md#fonte-antes-da-tese))
 - **Raciocínio também precisa de prova.** Lógica ou matemática valem, mas escritas por extenso e apoiadas numa referência que mostre que o princípio é aceito. Exemplo: a equação do ADR-0014, apoiada na modelagem dimensional de Kimball.
-- **Link só depois de aberto ou encontrado numa busca.** Nunca monte URL de memória. Se a página não abriu, não cite. (Origem: dois links escritos de memória durante o #110.)
-- **Origem aponta pra evidência, não pra data.** Ao dizer de onde algo veio (um erro, uma medição, uma pesquisa), aponte o PR, a issue, o commit ou a nota de rodapé onde dá pra conferir. Data solta não leva a lugar nenhum, fica ambígua sem o ano, e o GitHub já guarda quando cada coisa aconteceu. Se a evidência for privada, como uma conversa numa conta pessoal, descreva o que foi e qual instrumento mediu, sem link. (Origem: datas soltas e uma citação vaga a uma sentença, apontadas na revisão do #110.)
+- **Link só depois de aberto ou encontrado numa busca.** Nunca monte URL de memória. Se a página não abriu, não cite. ([origem](docs/origem-das-regras.md#link-só-depois-de-aberto))
+- **Origem aponta pra evidência que mora no repositório.** Ao dizer de onde algo veio (um erro, uma medição, uma pesquisa), aponte um arquivo do repositório, uma nota de rodapé ou um commit da `main`. Número de issue ou PR pode vir junto como atalho, mas não sozinho: só tem sentido no GitHub, e o Prumo não pode depender dele. Data solta também não serve: não leva a lugar nenhum e fica ambígua sem o ano. Se a evidência for privada, como uma conversa numa conta pessoal, descreva o que foi e qual instrumento mediu, sem link. ([origem](docs/origem-das-regras.md#origem-aponta-pra-evidência-que-mora-no-repositório))
 - **Separe fonte de proposta.** Diga o que a fonte afirma e o que é conclusão sua a partir dela. Conclusão vira decisão do Prumo no ADR, com as fontes de onde partiu, nunca disfarçada de literatura.
 - **ADR aceito também se revalida.** Fonte nova, ADR novo no mesmo tema ou mudança no método de validação reabrem a checagem (#109).
 
 ## Fila de trabalho
 
-- **Ideia ou relato vira issue, não código.** Quando alguém despeja ideias ou relata um problema, anote em issues e só implemente quando pedirem. (Origem: três relatos viraram PR sem pedido, #103.)
+- **Ideia ou relato vira issue, não código.** Quando alguém despeja ideias ou relata um problema, anote em issues e só implemente quando pedirem. ([origem](docs/origem-das-regras.md#ideia-ou-relato-vira-issue-não-código))
 - **Siga a ordem combinada.** Se a prioridade foi definida, não puxe outra coisa por ser rápida ou urgente sem combinar antes.
-- **Procure antes de abrir.** Antes de criar issue ou ADR, busque se já existe. (A #107 duplicou a #40.)
+- **Procure antes de abrir.** Antes de criar issue ou ADR, busque se já existe. ([origem](docs/origem-das-regras.md#procure-antes-de-abrir))
 - **Uma sessão de IA por tarefa,** sempre que der: deixa o custo da tarefa exato (ADR-0014).
 
 ## Mudança visual
 
-- **Teste no celular com toque**, além de claro e escuro e das larguras de [como mudar o site](docs/como-mudar-o-site.md): abrir o menu, tocar num link e chegar na página. (O #95 quebrou o menu do celular, #101, porque só foi conferido com mouse.)
-- **Estilo global com seletor de escopo.** Regra em CSS global não pode depender de uma classe genérica que outra página também usa. (O `.topo` da página inicial herdou a transição da documentação.)
+Segue as [regras da camada Site](docs/design/site.md) e o roteiro de [como mudar o site](docs/como-mudar-o-site.md). O design system é a fonte: regra visual nova entra lá, não aqui.
 
 ## Idioma
 

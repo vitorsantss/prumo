@@ -10,6 +10,7 @@ export const menu = [
     items: [
       'docs/a-ideia',
       'docs/processo',
+      'docs/origem-das-regras',
       { label: 'Decisões (ADRs)', translations: { en: 'Decisions (ADRs)' }, collapsed: true, items: [{ autogenerate: { directory: 'docs/adr' } }] },
     ],
   },
