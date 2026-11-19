@@ -1,6 +1,6 @@
 # 0016 · Ciclo de vida do ADR, com o merge humano como transição
 
-- **Status:** Proposto
+- **Status:** Aceito
 - **Data:** 2026-11-19
 
 ## Contexto
