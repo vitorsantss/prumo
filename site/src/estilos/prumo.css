@@ -87,6 +87,11 @@ body {
   width: auto;
 }
 
+.right-sidebar-panel starlight-toc a {
+  --pad-inline: 0;
+  padding-inline: calc(0.75rem * var(--depth)) 0;
+}
+
 .content-panel + .content-panel {
   border-top: none;
 }
@@ -142,6 +147,15 @@ main h1#_top {
 
 .mobile-preferences {
   gap: 8px;
+  align-items: center;
+}
+
+.mobile-preferences prumo-idioma {
+  order: -1;
+}
+
+.mobile-preferences .social-icons {
+  order: 1;
 }
 
 .sidebar-content .selo-idioma {
@@ -457,6 +471,7 @@ html {
 }
 
 .mobile-preferences a[rel='me'] {
+  margin: 0;
   width: 44px;
   height: 44px;
   align-items: center;
