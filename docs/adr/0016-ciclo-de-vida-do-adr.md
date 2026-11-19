@@ -38,12 +38,11 @@ stateDiagram-v2
 O verificador no PR:
 
 ```mermaid
-flowchart LR
+flowchart TD
   PR["PR aberto"] --> C{"prumo adr conferir"}
-  C -->|"ADR Proposto indo pra main"| T["Trava"]
-  C -->|"arquivo alterado fora do modelo"| T
-  C -->|"arquivo antigo fora do modelo"| A["Aviso"]
-  C -->|"arquivos alterados"| L["Lista os ADRs que os governam"]
+  C -->|"erro"| T["Trava o PR<br/>ADR Proposto indo pra main,<br/>ou arquivo alterado fora do modelo"]
+  C -->|"alerta"| A["Aviso<br/>arquivo antigo fora do modelo"]
+  C -->|"sempre"| L["Lista os ADRs que governam<br/>os arquivos alterados"]
   A --> H{"Humano revisa"}
   L --> H
   H -->|"aprova"| M["Merge: Aceito ou Rejeitado"]
