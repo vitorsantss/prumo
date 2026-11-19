@@ -29,9 +29,9 @@ O que está errado? > saldo passa do limite com requisições simultâneas
 → volta pro PLAN com o comentário
 ```
 
-A causa e o comentário ficam gravados no `gates.jsonl` e no `etapa.json` da etapa (ADR-0007).
+A causa e o comentário ficam gravados no `gates.jsonl` e no `etapa.json` da etapa ([ADR-0007](0007-modelo-de-execucao.md)).
 
-Toda reprovação, em qualquer gate, grava a etapa onde o erro nasceu e a etapa onde foi achado. O custo da correção vem do registro de uso (ADR-0014). Com esses três campos, o Prumo consegue repetir a medição de Menzies e colegas[^menzies] nos próprios dados.
+Toda reprovação, em qualquer gate, grava a etapa onde o erro nasceu e a etapa onde foi achado. O custo da correção vem do registro de uso ([ADR-0014](0014-registro-de-uso-de-ia.md)). Com esses três campos, o Prumo consegue repetir a medição de Menzies e colegas[^menzies] nos próprios dados.
 
 Mais tarde, o próprio agente de review pode **sugerir** a causa, e a pessoa confirma ou troca. A decisão continua humana.
 

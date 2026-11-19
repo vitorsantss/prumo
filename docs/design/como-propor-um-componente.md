@@ -1,6 +1,6 @@
 # Como propor um componente
 
-Componente novo ou mudança visual só entra com a página do componente atualizada (ADR-0011). É o mesmo fluxo de [Como mudar o site](../como-mudar-o-site.md), com uma página a mais.
+Componente novo ou mudança visual só entra com a página do componente atualizada ([ADR-0011](../adr/0011-design-system-no-repositorio.md)). É o mesmo fluxo de [Como mudar o site](../como-mudar-o-site.md), com uma página a mais.
 
 ## Passo a passo
 1. **Abra uma issue** com o modelo "Mudança no site ou na documentação": o problema, a proposta e quem é afetado.
@@ -37,4 +37,4 @@ Pra que serve, em uma ou duas frases.
 O marcador `<!-- codigo:... -->` é trocado no build pelo trecho do arquivo, então o código mostrado é sempre o que roda.
 
 ## Implementação em outro framework
-Quer fazer a versão em React, Angular ou outro? Siga o molde, use os tokens gerados de `tokens.json` e acrescente uma linha em "Implementações" do componente com o caminho. Os trechos de código das páginas de componente são CC0; o resto do repositório é AGPL-3.0 (ADR-0004).
+Quer fazer a versão em React, Angular ou outro? Siga o molde, use os tokens gerados de `tokens.json` e acrescente uma linha em "Implementações" do componente com o caminho. Os trechos de código das páginas de componente são CC0; o resto do repositório é AGPL-3.0 ([ADR-0004](../adr/0004-licenca-agpl-3.md)).

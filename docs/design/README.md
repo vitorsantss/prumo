@@ -1,6 +1,6 @@
 # Design system
 
-As regras visuais do Prumo, num lugar só. Pessoas leem aqui; uma IA que clonar o repositório lê os mesmos arquivos em `docs/design/`. **Esta pasta é a fonte** (ADR-0011): mudanças entram por PR, como o resto da documentação, e o CSS do site é gerado a partir dela.
+As regras visuais do Prumo, num lugar só. Pessoas leem aqui; uma IA que clonar o repositório lê os mesmos arquivos em `docs/design/`. **Esta pasta é a fonte** ([ADR-0011](../adr/0011-design-system-no-repositorio.md)): mudanças entram por PR, como o resto da documentação, e o CSS do site é gerado a partir dela.
 
 ## Quatro partes
 | Parte | O que tem |

@@ -15,7 +15,7 @@ flowchart LR
 
 - **O estado do projeto mora no GitHub.** Decisão é ADR, tarefa é issue, conversa de review é comentário no PR. Nada importante fica preso numa ferramenta ou numa conversa.
 - **O [AGENTS.md](../../AGENTS.md) é o contrato.** Qualquer agente lê primeiro e segue as regras dele.
-- **Cada ferramenta é um adaptador fino.** Trocar de ferramenta não muda o processo, só o jeito de chegar nele. É a mesma ideia de portas e adaptadores que o Prumo usa no código (ADR-0005).
+- **Cada ferramenta é um adaptador fino.** Trocar de ferramenta não muda o processo, só o jeito de chegar nele. É a mesma ideia de portas e adaptadores que o Prumo usa no código ([ADR-0005](../adr/0005-integracoes-terceirizadas-caminho-nativo.md)).
 
 ## O dia a dia, em qualquer ferramenta
 

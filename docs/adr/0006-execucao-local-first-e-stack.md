@@ -7,7 +7,7 @@
 
 O Prumo executa agentes de IA, roda comandos, sobe ambientes e mexe em arquivos de um projeto. Isso exige uma máquina. Hoje essa máquina é o computador de quem usa; no futuro pode ser uma VPS ou runners sob demanda. Também queremos uma versão web e, quem sabe, mobile.
 
-Ao mesmo tempo, quem for contribuir precisa conseguir rodar o Prumo na própria máquina com pouco esforço e sem pagar nada (ADR-0005).
+Ao mesmo tempo, quem for contribuir precisa conseguir rodar o Prumo na própria máquina com pouco esforço e sem pagar nada ([ADR-0005](0005-integracoes-terceirizadas-caminho-nativo.md)).
 
 O mantenedor domina Java/Spring e React/TypeScript. O projeto vai ter partes com necessidades diferentes, então pode ter mais de uma linguagem.
 

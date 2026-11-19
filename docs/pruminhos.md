@@ -15,9 +15,9 @@ A ideia é que o Prumo vire um ecossistema: o projeto principal e, em volta dele
 ## Ciclo de vida
 1. **Ideia:** uma issue com a label `pruminho` e a pergunta.
 2. **Estudo:** fontes reunidas e comparadas na própria issue.
-3. **Experimento:** o pruminho roda no Prumo, num PR como qualquer outro. Se ele coleta dado de quem usa, antes vem um ADR (ADR-0012).
+3. **Experimento:** o pruminho roda no Prumo, num PR como qualquer outro. Se ele coleta dado de quem usa, antes vem um ADR ([ADR-0012](adr/0012-privacidade-e-coleta.md)).
 4. **Resultado:** os números e a conclusão entram na documentação.
-5. **Confiável** ou **arquivado.** Confiável é o pruminho testado em pelo menos dois projetos, com documentação completa e licença livre (ADR-0004). Arquivado é o que não funcionou: fica documentado o porquê.
+5. **Confiável** ou **arquivado.** Confiável é o pruminho testado em pelo menos dois projetos, com documentação completa e licença livre ([ADR-0004](adr/0004-licenca-agpl-3.md)). Arquivado é o que não funcionou: fica documentado o porquê.
 
 ## Como um pruminho vira parte do Prumo
 - **Gate:** uma verificação que uma etapa pode exigir. Ex.: o gate de qualidade web na etapa de teste.

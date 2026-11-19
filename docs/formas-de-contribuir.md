@@ -8,7 +8,7 @@ Contribuir aqui é estudar fluxos de IA na prática. O que você aprende serve p
 | Perguntar | Dúvida, sugestão ou discordância também é contribuição | [Conversas do repositório](https://github.com/vitorsantss/prumo/discussions) |
 | Traduzir | Revisar o inglês feito por IA ou traduzir páginas | [Tarefas de tradução](https://github.com/vitorsantss/prumo/issues?q=is%3Aopen+label%3Atraducao) |
 | Escrever documentação | Deixar mais claro o que já existe | [Tarefas de documentação](https://github.com/vitorsantss/prumo/issues?q=is%3Aopen+label%3Adocumentation) |
-| Desenhar | Telas, diagramas, o visual do projeto | Diagramas seguem o ADR-0009 |
+| Desenhar | Telas, diagramas, o visual do projeto | Diagramas seguem o [ADR-0009](adr/0009-diagramas.md) |
 | Programar | Tarefas pequenas, marcadas pra começar | [Tarefas pra começar](https://github.com/vitorsantss/prumo/issues?q=is%3Aopen+label%3A%22good+first+issue%22) |
 | Pesquisar | Tocar um pruminho: uma pergunta, as fontes, um teste no Prumo e o resultado | [Pruminhos](pruminhos.md) e as [frentes abertas](https://github.com/vitorsantss/prumo/issues?q=is%3Aopen+label%3Apruminho) |
 

@@ -38,7 +38,7 @@ Hipóteses, linha do tempo e textos da página inicial ficam em `site/src/data/l
    - prints nos temas claro e escuro, em celular, notebook e tela larga;
    - `cd site && npm run build` passando;
    - `npm run auditar` sem nota abaixo de 90 (ver abaixo).
-6. **Revisão e merge por squash**, como todo PR (ADR-0008).
+6. **Revisão e merge por squash**, como todo PR ([ADR-0008](adr/0008-merge-por-squash.md)).
 
 ## Testar no seu computador
 ```

@@ -30,11 +30,11 @@ Dentro de cada entrega, os PRs continuam pequenos: trabalhar em lotes pequenos p
 
 ## Issues
 
-- **Toda issue nova passa pela triagem humana** antes de alguém trabalhar nela, humano ou IA. Ela entra com `precisa-triagem` e sai com `triagem/aceita`, com `triagem/precisa-informacao` ou fechada. Se o risco for baixo, a triagem pode marcar também `pode-ser-automatica`, e aí uma IA abre o PR e um humano valida (ADR-0015).
+- **Toda issue nova passa pela triagem humana** antes de alguém trabalhar nela, humano ou IA. Ela entra com `precisa-triagem` e sai com `triagem/aceita`, com `triagem/precisa-informacao` ou fechada. Se o risco for baixo, a triagem pode marcar também `pode-ser-automatica`, e aí uma IA abre o PR e um humano valida ([ADR-0015](adr/0015-triagem-humana-contra-injecao-de-prompt.md)).
 - Cada checkpoint tem uma **issue-mãe** com as tarefas como **sub-issues**.
 - Quando uma tarefa depende de outra, ela fica marcada como **bloqueada por** (`is:blocked` mostra todas). Não comece uma tarefa bloqueada.
 - Toda tarefa diz **o que fazer** e **pronto quando**, com critérios verificáveis.
-- Labels de área (`area:*`) dizem de que parte do software a tarefa é; `caminho-nativo` marca a troca de algo pago ou proprietário por algo livre (ADR-0005).
+- Labels de área (`area:*`) dizem de que parte do software a tarefa é; `caminho-nativo` marca a troca de algo pago ou proprietário por algo livre ([ADR-0005](adr/0005-integracoes-terceirizadas-caminho-nativo.md)).
 
 ## Decisões (ADR)
 
@@ -44,12 +44,12 @@ Referência: Michael Nygard, *Documenting Architecture Decisions* (2011) · http
 
 ## Desenhos
 
-Diagramas são bem-vindos quando ajudam e opcionais sempre. Qualquer ferramenta vale se o desenho aparecer no GitHub e a fonte editável ficar no repositório (ADR-0009).
+Diagramas são bem-vindos quando ajudam e opcionais sempre. Qualquer ferramenta vale se o desenho aparecer no GitHub e a fonte editável ficar no repositório ([ADR-0009](adr/0009-diagramas.md)).
 
 ## Revisão
 
 - Nada entra na `main` sem PR e sem aprovação de um mantenedor.
-- No Review, quem reprova classifica a causa e diz pra onde a tarefa volta: regra de negócio → SPEC, implementação → PLAN, ajuste visual → fluxo curto (ADR-0002). Por enquanto, quem revisa é o mantenedor.
+- No Review, quem reprova classifica a causa e diz pra onde a tarefa volta: regra de negócio → SPEC, implementação → PLAN, ajuste visual → fluxo curto ([ADR-0002](adr/0002-review-volta-pela-causa.md)). Por enquanto, quem revisa é o mantenedor.
 - Todo PR diz se usou IA e qual. Quem envia responde por cada linha.
 - Cada PR sai direto da `main`. Evite empilhar PRs: depois do squash de um, o seguinte entra em conflito.
 

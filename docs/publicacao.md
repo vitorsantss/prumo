@@ -1,10 +1,10 @@
 # Como o site é publicado
 
-O site fica em **https://prumo-docs.pages.dev**, no Cloudflare Pages, no plano grátis. Cada merge na `main` publica uma versão nova sozinho. O Cloudflare é uma ponte: o ADR-0010 aponta o GitHub Pages como destino, e ele fica parado enquanto o GitHub Actions da conta não volta (#41). A volta está registrada em #61.
+O site fica em **https://prumo-docs.pages.dev**, no Cloudflare Pages, no plano grátis. Cada merge na `main` publica uma versão nova sozinho. O Cloudflare é uma ponte: o [ADR-0010](adr/0010-site-com-starlight.md) aponta o GitHub Pages como destino, e ele fica parado enquanto o GitHub Actions da conta não volta (#41). A volta está registrada em #61.
 
 ## O caminho de uma mudança até o site
 
-1. A mudança entra por PR, passa pela revisão e vira um commit na `main` (merge por squash, ADR-0008).
+1. A mudança entra por PR, passa pela revisão e vira um commit na `main` (merge por squash, [ADR-0008](adr/0008-merge-por-squash.md)).
 2. O Cloudflare percebe o push na `main`, copia o repositório e roda `npm run build` dentro de `site/`. Esse comando sincroniza `docs/`, gera as páginas e monta o índice da busca.
 3. Se o build passa, a pasta `dist/` vira a versão no ar. Se falha, nada é publicado e o log fica no painel do Cloudflare.
 
@@ -55,7 +55,7 @@ O endereço `prumo-docs.pages.dev` é grátis e já vem com HTTPS. Domínio pró
 
 ## Voltar pro GitHub Pages
 
-Vale avaliar a volta (#61) quando o Actions estiver funcionando e pelo menos um destes acontecer: o Cloudflare mudar as condições do plano grátis, a ponte começar a dar trabalho, ou o projeto quiser reduzir serviços de terceiros, como pede o ADR-0005.
+Vale avaliar a volta (#61) quando o Actions estiver funcionando e pelo menos um destes acontecer: o Cloudflare mudar as condições do plano grátis, a ponte começar a dar trabalho, ou o projeto quiser reduzir serviços de terceiros, como pede o [ADR-0005](adr/0005-integracoes-terceirizadas-caminho-nativo.md).
 
 | | Cloudflare Pages (hoje) | GitHub Pages |
 | --- | --- | --- |
@@ -71,7 +71,7 @@ Passos da migração:
 2. Em **Settings → Pages**, escolher **GitHub Actions** como origem.
 3. Não definir `PRUMO_SITE_URL` nem `PRUMO_SITE_BASE`: os valores padrão do `astro.config.mjs` já são `https://vitorsantss.github.io` e `/prumo`.
 4. Conferir o site novo nas três larguras (celular, notebook, tela larga), com busca e troca de idioma.
-5. Atualizar o endereço no README, no ADR-0010 e nesta página.
+5. Atualizar o endereço no README, no [ADR-0010](adr/0010-site-com-starlight.md) e nesta página.
 6. Apagar o projeto `prumo-docs` no Cloudflare e remover o app do Cloudflare das integrações do GitHub.
 
 [^previas]: Cloudflare, *Branch deployment controls* · https://developers.cloudflare.com/pages/configuration/branch-build-controls/

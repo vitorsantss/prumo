@@ -8,7 +8,9 @@
     "build": "npm run sincronizar && npm run tokens && astro build",
     "preview": "astro preview",
     "auditar": "node scripts/auditar.mjs",
-    "tokens": "node scripts/gerar-tokens.mjs"
+    "tokens": "node scripts/gerar-tokens.mjs",
+    "conferir": "node scripts/conferir-referencias.mjs",
+    "conferir:externos": "node scripts/conferir-referencias.mjs --externos"
   },
   "dependencies": {
     "@astrojs/starlight": "0.43.1",

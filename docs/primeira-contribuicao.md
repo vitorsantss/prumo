@@ -19,7 +19,7 @@ Antes de tudo, leia o [Comece aqui](comece-aqui.md). Depois:
    ```
 6. **Faça o commit** com uma mensagem em português dizendo o porquê. Se usou IA, pode creditar com uma linha `Co-Authored-By`.
 7. **Abra o PR** pro repositório original. Escreva `Closes #<número da tarefa>` na descrição (só as palavras em inglês fecham a tarefa sozinhas) e preencha o modelo, inclusive "Como foi feito".
-8. **Acompanhe a revisão.** Um mantenedor comenta no PR; ajuste no mesmo branch. Aprovado, o merge é por squash: o título do PR vira o commit (ADR-0008).
+8. **Acompanhe a revisão.** Um mantenedor comenta no PR; ajuste no mesmo branch. Aprovado, o merge é por squash: o título do PR vira o commit ([ADR-0008](adr/0008-merge-por-squash.md)).
 
 > **Nota.** Hoje os testes automáticos do repositório estão parados por uma pendência da conta. Até voltarem, quem revisa roda os testes à mão.
 

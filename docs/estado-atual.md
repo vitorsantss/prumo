@@ -4,7 +4,7 @@
 
 ## O que já existe
 
-Uma linha de comando em Go que leva uma tarefa de exemplo por duas etapas, especificação e entrega, com um portão no meio. Ela grava o que cada etapa leu e escreveu, o tempo, os tokens e as decisões do portão. Por padrão roda sem IA, com respostas simuladas, pra estudo (ADR-0006, ADR-0007).
+Uma linha de comando em Go que leva uma tarefa de exemplo por duas etapas, especificação e entrega, com um portão no meio. Ela grava o que cada etapa leu e escreveu, o tempo, os tokens e as decisões do portão. Por padrão roda sem IA, com respostas simuladas, pra estudo ([ADR-0006](adr/0006-execucao-local-first-e-stack.md), [ADR-0007](adr/0007-modelo-de-execucao.md)).
 
 ## O que ainda não existe
 
@@ -29,7 +29,7 @@ O primeiro caso de estudo vem de um desafio público, a [Rinha de Backend (ediç
 | Quando | Marco |
 | --- | --- |
 | 11/11/2026 | A ideia: um jeito pessoal de trabalhar com IA vira a hipótese das etapas com portões. |
-| 14/11/2026 | Nasce aberto: nome, licença livre (ADR-0004) e as primeiras decisões registradas. |
+| 14/11/2026 | Nasce aberto: nome, licença livre ([ADR-0004](adr/0004-licenca-agpl-3.md)) e as primeiras decisões registradas. |
 | 15/11/2026 | Primeiro esqueleto rodando, sem IA, pra estudo. |
 | agora | Fechando as decisões de base e documentando o processo. |
 | depois | Usar em tarefas reais, medir custo e qualidade e só então dizer se funciona. |

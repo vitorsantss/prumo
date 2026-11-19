@@ -67,7 +67,7 @@ Cada porta nova, quando for tratada, vira ADR próprio citando este como base. O
 - O tempo do mantenedor vai pra decisões curtas: aceitar na triagem e conferir na validação. Investigar e corrigir saem da mão dele nas issues de baixo risco.
 - A rotina só liga depois dos testes do site no CI ([#104](https://github.com/vitorsantss/prumo/issues/104)). Menos supervisão pede mais teste[^hleg]; sem eles, a validação vira carimbo.
 - Toda issue nova ganha um passo a mais (a triagem), mas é o passo que fecha a porta da injeção de prompt.
-- Cada correção feita por IA registra o uso de tokens (ADR-0014).
+- Cada correção feita por IA registra o uso de tokens ([ADR-0014](0014-registro-de-uso-de-ia.md)).
 - As quatro labels já existem no repositório. A aplicação automática de `precisa-triagem` e a rotina entram pela [#111](https://github.com/vitorsantss/prumo/issues/111).
 
 ## Fontes
