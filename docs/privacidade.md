@@ -11,6 +11,7 @@ O que o Prumo coleta de quem visita o site, hoje. A regra está no [ADR-0012](ad
 - Nome, e-mail ou qualquer dado que identifique você, inclusive usar o seu endereço IP pra te reconhecer.
 - Cookies de rastreamento ou identificador salvo no seu navegador.
 - Gravação da sua sessão, cliques ou o que você digita.
+- O seu IP, pelo Prumo. A empresa que hospeda o site (hoje a Cloudflare) recebe o IP pra entregar a página, como qualquer hospedagem, e trata esse dado conforme a política de privacidade dela.
 
 A busca do site roda no seu navegador: o que você procura não sai da página. As fontes também vêm do próprio site, então abrir uma página não manda o seu endereço IP pra nenhum serviço de fontes.
 
