@@ -7,26 +7,45 @@ import (
 	"errors"
 	"fmt"
 	"os/exec"
+	"sort"
 	"strings"
+	"time"
 )
 
+// ClaudeCode roda a etapa com o Claude Code em modo não interativo
+// (claude -p). É o adaptador terceirizado; o caminho livre é a issue #13.
 type ClaudeCode struct {
 	Comando string
 	Modelo  string
 }
 
+// respostaClaude lê só o que o Prumo usa. Identificadores de sessão e dados de
+// credencial ficam de fora de propósito: nunca são gravados.
 type respostaClaude struct {
 	Result       string  `json:"result"`
 	IsError      bool    `json:"is_error"`
 	TotalCostUSD float64 `json:"total_cost_usd"`
+	NumTurns     int     `json:"num_turns"`
+	DurationMS   int64   `json:"duration_ms"`
 	Usage        struct {
 		InputTokens              int `json:"input_tokens"`
 		OutputTokens             int `json:"output_tokens"`
 		CacheReadInputTokens     int `json:"cache_read_input_tokens"`
 		CacheCreationInputTokens int `json:"cache_creation_input_tokens"`
 	} `json:"usage"`
-	ModelUsage map[string]json.RawMessage `json:"modelUsage"`
+	ModelUsage map[string]usoModeloClaude `json:"modelUsage"`
 }
+
+type usoModeloClaude struct {
+	InputTokens              int     `json:"inputTokens"`
+	OutputTokens             int     `json:"outputTokens"`
+	CacheReadInputTokens     int     `json:"cacheReadInputTokens"`
+	CacheCreationInputTokens int     `json:"cacheCreationInputTokens"`
+	CostUSD                  float64 `json:"costUSD"`
+	CostBasis                string  `json:"costBasis"`
+}
+
+const provedorClaude = "anthropic"
 
 func (c ClaudeCode) Executar(ctx context.Context, p Pedido) (Resultado, error) {
 	comando := c.Comando
@@ -60,19 +79,44 @@ func interpretarRespostaClaude(bruto []byte) (Resultado, error) {
 	if r.IsError {
 		return Resultado{}, fmt.Errorf("claude devolveu erro: %s", r.Result)
 	}
-	uso := Uso{
-		Provedor:      "anthropic",
-		Modelo:        modeloPrincipal(r.ModelUsage),
-		TokensEntrada: r.Usage.InputTokens + r.Usage.CacheReadInputTokens + r.Usage.CacheCreationInputTokens,
-		TokensSaida:   r.Usage.OutputTokens,
-		CustoUSD:      r.TotalCostUSD,
-	}
-	return Resultado{Conteudo: r.Result, Uso: uso}, nil
+	return Resultado{
+		Conteudo:  r.Result,
+		Usos:      usosPorModelo(r),
+		Voltas:    r.NumTurns,
+		DuracaoIA: time.Duration(r.DurationMS) * time.Millisecond,
+	}, nil
 }
 
-func modeloPrincipal(uso map[string]json.RawMessage) string {
-	for modelo := range uso {
-		return modelo
+func usosPorModelo(r respostaClaude) []Uso {
+	if len(r.ModelUsage) == 0 {
+		u := r.Usage
+		return []Uso{{
+			Provedor:           provedorClaude,
+			TokensEntrada:      u.InputTokens + u.CacheReadInputTokens + u.CacheCreationInputTokens,
+			TokensLeituraCache: u.CacheReadInputTokens,
+			TokensCriacaoCache: u.CacheCreationInputTokens,
+			TokensSaida:        u.OutputTokens,
+			CustoUSD:           r.TotalCostUSD,
+		}}
 	}
-	return ""
+	modelos := make([]string, 0, len(r.ModelUsage))
+	for m := range r.ModelUsage {
+		modelos = append(modelos, m)
+	}
+	sort.Strings(modelos)
+	usos := make([]Uso, 0, len(modelos))
+	for _, m := range modelos {
+		u := r.ModelUsage[m]
+		usos = append(usos, Uso{
+			Provedor:           provedorClaude,
+			Modelo:             m,
+			TokensEntrada:      u.InputTokens + u.CacheReadInputTokens + u.CacheCreationInputTokens,
+			TokensLeituraCache: u.CacheReadInputTokens,
+			TokensCriacaoCache: u.CacheCreationInputTokens,
+			TokensSaida:        u.OutputTokens,
+			CustoUSD:           u.CostUSD,
+			BaseCusto:          u.CostBasis,
+		})
+	}
+	return usos
 }

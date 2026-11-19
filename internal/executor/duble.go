@@ -22,11 +22,12 @@ func (Duble) Executar(_ context.Context, p Pedido) (Resultado, error) {
 	prompt := montarPrompt(p)
 	return Resultado{
 		Conteudo: b.String(),
-		Uso: Uso{
+		Usos: []Uso{{
 			Provedor:      "duble",
 			Modelo:        "duble",
 			TokensEntrada: len(prompt) / 4,
 			TokensSaida:   b.Len() / 4,
-		},
+		}},
+		Voltas: 1,
 	}, nil
 }

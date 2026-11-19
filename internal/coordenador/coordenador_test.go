@@ -89,8 +89,11 @@ func TestFluxoComAjusteNoGate(t *testing.T) {
 		t.Fatal("tokens não registrados")
 	}
 
-	if n := contarLinhas(t, tf.Caminho("usage.jsonl")); n != 3 {
-		t.Fatalf("usage.jsonl com %d linhas, esperava 3", n)
+	if etapa.Atributos[rastro.AtributoVoltas].(float64) != 2 {
+		t.Fatalf("voltas das duas tentativas não somaram: %+v", etapa.Atributos)
+	}
+	if n := contarLinhas(t, tf.Caminho("usage.jsonl")); n != 2 {
+		t.Fatalf("usage.jsonl com %d linhas, esperava 2 (só as tentativas de IA)", n)
 	}
 	if n := contarLinhas(t, tf.Caminho("gates.jsonl")); n != 3 {
 		t.Fatalf("gates.jsonl com %d linhas, esperava 3", n)
@@ -112,6 +115,59 @@ func TestParaQuandoAsTentativasAcabam(t *testing.T) {
 	}
 	if _, err := os.Stat(tf.Caminho("tarefa.json")); err != nil {
 		t.Fatal("tarefa.json precisa existir mesmo com falha")
+	}
+}
+
+type doisModelos struct{}
+
+func (doisModelos) Executar(context.Context, executor.Pedido) (executor.Resultado, error) {
+	return executor.Resultado{
+		Conteudo: "# SPEC",
+		Usos: []executor.Uso{
+			{Provedor: "anthropic", Modelo: "modelo-a", TokensEntrada: 100, TokensLeituraCache: 80, TokensSaida: 10, CustoUSD: 0.1, BaseCusto: "list"},
+			{Provedor: "anthropic", Modelo: "modelo-b", TokensEntrada: 20, TokensSaida: 5, CustoUSD: 0.02, BaseCusto: "list"},
+		},
+		Voltas:    3,
+		DuracaoIA: 1500 * time.Millisecond,
+	}, nil
+}
+
+func TestDoisModelosViramDuasLinhasESomamNaEtapa(t *testing.T) {
+	p, tf := preparar(t)
+	c := Coordenador{IA: doisModelos{}, Modelo: executor.Modelo{}, Decisor: gate.Automatico{}, Saida: io.Discard}
+	if _, err := c.Executar(context.Background(), p, tf); err != nil {
+		t.Fatal(err)
+	}
+	if n := contarLinhas(t, tf.Caminho("usage.jsonl")); n != 2 {
+		t.Fatalf("usage.jsonl com %d linhas, esperava uma por modelo", n)
+	}
+
+	var etapa rastro.Etapa
+	conteudo, _ := os.ReadFile(filepath.Join(tf.PastaEtapa(1, "spec"), "etapa.json"))
+	if err := json.Unmarshal(conteudo, &etapa); err != nil {
+		t.Fatal(err)
+	}
+	a := etapa.Atributos
+	if a[rastro.AtributoTokensEntrada].(float64) != 120 || a[rastro.AtributoTokensLeituraCache].(float64) != 80 {
+		t.Fatalf("tokens da etapa não somaram os modelos: %+v", a)
+	}
+	if a[rastro.AtributoVoltas].(float64) != 3 || a[rastro.AtributoDuracaoIAMS].(float64) != 1500 || a[rastro.AtributoBaseCusto] != "list" {
+		t.Fatalf("voltas, duração ou base do custo erradas: %+v", a)
+	}
+	if _, ok := a[rastro.AtributoModelo]; ok {
+		t.Fatalf("com dois modelos não pode haver um modelo principal: %+v", a)
+	}
+	if modelos, _ := a[rastro.AtributoModelos].([]any); len(modelos) != 2 || modelos[0] != "modelo-a" {
+		t.Fatalf("lista de modelos errada: %+v", a[rastro.AtributoModelos])
+	}
+
+	var entrega rastro.Etapa
+	conteudo, _ = os.ReadFile(filepath.Join(tf.PastaEtapa(2, "entrega"), "etapa.json"))
+	if err := json.Unmarshal(conteudo, &entrega); err != nil {
+		t.Fatal(err)
+	}
+	if len(entrega.Atributos) != 0 {
+		t.Fatalf("etapa sem IA registrou uso: %+v", entrega.Atributos)
 	}
 }
 
