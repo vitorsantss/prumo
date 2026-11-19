@@ -7,6 +7,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"slices"
 	"time"
 
 	"github.com/vitorsantss/prumo/internal/executor"
@@ -107,9 +108,11 @@ func (c Coordenador) executarEtapa(ctx context.Context, ordem int, etapa pipelin
 		if err != nil {
 			return finalizar(statusErro, err)
 		}
-		registrarUso(r.Atributos, res.Uso)
-		if err := c.registrarUsoNaTarefa(t, etapa, tentativa, res.Uso); err != nil {
-			return finalizar(statusErro, err)
+		registrarUso(r.Atributos, res)
+		for _, u := range res.Usos {
+			if err := c.registrarUsoNaTarefa(t, etapa, tentativa, u); err != nil {
+				return finalizar(statusErro, err)
+			}
 		}
 		caminhoSaida := t.Caminho(etapa.Saida)
 		if err := os.WriteFile(caminhoSaida, []byte(res.Conteudo), 0o644); err != nil {
@@ -143,16 +146,22 @@ func (c Coordenador) executarEtapa(ctx context.Context, ordem int, etapa pipelin
 }
 
 func (c Coordenador) registrarUsoNaTarefa(t tarefa.Tarefa, etapa pipeline.Etapa, tentativa int, u executor.Uso) error {
-	return rastro.AcrescentarLinha(t.Caminho("usage.jsonl"), map[string]any{
-		"em":                         c.agora(),
-		"etapa":                      etapa.ID,
-		"tentativa":                  tentativa,
-		rastro.AtributoProvedor:      u.Provedor,
-		rastro.AtributoModelo:        u.Modelo,
-		rastro.AtributoTokensEntrada: u.TokensEntrada,
-		rastro.AtributoTokensSaida:   u.TokensSaida,
-		rastro.AtributoCustoUSD:      u.CustoUSD,
-	})
+	linha := map[string]any{
+		"em":                              c.agora(),
+		"etapa":                           etapa.ID,
+		"tentativa":                       tentativa,
+		rastro.AtributoProvedor:           u.Provedor,
+		rastro.AtributoModelo:             u.Modelo,
+		rastro.AtributoTokensEntrada:      u.TokensEntrada,
+		rastro.AtributoTokensLeituraCache: u.TokensLeituraCache,
+		rastro.AtributoTokensCriacaoCache: u.TokensCriacaoCache,
+		rastro.AtributoTokensSaida:        u.TokensSaida,
+		rastro.AtributoCustoUSD:           u.CustoUSD,
+	}
+	if u.BaseCusto != "" {
+		linha[rastro.AtributoBaseCusto] = u.BaseCusto
+	}
+	return rastro.AcrescentarLinha(t.Caminho("usage.jsonl"), linha)
 }
 
 func lerEntradas(etapa pipeline.Etapa, t tarefa.Tarefa) ([]executor.Entrada, []rastro.Arquivo, error) {
@@ -174,12 +183,51 @@ func lerEntradas(etapa pipeline.Etapa, t tarefa.Tarefa) ([]executor.Entrada, []r
 	return entradas, lidos, nil
 }
 
-func registrarUso(atributos map[string]any, u executor.Uso) {
-	atributos[rastro.AtributoProvedor] = u.Provedor
-	atributos[rastro.AtributoModelo] = u.Modelo
-	atributos[rastro.AtributoTokensEntrada] = inteiro(atributos[rastro.AtributoTokensEntrada]) + u.TokensEntrada
-	atributos[rastro.AtributoTokensSaida] = inteiro(atributos[rastro.AtributoTokensSaida]) + u.TokensSaida
-	atributos[rastro.AtributoCustoUSD] = decimal(atributos[rastro.AtributoCustoUSD]) + u.CustoUSD
+func registrarUso(atributos map[string]any, res executor.Resultado) {
+	for _, u := range res.Usos {
+		atributos[rastro.AtributoProvedor] = u.Provedor
+		somar(atributos, rastro.AtributoTokensEntrada, u.TokensEntrada)
+		somar(atributos, rastro.AtributoTokensLeituraCache, u.TokensLeituraCache)
+		somar(atributos, rastro.AtributoTokensCriacaoCache, u.TokensCriacaoCache)
+		somar(atributos, rastro.AtributoTokensSaida, u.TokensSaida)
+		atributos[rastro.AtributoCustoUSD] = decimal(atributos[rastro.AtributoCustoUSD]) + u.CustoUSD
+		if u.BaseCusto != "" {
+			atributos[rastro.AtributoBaseCusto] = u.BaseCusto
+		}
+		incluirModelo(atributos, u.Modelo)
+	}
+	if res.Voltas > 0 {
+		somar(atributos, rastro.AtributoVoltas, res.Voltas)
+	}
+	if res.DuracaoIA > 0 {
+		somar(atributos, rastro.AtributoDuracaoIAMS, int(res.DuracaoIA.Milliseconds()))
+	}
+}
+
+func somar(atributos map[string]any, chave string, valor int) {
+	atributos[chave] = inteiro(atributos[chave]) + valor
+}
+
+func incluirModelo(atributos map[string]any, modelo string) {
+	if modelo == "" {
+		return
+	}
+	modelos, _ := atributos[rastro.AtributoModelos].([]string)
+	if unico, ok := atributos[rastro.AtributoModelo].(string); ok {
+		modelos = []string{unico}
+	}
+	if slices.Contains(modelos, modelo) {
+		return
+	}
+	modelos = append(modelos, modelo)
+	slices.Sort(modelos)
+	if len(modelos) == 1 {
+		atributos[rastro.AtributoModelo] = modelos[0]
+		delete(atributos, rastro.AtributoModelos)
+		return
+	}
+	delete(atributos, rastro.AtributoModelo)
+	atributos[rastro.AtributoModelos] = modelos
 }
 
 func (c Coordenador) agora() time.Time {
