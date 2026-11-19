@@ -3,7 +3,7 @@
 Cada regra de pesquisa e de trabalho do [AGENTS.md](../AGENTS.md) nasceu de um erro real no próprio Prumo. Aqui fica a história de cada uma: o que aconteceu, o que mudou e onde conferir. Número de issue ou PR aparece como atalho pro GitHub; a prova é o que está neste repositório.
 
 ## Fonte antes da tese
-- **O que aconteceu:** na discussão do ADR-0014, a IA propôs "registrar o uso por sessão" como decisão, sem referência. A fonte só apareceu depois que o mantenedor cobrou.
+- **O que aconteceu:** na discussão do [ADR-0014](adr/0014-registro-de-uso-de-ia.md), a IA propôs "registrar o uso por sessão" como decisão, sem referência. A fonte só apareceu depois que o mantenedor cobrou.
 - **O que mudou:** a decisão ganhou fontes de modelagem dimensional e de event sourcing, e a regra entrou no AGENTS.md.
 - **Onde conferir:** notas de rodapé do [ADR-0014](adr/0014-registro-de-uso-de-ia.md).
 

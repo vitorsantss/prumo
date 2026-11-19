@@ -61,4 +61,4 @@ Nada disso guarda estado do projeto: se fechar o Maestri, o GitHub continua com 
 ## Cuidados
 
 - O agente tem acesso ao seu terminal e ao seu navegador logado. Leia o que ele pede antes de aprovar, principalmente comandos que apagam coisas ou ações em sites.
-- Segredos e dados pessoais nunca entram no contexto (ADR-0003).
+- Segredos e dados pessoais nunca entram no contexto ([ADR-0003](../adr/0003-dado-sensivel-fora-da-ia.md)).

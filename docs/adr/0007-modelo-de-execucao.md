@@ -7,7 +7,7 @@
 
 O desenho do mantenedor (15/11) propôs: um **workspace** por projeto, numa máquina; um **contexto de arquivos compartilhado**; cada **etapa** rodando num terminal limpo, sem herdar contexto, como um runner; e **entrada e saída de arquivos** por etapa e por tarefa, pra saber o que cada etapa leu, criou, quanto tempo levou e quanto consumiu.
 
-Restrições: guardar tudo pesa; o repositório de quem usa não pode virar depósito de rastro; e o modelo precisa funcionar hoje no computador da pessoa e amanhã numa VPS ou em runners (ADR-0006).
+Restrições: guardar tudo pesa; o repositório de quem usa não pode virar depósito de rastro; e o modelo precisa funcionar hoje no computador da pessoa e amanhã numa VPS ou em runners ([ADR-0006](0006-execucao-local-first-e-stack.md)).
 
 ## Decisão
 
@@ -42,7 +42,7 @@ Restrições: guardar tudo pesa; o repositório de quem usa não pode virar dep�
 - O armazenamento cresce devagar: referências em vez de cópias, e logs com prazo.
 - Uma etapa com entradas e saídas declaradas pode, no futuro, rodar em outra máquina (runner) sem mudar o modelo: é o que torna as fases 2 e 3 da infraestrutura possíveis.
 - O núcleo em Go separa desde já, por interface, o **coordenador** (decide o que roda, guarda o estado) do **executor de etapa** (roda uma etapa e devolve o `etapa.json`). No C1 os dois ficam no mesmo processo.
-- Atualiza o ADR-0001: os arquivos continuam sendo a fonte da verdade, mas ficam na pasta de dados do Prumo, legíveis e não versionados.
+- Atualiza o [ADR-0001](0001-arquivos-como-fonte-da-verdade.md): os arquivos continuam sendo a fonte da verdade, mas ficam na pasta de dados do Prumo, legíveis e não versionados.
 - O gate de review, num workspace com vários repositórios, precisa mostrar o diff somando todos eles. O suporte a vários repositórios vem depois do C2.
 - As convenções GenAI do OpenTelemetry ainda estão em desenvolvimento; nomes podem mudar e o rastro precisa acompanhar.
 

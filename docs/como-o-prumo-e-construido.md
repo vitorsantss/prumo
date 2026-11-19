@@ -32,7 +32,7 @@ flowchart LR
 1. **A conversa anda por perguntas.** A IA pergunta, o mantenedor responde, e a IA transforma as respostas em ADR ou issue. Ideia que aparece no meio vira issue com a label `ideia`, pra não desviar o checkpoint (ver [processo](processo.md)).
 2. **Rascunho é livre, registro é no GitHub.** Ideias podem nascer em qualquer caderno ou quadro, de qualquer pessoa. O mantenedor usa um quadro visual privado como caderno. Mas só existe pro projeto o que vira issue, ADR ou PR aqui.
 3. **Decisão tem fonte.** Toda escolha relevante cita a literatura ou a documentação oficial que a sustenta, pra ninguém depender só da palavra da IA.
-4. **Review é no PR.** O mantenedor comenta nas linhas; a IA corrige no mesmo PR e a conversa fica registrada. Exemplo: o suporte a workspaces com vários repositórios entrou no ADR-0007 a partir de um comentário de review.
+4. **Review é no PR.** O mantenedor comenta nas linhas; a IA corrige no mesmo PR e a conversa fica registrada. Exemplo: o suporte a workspaces com vários repositórios entrou no [ADR-0007](adr/0007-modelo-de-execucao.md) a partir de um comentário de review.
 5. **Teste em ambiente real.** A IA de conversa roda os testes no ambiente dela (Linux), e a IA na máquina do mantenedor roda no Windows. Foi assim que apareceram dois problemas que só existiam no Windows: testes com caminhos de Linux e a marca BOM que o PowerShell 5.1 põe na entrada por pipe.
 
 ## Passar trabalho entre as IAs

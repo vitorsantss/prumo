@@ -4,7 +4,7 @@
 - **Data:** 2026-11-15
 
 ## Contexto
-Desenhar ajuda a decidir e a explicar: o próprio modelo de execução (ADR-0007) nasceu de um desenho. O mantenedor usa Excalidraw, com e sem IA, mas quem contribui pode usar outra ferramenta, ou preferir não desenhar. Impor uma ferramenta exclui pessoas; não ter regra nenhuma gera imagens soltas que ninguém consegue editar depois.
+Desenhar ajuda a decidir e a explicar: o próprio modelo de execução ([ADR-0007](0007-modelo-de-execucao.md)) nasceu de um desenho. O mantenedor usa Excalidraw, com e sem IA, mas quem contribui pode usar outra ferramenta, ou preferir não desenhar. Impor uma ferramenta exclui pessoas; não ter regra nenhuma gera imagens soltas que ninguém consegue editar depois.
 
 ## Decisão
 1. **Diagrama é opcional.** Entra quando o texto sozinho não explica bem: em ADR, issue, PR ou qualquer documento.

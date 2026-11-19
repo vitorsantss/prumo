@@ -38,7 +38,7 @@ Hypotheses, the timeline and the home page texts live in `site/src/data/landing.
    - an ADR, if a new dependency or pattern came in;
    - screenshots in light and dark themes, on phone, laptop and wide screen;
    - `cd site && npm run build` passing.
-6. **Review and squash merge**, like every PR (ADR-0008).
+6. **Review and squash merge**, like every PR ([ADR-0008](../adr/0008-merge-por-squash.md)).
 
 ## Test on your computer
 

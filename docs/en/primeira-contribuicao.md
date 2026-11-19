@@ -21,7 +21,7 @@ First, read [Start here](comece-aqui.md). Then:
    ```
 6. **Commit** with a message saying why. The project writes commits in Portuguese, but English is fine for a first contribution. If you used AI, you can credit it with a `Co-Authored-By` line.
 7. **Open the PR** to the original repository. Write `Closes #<task number>` in the description and fill in the template, including "how it was made".
-8. **Follow the review.** A maintainer comments on the PR; adjust it on the same branch. Once approved, it is squash-merged: the PR title becomes the commit (ADR-0008).
+8. **Follow the review.** A maintainer comments on the PR; adjust it on the same branch. Once approved, it is squash-merged: the PR title becomes the commit ([ADR-0008](../adr/0008-merge-por-squash.md)).
 
 > **Note.** The repository's automated tests are currently paused because of an account issue. Until they are back, reviewers run the tests by hand.
 

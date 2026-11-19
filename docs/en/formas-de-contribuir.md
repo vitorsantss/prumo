@@ -10,7 +10,7 @@ Contributing here means studying AI workflows in practice. What you learn serves
 | Ask | Questions, suggestions and disagreement count too | [Repository discussions](https://github.com/vitorsantss/prumo/discussions) |
 | Translate | Review the AI-made English or translate pages | [Translation tasks](https://github.com/vitorsantss/prumo/issues?q=is%3Aopen+label%3Atraducao) |
 | Write docs | Make what exists clearer | [Documentation tasks](https://github.com/vitorsantss/prumo/issues?q=is%3Aopen+label%3Adocumentation) |
-| Design | Screens, diagrams, the project's look | Diagrams follow ADR-0009 |
+| Design | Screens, diagrams, the project's look | Diagrams follow [ADR-0009](../adr/0009-diagramas.md) |
 | Code | Small tasks marked for newcomers | [Good first issues](https://github.com/vitorsantss/prumo/issues?q=is%3Aopen+label%3A%22good+first+issue%22) |
 
 Ready to send your first one? Follow the [first contribution guide](primeira-contribuicao.md). With or without AI, everything counts, as long as you understand and can explain what you sent.

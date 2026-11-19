@@ -16,7 +16,7 @@ Each task goes through **stages**, and each stage delivers **one file** that the
 | SPEC | `research.md` | `spec.md` | what needs to be done, with verifiable acceptance criteria |
 | PLAN | `spec.md` | `plan.md` | how to do it, file by file |
 | Code | `plan.md` | the diff | the implementation, in a copy of the repository just for the task |
-| Review | the diff | the decision | rejected? back to the stage where the error was born (ADR-0002) |
+| Review | the diff | the decision | rejected? back to the stage where the error was born ([ADR-0002](../adr/0002-review-volta-pela-causa.md)) |
 
 ### Why start with Research
 
@@ -24,7 +24,7 @@ Research comes from the way Prumo's maintainer works: before writing code, under
 
 ## The gate
 
-The AI does the work; the gate is human. The three possible decisions (approve, ask for changes, redo) are recorded in the stage trace, along with what it read, wrote, spent and how long it took (ADR-0007).
+The AI does the work; the gate is human. The three possible decisions (approve, ask for changes, redo) are recorded in the stage trace, along with what it read, wrote, spent and how long it took ([ADR-0007](../adr/0007-modelo-de-execucao.md)).
 
 ## A pattern that adapts to you
 

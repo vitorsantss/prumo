@@ -14,7 +14,7 @@ Cada tarefa percorre **etapas**, e cada etapa entrega **um arquivo** que a próx
 | SPEC | `research.md` | `spec.md` | o que precisa ser feito, com critérios de aceite verificáveis |
 | PLAN | `spec.md` | `plan.md` | como fazer, arquivo por arquivo |
 | Código | `plan.md` | o diff | a implementação, numa cópia do repositório só da tarefa |
-| Review | o diff | a decisão | reprovou? volta pra etapa onde o erro nasceu (ADR-0002) |
+| Review | o diff | a decisão | reprovou? volta pra etapa onde o erro nasceu ([ADR-0002](adr/0002-review-volta-pela-causa.md)) |
 
 ### Por que começar pelo Research
 
@@ -22,7 +22,7 @@ O Research nasceu do jeito de trabalhar de quem mantém o Prumo: antes de escrev
 
 ## O portão
 
-A IA faz o trabalho; o portão é humano. As três decisões possíveis (aprovar, pedir ajuste, refazer) ficam registradas no rastro da etapa, junto com o que ela leu, escreveu, gastou e quanto tempo levou (ADR-0007).
+A IA faz o trabalho; o portão é humano. As três decisões possíveis (aprovar, pedir ajuste, refazer) ficam registradas no rastro da etapa, junto com o que ela leu, escreveu, gastou e quanto tempo levou ([ADR-0007](adr/0007-modelo-de-execucao.md)).
 
 ## Um padrão que se adapta a você
 

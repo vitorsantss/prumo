@@ -6,7 +6,7 @@
 ## Contexto
 O Prumo é uma pesquisa sobre construir software com IA com qualidade, e uma das perguntas é quanto isso custa: em tokens, por modelo, por ferramenta e por tarefa. A outra é se o Prumo gasta menos que os outros jeitos de trabalhar conforme cresce (#40). Sem registro, essa comparação não existe.
 
-Já temos uma parte. Dentro do pipeline do Prumo, o `usage.jsonl` grava uma linha por chamada de IA (ADR-0001), com os nomes das convenções GenAI do OpenTelemetry (ADR-0007). Mas o próprio Prumo é construído fora do pipeline, em conversas com ferramentas como Claude Code, claude.ai, Orca ou Maestri. Esse gasto não é registrado em lugar nenhum.
+Já temos uma parte. Dentro do pipeline do Prumo, o `usage.jsonl` grava uma linha por chamada de IA ([ADR-0001](0001-arquivos-como-fonte-da-verdade.md)), com os nomes das convenções GenAI do OpenTelemetry ([ADR-0007](0007-modelo-de-execucao.md)). Mas o próprio Prumo é construído fora do pipeline, em conversas com ferramentas como Claude Code, claude.ai, Orca ou Maestri. Esse gasto não é registrado em lugar nenhum.
 
 O que a pesquisa feita pra este ADR encontrou (fontes nas notas de rodapé):
 - **A ferramenta mede por sessão, não por tarefa.** O Claude Code anexa `session.id` a todas as métricas que exporta[^cc-otel], e o uso que o app do Claude mostra também é da conversa inteira. Uma sessão costuma tocar vários PRs, e um PR pode levar várias sessões.
@@ -82,7 +82,7 @@ O que a pesquisa feita pra este ADR encontrou (fontes nas notas de rodapé):
 
 10. **Custo com data, e assinatura com custo marginal zero.** Custo convertido leva a tarifa e a data em que ela foi conferida, porque a tarifa muda e um número antigo não se compara com um atual[^akita-preco]. Em plano de assinatura, o custo marginal é 0, com o equivalente em API ao lado, como no benchmark do Akita[^akita-metodo].
 
-11. **Nada de conteúdo.** Só números, nomes de ferramenta e modelo, e referências a tarefas. Nenhum trecho de conversa, prompt, link de sessão ou dado pessoal (ADR-0003, ADR-0012).
+11. **Nada de conteúdo.** Só números, nomes de ferramenta e modelo, e referências a tarefas. Nenhum trecho de conversa, prompt, link de sessão ou dado pessoal ([ADR-0003](0003-dado-sensivel-fora-da-ia.md), [ADR-0012](0012-privacidade-e-coleta.md)).
 
 ## Consequências
 - O custo por tarefa passa a ser um dado de pesquisa com prova de origem, e a comparação entre modelos e ferramentas fica possível (#40).

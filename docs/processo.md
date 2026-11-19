@@ -30,11 +30,11 @@ Dentro de cada entrega, os PRs continuam pequenos: trabalhar em lotes pequenos p
 
 ## Issues
 
-- **Toda issue nova passa pela triagem humana** antes de alguém trabalhar nela, humano ou IA. Ela entra com `precisa-triagem` e sai com `triagem/aceita`, com `triagem/precisa-informacao` ou fechada. Se o risco for baixo, a triagem pode marcar também `pode-ser-automatica`, e aí uma IA abre o PR e um humano valida (ADR-0015).
+- **Toda issue nova passa pela triagem humana** antes de alguém trabalhar nela, humano ou IA. Ela entra com `precisa-triagem` e sai com `triagem/aceita`, com `triagem/precisa-informacao` ou fechada. Se o risco for baixo, a triagem pode marcar também `pode-ser-automatica`, e aí uma IA abre o PR e um humano valida ([ADR-0015](adr/0015-triagem-humana-contra-injecao-de-prompt.md)).
 - Cada checkpoint tem uma **issue-mãe** com as tarefas como **sub-issues**.
 - Quando uma tarefa depende de outra, ela fica marcada como **bloqueada por** (`is:blocked` mostra todas). Não comece uma tarefa bloqueada.
 - Toda tarefa diz **o que fazer** e **pronto quando**, com critérios verificáveis.
-- Labels de área (`area:*`) dizem de que parte do software a tarefa é; `caminho-nativo` marca a troca de algo pago ou proprietário por algo livre (ADR-0005).
+- Labels de área (`area:*`) dizem de que parte do software a tarefa é; `caminho-nativo` marca a troca de algo pago ou proprietário por algo livre ([ADR-0005](adr/0005-integracoes-terceirizadas-caminho-nativo.md)).
 
 ## Decisões (ADR)
 
@@ -44,14 +44,34 @@ Referência: Michael Nygard, *Documenting Architecture Decisions* (2011) · http
 
 ## Desenhos
 
-Diagramas são bem-vindos quando ajudam e opcionais sempre. Qualquer ferramenta vale se o desenho aparecer no GitHub e a fonte editável ficar no repositório (ADR-0009).
+Diagramas são bem-vindos quando ajudam e opcionais sempre. Qualquer ferramenta vale se o desenho aparecer no GitHub e a fonte editável ficar no repositório ([ADR-0009](adr/0009-diagramas.md)).
 
 ## Revisão
 
 - Nada entra na `main` sem PR e sem aprovação de um mantenedor.
-- No Review, quem reprova classifica a causa e diz pra onde a tarefa volta: regra de negócio → SPEC, implementação → PLAN, ajuste visual → fluxo curto (ADR-0002). Por enquanto, quem revisa é o mantenedor.
+- No Review, quem reprova classifica a causa e diz pra onde a tarefa volta: regra de negócio → SPEC, implementação → PLAN, ajuste visual → fluxo curto ([ADR-0002](adr/0002-review-volta-pela-causa.md)). Por enquanto, quem revisa é o mantenedor.
 - Todo PR diz se usou IA e qual. Quem envia responde por cada linha.
 - Cada PR sai direto da `main`. Evite empilhar PRs: depois do squash de um, o seguinte entra em conflito.
+
+## Verificações automáticas
+
+Antes da revisão humana, todo PR passa por verificações que rodam sozinhas. Elas existem porque erro de citação passava na leitura: o mesmo tipo de erro apareceu quatro vezes no C0 ([origem das regras](origem-das-regras.md#origem-aponta-pra-evidência-que-mora-no-repositório)).
+
+| Verificação | O que olha | Efeito |
+| --- | --- | --- |
+| Testes do núcleo | `gofmt`, `go vet` e `go test` em Linux, Windows e macOS | Trava o PR |
+| Referências da documentação | `ADR-0000` sem link, nota de rodapé citada e não definida (ou o contrário), link interno quebrado em `docs/` e no `AGENTS.md` | Trava o PR |
+| Números de issue | `#123` sem link | Só avisa, até o padrão de citação ([#121](https://github.com/vitorsantss/prumo/issues/121)) |
+| Links externos | Se os links de fora ainda abrem | Roda toda segunda e sob demanda, sem travar PR, porque site de terceiro fora do ar não é erro do PR |
+
+Pra rodar antes de abrir o PR:
+
+```sh
+node site/scripts/conferir-referencias.mjs             # referências
+node site/scripts/conferir-referencias.mjs --externos  # também abre os links de fora
+```
+
+**O comando é do Prumo; só o gatilho é do GitHub.** Os arquivos em `.github/workflows/` dizem quando rodar. Numa troca de forja (GitLab, Forgejo), muda o gatilho e o comando continua o mesmo.
 
 ## Onde as coisas moram
 

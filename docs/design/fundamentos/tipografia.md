@@ -8,7 +8,7 @@ Três famílias, cada uma com um papel:
 | Inter | `--p-fonte-texto` | Texto e interface. |
 | JetBrains Mono | `--p-fonte-mono` | Código, tokens, teclas. |
 
-As três são servidas pelo próprio site (`site/src/fontes/`), sob a licença SIL Open Font License 1.1. Nada de Google Fonts: carregar de lá manda o IP de quem lê pro Google, o que fere o ADR-0012[^lg-munique], e cria uma conexão a mais antes do texto aparecer. Só o subconjunto latino e só os pesos usados: Inter 400, 500, 600 e 700, Mono 400 e Architects 400.
+As três são servidas pelo próprio site (`site/src/fontes/`), sob a licença SIL Open Font License 1.1. Nada de Google Fonts: carregar de lá manda o IP de quem lê pro Google, o que fere o [ADR-0012](../../adr/0012-privacidade-e-coleta.md)[^lg-munique], e cria uma conexão a mais antes do texto aparecer. Só o subconjunto latino e só os pesos usados: Inter 400, 500, 600 e 700, Mono 400 e Architects 400.
 
 Pra não piscar:
 - **as fontes da primeira tela (Inter 400 e 600, Architects) são pré-carregadas** no `<head>` (`site/src/fontes/primeira-tela.ts`);

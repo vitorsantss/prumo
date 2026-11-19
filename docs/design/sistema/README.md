@@ -1,6 +1,6 @@
 # Prumo · design system
 
-> Versão anterior, vinda do canvas do claude.ai. A fonte agora é [`docs/design/`](../README.md) (ADR-0011); estes componentes do app migram pro molde na próxima entrega (#65).
+> Versão anterior, vinda do canvas do claude.ai. A fonte agora é [`docs/design/`](../README.md) ([ADR-0011](../../adr/0011-design-system-no-repositorio.md)); estes componentes do app migram pro molde na próxima entrega (#65).
 
 Prumo é o fio com peso que o pedreiro usa pra ver se a parede está reta; no Nordeste, "tomar prumo" é entrar nos eixos. O sistema faz isso com o trabalho: cada tarefa passa pelas etapas no rumo certo. Canvas pessoal de fluxo de trabalho com IA: Jira → Research → SPEC → PLAN → Código → Review → Entrega.
 
