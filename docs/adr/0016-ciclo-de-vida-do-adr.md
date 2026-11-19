@@ -21,18 +21,25 @@ O que o mercado faz:
 3. **Aceito não muda de decisão.** Revalidação que só corrige fonte, link ou redação edita o Aceito no lugar. Revalidação que muda a decisão gera um ADR novo; o antigo passa a "Substituído por ADR-NNNN", e só o status e o link mudam nele. Decisão que deixou de valer sem substituta passa a Obsoleto.
 4. **Rigoroso no que muda, tolerante com o passado.** As regras valem à risca pros arquivos que o PR altera. Arquivo antigo que o PR não toca só gera aviso. Assim nada novo nasce errado, e o passado se ajusta quando alguém mexe nele. É decisão do projeto, sem fonte de mercado.
 5. **Cada ADR declara o que governa** num campo `Afeta` (caminhos do repositório ou temas). O verificador lista no PR os ADRs que governam os arquivos alterados, pra quem revisa conferir se o PR contradiz algum.
-6. **O verificador é do núcleo, por modelo.** A máquina de estados e as regras são regra de negócio e moram no núcleo em Go ([ADR-0006](0006-execucao-local-first-e-stack.md)), num comando como `prumo adr conferir`. As regras do modelo do ADR ficam num arquivo separado do motor. A forja (hoje o GitHub) só dispara o comando.
+6. **O verificador e os comandos são do núcleo.** A máquina de estados e as regras são regra de negócio e moram no núcleo em Go ([ADR-0006](0006-execucao-local-first-e-stack.md)). As regras do modelo do ADR ficam num arquivo separado do motor. Há dois tipos de comando:
+   - **os que conferem** só leem e respondem se passa ou trava. A forja (hoje o GitHub) dispara esses em todo PR. Exemplo: `prumo adr conferir`;
+   - **os que mudam estado** (aceitar, rejeitar, substituir, tornar obsoleto) editam os arquivos do ADR e rodam pela mão de quem decide, na branch, antes do merge. A forja nunca dispara esses e nunca escreve na `main`.
+
+   Os nomes, as opções e a saída de cada comando são definidos na SPEC do verificador.
 7. **Começa pelo ADR.** SPEC e PLAN também são artefatos de etapa com modelo, mas o validador genérico só nasce quando o segundo modelo existir. Construir antes é funcionalidade presumida: custa construir e atrasa o que importa agora[^yagni].
 
 ```mermaid
 stateDiagram-v2
   [*] --> Proposto: PR aberto
-  Proposto --> Aceito: merge humano
-  Proposto --> Rejeitado: merge humano, com o porquê
+  Proposto --> Aceito: aceitar, depois merge
+  Proposto --> Rejeitado: rejeitar com o porquê, depois merge
   Proposto --> [*]: PR fechado sem merge
-  Aceito --> Aceito: correção de fonte, link ou redação
-  Aceito --> Substituído: ADR novo aceito muda a decisão
-  Aceito --> Obsoleto: deixou de valer, sem substituto
+  Aceito --> Substituído: substituir por ADR novo
+  Aceito --> Obsoleto: tornar obsoleto, com o porquê
+  note left of Aceito
+    Corrigir fonte, link ou redação
+    edita no lugar e não muda o status
+  end note
 ```
 
 O verificador no PR:
@@ -50,9 +57,10 @@ flowchart TD
 
 ## Consequências
 - O que está na `main` é decisão tomada. Pra ver o que está em discussão, olhe os PRs abertos.
-- O [ADR-0014](0014-registro-de-uso-de-ia.md), hoje Proposto na `main`, passa a gerar aviso até ser decidido num PR (Aceito, Rejeitado ou retirado).
+- O [ADR-0014](0014-registro-de-uso-de-ia.md), hoje Proposto na `main`, é revisado num PR próprio logo depois deste.
 - Onde moram a SPEC e o PLAN de uma tarefa do próprio Prumo, e como a pasta se chama, viram o próximo ADR; se ele mudar o [ADR-0001](0001-arquivos-como-fonte-da-verdade.md), o 0001 passa a Substituído.
 - O modelo de ADR (`0000-modelo.md`) e a explicação da pasta ganham os status novos e o campo `Afeta` no mesmo PR que implementar o verificador.
+- Cada comando ganha página de referência em `docs/` no mesmo PR que o implementa, e a ajuda do próprio comando diz o mesmo que a página. Comando sem documentação não entra. Se o verificador de referências confere isso automaticamente, é decisão do PLAN.
 - O verificador de referências do site ([processo](../processo.md)) continua cuidando de links e notas; o de ADR cuida de estrutura e status. Se um absorver o outro, é decisão do PLAN.
 
 ## Fontes
