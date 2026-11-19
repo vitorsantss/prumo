@@ -2,7 +2,6 @@
 
 - **Status:** Aceito
 - **Data:** 2026-11-16
-- **Afeta:** `pesquisa/uso-de-ia/` e o `usage.jsonl` do pipeline
 
 ## Contexto
 O Prumo é uma pesquisa sobre construir software com IA com qualidade, e uma das perguntas é quanto isso custa: em tokens, por modelo, por ferramenta e por tarefa. A outra é se o Prumo gasta menos que os outros jeitos de trabalhar conforme cresce ([#40](https://github.com/vitorsantss/prumo/issues/40)). Sem registro, essa comparação não existe.
