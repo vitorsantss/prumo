@@ -33,5 +33,6 @@ The first study case comes from a public challenge, the Brazilian [Rinha de Back
 | Nov 11, 2026 | The idea: a personal way of working with AI becomes the gated-stages hypothesis. |
 | Nov 14, 2026 | Born open: name, free license ([ADR-0004](../adr/0004-licenca-agpl-3.md)) and the first recorded decisions. |
 | Nov 15, 2026 | First skeleton running, without AI, for study. |
-| now | Closing the foundational decisions and documenting the process. |
+| Nov 19, 2026 | Foundational decisions accepted: checkpoint C0 closes with every ADR decided. |
+| now | Plug in real AI and take the first real task end to end (checkpoint C1). |
 | next | Use it on real tasks, measure cost and quality, and only then say whether it works. |

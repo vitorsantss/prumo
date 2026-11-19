@@ -31,5 +31,6 @@ O primeiro caso de estudo vem de um desafio público, a [Rinha de Backend (ediç
 | 11/11/2026 | A ideia: um jeito pessoal de trabalhar com IA vira a hipótese das etapas com portões. |
 | 14/11/2026 | Nasce aberto: nome, licença livre ([ADR-0004](adr/0004-licenca-agpl-3.md)) e as primeiras decisões registradas. |
 | 15/11/2026 | Primeiro esqueleto rodando, sem IA, pra estudo. |
-| agora | Fechando as decisões de base e documentando o processo. |
+| 19/11/2026 | Decisões de base aceitas: o checkpoint C0 fecha com todos os ADRs decididos. |
+| agora | Ligar a IA de verdade e levar a primeira tarefa real de ponta a ponta (checkpoint C1). |
 | depois | Usar em tarefas reais, medir custo e qualidade e só então dizer se funciona. |

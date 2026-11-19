@@ -36,6 +36,17 @@ Dentro de cada entrega, os PRs continuam pequenos: trabalhar em lotes pequenos p
 - Toda tarefa diz **o que fazer** e **pronto quando**, com critérios verificáveis.
 - Labels de área (`area:*`) dizem de que parte do software a tarefa é; `caminho-nativo` marca a troca de algo pago ou proprietário por algo livre ([ADR-0005](adr/0005-integracoes-terceirizadas-caminho-nativo.md)).
 
+### Labels
+
+| Grupo | Labels | Pra quê |
+| --- | --- | --- |
+| Tipo | `tarefa`, `ideia`, `bug`, `feedback`, `adr`, `documentation`, `traducao`, `pruminho` | O que a issue é. `ideia` é proposta pra discutir; `tarefa` já diz o que fazer e quando está pronta; `feedback` é relato de quem usa |
+| Triagem | `precisa-triagem`, `triagem/aceita`, `triagem/precisa-informacao`, `pode-ser-automatica` | Onde a issue está na triagem humana ([ADR-0015](adr/0015-triagem-humana-contra-injecao-de-prompt.md)) |
+| Área | `area:produto`, `area:arquitetura`, `area:ux`, `area:qualidade`, `area:infra`, `area:integracoes`, `area:ia-custos`, `area:gestao` | De que parte do software a tarefa é |
+| Especiais | `caminho-nativo`, `automacao`, `accessibility`, `good first issue`, `help wanted` | Troca por algo livre, issue aberta pela rotina automática, barreira de acessibilidade e convites pra quem quer contribuir |
+
+Duplicada ou "não vai ser feita" não tem label: a issue é fechada com o motivo do próprio GitHub. Label nova entra nesta tabela no mesmo PR que a cria.
+
 ## Decisões (ADR)
 
 Decisão que muda arquitetura, dependência, formato de arquivo ou forma de trabalhar vira um ADR em `docs/adr/`, no formato de Michael Nygard (contexto, decisão, consequências), sempre com fontes. Um ADR começa como **Proposto** e só vale quando muda pra **Aceito**. Decisão revista não é apagada: o ADR novo marca o antigo como substituído.

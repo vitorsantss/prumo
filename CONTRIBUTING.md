@@ -11,6 +11,8 @@ O Prumo é feito pra ser estudado e construído junto. Estudante, professor, dev
    - `help wanted`: precisa de alguém, não importa a experiência.
 3. Comente na issue que vai pegar ela, pra ninguém fazer o mesmo trabalho em dobro.
 
+Todas as labels estão explicadas em [Como trabalhamos](docs/processo.md#labels). O que o projeto está fazendo agora é o [marco aberto](https://github.com/vitorsantss/prumo/milestones) com a data mais próxima. Issue fora dele também é bem-vinda, mas não tem pressa.
+
 Não achou uma issue que sirva? Abra uma com o modelo **Ideia** e conte o que pensou.
 
 ## Do seu jeito, com ou sem IA
