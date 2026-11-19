@@ -53,6 +53,26 @@ Diagramas são bem-vindos quando ajudam e opcionais sempre. Qualquer ferramenta 
 - Todo PR diz se usou IA e qual. Quem envia responde por cada linha.
 - Cada PR sai direto da `main`. Evite empilhar PRs: depois do squash de um, o seguinte entra em conflito.
 
+## Verificações automáticas
+
+Antes da revisão humana, todo PR passa por verificações que rodam sozinhas. Elas existem porque erro de citação passava na leitura: o mesmo tipo de erro apareceu quatro vezes no C0 ([origem das regras](origem-das-regras.md#origem-aponta-pra-evidência-que-mora-no-repositório)).
+
+| Verificação | O que olha | Efeito |
+| --- | --- | --- |
+| Testes do núcleo | `gofmt`, `go vet` e `go test` em Linux, Windows e macOS | Trava o PR |
+| Referências da documentação | `ADR-0000` sem link, nota de rodapé citada e não definida (ou o contrário), link interno quebrado em `docs/` e no `AGENTS.md` | Trava o PR |
+| Números de issue | `#123` sem link | Só avisa, até o padrão de citação ([#121](https://github.com/vitorsantss/prumo/issues/121)) |
+| Links externos | Se os links de fora ainda abrem | Roda toda segunda e sob demanda, sem travar PR, porque site de terceiro fora do ar não é erro do PR |
+
+Pra rodar antes de abrir o PR:
+
+```sh
+node site/scripts/conferir-referencias.mjs             # referências
+node site/scripts/conferir-referencias.mjs --externos  # também abre os links de fora
+```
+
+**O comando é do Prumo; só o gatilho é do GitHub.** Os arquivos em `.github/workflows/` dizem quando rodar. Numa troca de forja (GitLab, Forgejo), muda o gatilho e o comando continua o mesmo.
+
 ## Onde as coisas moram
 
 | O quê | Onde |
