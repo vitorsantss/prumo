@@ -305,16 +305,31 @@
     },
     {
       "quando": {
+        "pt": "19 nov 2026",
+        "en": "Nov 19, 2026"
+      },
+      "pt": [
+        "Decisões de base",
+        "O checkpoint C0 fecha com todos os ADRs decididos."
+      ],
+      "en": [
+        "Foundational decisions",
+        "Checkpoint C0 closes with every ADR decided."
+      ],
+      "tipo": "feito"
+    },
+    {
+      "quando": {
         "pt": "agora",
         "en": "now"
       },
       "pt": [
-        "Base e documentação",
-        "Fechando as decisões de base e documentando o processo."
+        "Primeira tarefa real",
+        "Ligar a IA de verdade e levar uma tarefa real de ponta a ponta (checkpoint C1)."
       ],
       "en": [
-        "Foundations and docs",
-        "Closing the foundational decisions and documenting the process."
+        "First real task",
+        "Plug in real AI and take a real task end to end (checkpoint C1)."
       ],
       "tipo": "agora"
     },
