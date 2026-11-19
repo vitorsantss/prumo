@@ -12,6 +12,11 @@ Cada regra de pesquisa e de trabalho do [AGENTS.md](../AGENTS.md) nasceu de um e
 - **O que mudou:** a sentença passou a ser citada pelo portal oficial de legislação da Baviera, aberto antes de citar. A W3C PROV não foi citada.
 - **Onde conferir:** nota `lg-munique` em [tipografia](design/fundamentos/tipografia.md), que entrou na `main` no commit `9c60980`.
 
+## ADR só se cita depois de lido
+- **O que aconteceu:** ao planejar a primeira tarefa feita com o fluxo do próprio Prumo, a IA propôs guardar a SPEC e o PLAN em `tasks/<id>/` dentro do repositório, citando o [ADR-0001](adr/0001-arquivos-como-fonte-da-verdade.md) como base. O ADR diz o contrário: esse estado mora fora do repositório e sem versionamento. A proposta foi pega antes de virar código, quando o ADR foi aberto.
+- **O que mudou:** a regra entrou no AGENTS.md. Onde a SPEC e o PLAN moram vai virar um ADR novo, e o validador de ADR vai listar no PR quais ADRs governam os arquivos alterados.
+- **Onde conferir:** seção Decisão do [ADR-0001](adr/0001-arquivos-como-fonte-da-verdade.md).
+
 ## Origem aponta pra evidência que mora no repositório
 - **O que aconteceu:** na revisão do PR #110, as regras diziam a origem com data solta ("em 16/11") e citavam "um link de decisão judicial" sem dizer qual, o que fazia parecer que o projeto estava num processo. A primeira correção trocou as datas por números de PR. A revisão seguinte notou que isso prende o Prumo ao GitHub: dentro de um arquivo, o próprio GitHub nem transforma número de issue em link[^autolink], e só o script do site faz essa conversão.
 - **O que mudou:** a regra e este arquivo.
