@@ -14,7 +14,7 @@ func TestExecutarExemploComDuble(t *testing.T) {
 	err := rodar([]string{
 		"executar",
 		"--pipeline", filepath.Join("..", "..", "exemplos", "pipeline.yml"),
-		"--tarefa", filepath.Join("..", "..", "exemplos", "rinha-2024q1", "tarefa.md"),
+		"--tarefa", filepath.Join("..", "..", "exemplos", "rinha-2024q1", "1-transacao-e-extrato.md"),
 		"--workspace", "rinha",
 	}, strings.NewReader("a\n"), &saida)
 	if err != nil {
