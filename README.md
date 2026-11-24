@@ -25,7 +25,7 @@ Precisa do [Go](https://go.dev/dl/) 1.24 ou mais novo.
 ```sh
 go build -o prumo ./cmd/prumo
 ./prumo validar exemplos/pipeline.yml
-./prumo executar --pipeline exemplos/pipeline.yml --tarefa exemplos/rinha-2024q1/tarefa.md
+./prumo executar --pipeline exemplos/pipeline.yml --tarefa exemplos/rinha-2024q1/1-transacao-e-extrato.md
 ```
 
 Por padrão as etapas de IA usam o **executor dublê**, que responde sem IA, pra testar o fluxo de graça. Pra usar o Claude Code (pago, ADR-0005), passe `--executor claude`. O caminho livre, com agente e modelo abertos, é a issue #13.

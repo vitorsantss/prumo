@@ -41,7 +41,7 @@ Núcleo em Go ([ADR-0006](docs/adr/0006-execucao-local-first-e-stack.md)); a int
 - Análise: `go vet ./...`
 - Site: `cd site && npm install && npm run dev` (precisa de Node 22+)
 - Referências da documentação: `node site/scripts/conferir-referencias.mjs` (ADR sem link, nota de rodapé órfã, link interno quebrado; `--externos` também abre os links de fora)
-- Rodar sem IA: `go run ./cmd/prumo executar --pipeline exemplos/pipeline.yml --tarefa exemplos/rinha-2024q1/tarefa.md`
+- Rodar sem IA: `go run ./cmd/prumo executar --pipeline exemplos/pipeline.yml --tarefa exemplos/rinha-2024q1/1-transacao-e-extrato.md`
 
 ## Jeitos de trabalhar
 
