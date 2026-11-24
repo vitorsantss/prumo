@@ -320,16 +320,31 @@
     },
     {
       "quando": {
+        "pt": "24 nov 2026",
+        "en": "Nov 24, 2026"
+      },
+      "pt": [
+        "Primeira tarefa real",
+        "Uma tarefa real passa de ponta a ponta com IA: o checkpoint C1 fecha."
+      ],
+      "en": [
+        "First real task",
+        "A real task goes end to end with AI: checkpoint C1 closes."
+      ],
+      "tipo": "feito"
+    },
+    {
+      "quando": {
         "pt": "agora",
         "en": "now"
       },
       "pt": [
-        "Primeira tarefa real",
-        "Ligar a IA de verdade e levar uma tarefa real de ponta a ponta (checkpoint C1)."
+        "Três tarefas reais",
+        "Pesquisa, plano e gate de risco em três tarefas reais (checkpoint C2)."
       ],
       "en": [
-        "First real task",
-        "Plug in real AI and take a real task end to end (checkpoint C1)."
+        "Three real tasks",
+        "Research, plan and a risk gate on three real tasks (checkpoint C2)."
       ],
       "tipo": "agora"
     },
