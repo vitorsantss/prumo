@@ -1,0 +1,3 @@
+{"em":"2026-11-19T17:49:45.8471967Z","etapa":"spec","gen_ai.provider.name":"anthropic","gen_ai.request.model":"claude-opus-5-5","gen_ai.usage.input_tokens":30521,"gen_ai.usage.output_tokens":3679,"prumo.custo_usd":0.20229219999999998,"tentativa":1}
+{"em":"2026-11-19T17:59:41.8743673Z","etapa":"spec","gen_ai.provider.name":"anthropic","gen_ai.request.model":"claude-opus-5-5","gen_ai.usage.input_tokens":90209,"gen_ai.usage.output_tokens":4700,"prumo.custo_usd":0.247925,"tentativa":2}
+{"em":"2026-11-19T18:02:52.9136215Z","etapa":"entrega","gen_ai.provider.name":"prumo","gen_ai.request.model":"modelo","gen_ai.usage.input_tokens":0,"gen_ai.usage.output_tokens":0,"prumo.custo_usd":0,"tentativa":1}

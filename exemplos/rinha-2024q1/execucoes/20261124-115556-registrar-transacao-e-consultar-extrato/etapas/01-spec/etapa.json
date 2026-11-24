@@ -1,0 +1,49 @@
+{
+  "trace_id": "f157993ea2afcafe24ab12605cc21902",
+  "span_id": "0b4fc4ee0bb22389",
+  "ordem": 1,
+  "etapa_id": "spec",
+  "nome": "SPEC",
+  "inicio": "2026-11-24T14:55:56.5264031Z",
+  "fim": "2026-11-24T14:57:29.806805Z",
+  "duracao_ms": 93280,
+  "status": "aprovada",
+  "tentativas": 1,
+  "origem_leituras": "entradas_declaradas",
+  "lidos": [
+    {
+      "caminho": "tarefa.md",
+      "bytes": 1080,
+      "sha256": "165ccef56674323e86656892337362916d4449e7ab5894705c5ff7fd3573dc7c"
+    }
+  ],
+  "escritos": [
+    {
+      "caminho": "spec.md",
+      "bytes": 8423,
+      "sha256": "f7d1e6b22708bc3fd30a96ea1f5c74e88541bc80c5d4cf559370686861082574"
+    }
+  ],
+  "atributos": {
+    "gen_ai.provider.name": "anthropic",
+    "gen_ai.usage.cache_creation.input_tokens": 23396,
+    "gen_ai.usage.cache_read.input_tokens": 44042,
+    "gen_ai.usage.input_tokens": 67446,
+    "gen_ai.usage.output_tokens": 5879,
+    "prumo.custo_base": "list",
+    "prumo.custo_usd": 0.24664055000000001,
+    "prumo.duracao_ia_ms": 51132,
+    "prumo.modelos": [
+      "claude-haiku-5-5",
+      "claude-opus-5-5"
+    ],
+    "prumo.voltas": 2
+  },
+  "gates": [
+    {
+      "tentativa": 1,
+      "decisao": "aprovar",
+      "em": "2026-11-24T14:57:29.8041873Z"
+    }
+  ]
+}
