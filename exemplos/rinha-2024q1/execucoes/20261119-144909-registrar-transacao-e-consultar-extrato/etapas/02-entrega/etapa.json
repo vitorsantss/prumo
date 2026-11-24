@@ -1,0 +1,46 @@
+{
+  "trace_id": "a9b708caa632d53b983f4aa35e66a40b",
+  "span_id": "0711dcdb4fd611d3",
+  "ordem": 2,
+  "etapa_id": "entrega",
+  "nome": "Entrega",
+  "inicio": "2026-11-19T18:02:52.9130837Z",
+  "fim": "2026-11-19T18:02:52.9486579Z",
+  "duracao_ms": 35,
+  "status": "aprovada",
+  "tentativas": 1,
+  "origem_leituras": "entradas_declaradas",
+  "lidos": [
+    {
+      "caminho": "tarefa.md",
+      "bytes": 1080,
+      "sha256": "165ccef56674323e86656892337362916d4449e7ab5894705c5ff7fd3573dc7c"
+    },
+    {
+      "caminho": "spec.md",
+      "bytes": 9150,
+      "sha256": "f2bee9b8fb324242cf1bb2afa630d0954c79b67f7a1398d468eee4add19b8237"
+    }
+  ],
+  "escritos": [
+    {
+      "caminho": "entrega.md",
+      "bytes": 10270,
+      "sha256": "c4ef92a9a6d818f748544d3382d27e014ca56e31b8b453208a6fa6b518723956"
+    }
+  ],
+  "atributos": {
+    "gen_ai.provider.name": "prumo",
+    "gen_ai.request.model": "modelo",
+    "gen_ai.usage.input_tokens": 0,
+    "gen_ai.usage.output_tokens": 0,
+    "prumo.custo_usd": 0
+  },
+  "gates": [
+    {
+      "tentativa": 1,
+      "decisao": "aprovar",
+      "em": "2026-11-19T18:02:52.9481354Z"
+    }
+  ]
+}

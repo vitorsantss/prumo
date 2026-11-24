@@ -4,7 +4,7 @@
 
 ## O que já existe
 
-Uma linha de comando em Go que leva uma tarefa de exemplo por duas etapas, especificação e entrega, com um portão no meio. Ela grava o que cada etapa leu e escreveu, os tokens por modelo, as voltas do agente, o tempo da IA separado do tempo humano e as decisões do portão ([ADR-0006](adr/0006-execucao-local-first-e-stack.md), [ADR-0007](adr/0007-modelo-de-execucao.md)). Por padrão roda sem IA, com respostas simuladas; com o Claude Code, já levou uma tarefa real da Rinha de Backend de ponta a ponta ([relato das execuções](../exemplos/rinha-2024q1/execucoes.md)).
+Uma linha de comando em Go que leva uma tarefa de exemplo por duas etapas, especificação e entrega, com um portão no meio. Ela grava o que cada etapa leu e escreveu, os tokens por modelo, as voltas do agente, o tempo da IA separado do tempo humano e as decisões do portão ([ADR-0006](adr/0006-execucao-local-first-e-stack.md), [ADR-0007](adr/0007-modelo-de-execucao.md)). Por padrão roda sem IA, com respostas simuladas; com o Claude Code, já levou uma tarefa real da Rinha de Backend de ponta a ponta ([relato das execuções](../exemplos/rinha-2024q1/execucoes/)).
 
 ## O que ainda não existe
 

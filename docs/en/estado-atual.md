@@ -6,7 +6,7 @@
 
 ## What exists
 
-A command-line tool in Go that takes a sample task through two stages, specification and delivery, with a gate in between. It records what each stage read and wrote, the tokens per model, the agent turns, the AI time apart from the human time and the gate decisions ([ADR-0006](../adr/0006-execucao-local-first-e-stack.md), [ADR-0007](../adr/0007-modelo-de-execucao.md)). By default it runs without AI, with simulated answers; with Claude Code, it has already taken a real Rinha de Backend task end to end ([report of the runs](../../exemplos/rinha-2024q1/execucoes.md)).
+A command-line tool in Go that takes a sample task through two stages, specification and delivery, with a gate in between. It records what each stage read and wrote, the tokens per model, the agent turns, the AI time apart from the human time and the gate decisions ([ADR-0006](../adr/0006-execucao-local-first-e-stack.md), [ADR-0007](../adr/0007-modelo-de-execucao.md)). By default it runs without AI, with simulated answers; with Claude Code, it has already taken a real Rinha de Backend task end to end ([report of the runs](../../exemplos/rinha-2024q1/execucoes/)).
 
 ## What does not exist yet
 

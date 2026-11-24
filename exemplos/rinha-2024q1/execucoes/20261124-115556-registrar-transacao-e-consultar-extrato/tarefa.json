@@ -1,0 +1,31 @@
+{
+  "trace_id": "f157993ea2afcafe24ab12605cc21902",
+  "id": "20261124-115556-registrar-transacao-e-consultar-extrato",
+  "titulo": "Registrar transação e consultar extrato de um cliente",
+  "workspace": "prumo",
+  "pipeline": "esqueleto",
+  "inicio": "2026-11-24T14:55:56.5264031Z",
+  "fim": "2026-11-24T14:57:29.8391555Z",
+  "status": "concluida",
+  "gen_ai.usage.input_tokens": 67446,
+  "gen_ai.usage.output_tokens": 5879,
+  "prumo.custo_usd": 0.24664055000000001,
+  "etapas": [
+    {
+      "ordem": 1,
+      "etapa_id": "spec",
+      "nome": "SPEC",
+      "status": "aprovada",
+      "duracao_ms": 93280,
+      "rastro": "etapas/01-spec/etapa.json"
+    },
+    {
+      "ordem": 2,
+      "etapa_id": "entrega",
+      "nome": "Entrega",
+      "status": "aprovada",
+      "duracao_ms": 30,
+      "rastro": "etapas/02-entrega/etapa.json"
+    }
+  ]
+}

@@ -56,7 +56,7 @@ $env:PRUMO_HOME = "$HOME\prumo-teste"
 3. A etapa Entrega roda sem IA e o terminal mostra o total de tokens e o custo de tabela.
 4. Na pasta da tarefa, o `usage.jsonl` e o `etapas/01-spec/etapa.json` têm o detalhe. No PowerShell, leia com `Get-Content -Encoding UTF8` pra não quebrar os acentos.
 
-O que aconteceu nas primeiras execuções reais está em [exemplos/rinha-2024q1/execucoes.md](exemplos/rinha-2024q1/execucoes.md).
+O que aconteceu nas primeiras execuções reais está em [exemplos/rinha-2024q1/execucoes/](exemplos/rinha-2024q1/execucoes/).
 
 Testes: `go test ./...`
 

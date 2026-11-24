@@ -1,0 +1,40 @@
+{
+  "trace_id": "f157993ea2afcafe24ab12605cc21902",
+  "span_id": "0acf47a6a8b3c1d8",
+  "ordem": 2,
+  "etapa_id": "entrega",
+  "nome": "Entrega",
+  "inicio": "2026-11-24T14:57:29.807854Z",
+  "fim": "2026-11-24T14:57:29.8381068Z",
+  "duracao_ms": 30,
+  "status": "aprovada",
+  "tentativas": 1,
+  "origem_leituras": "entradas_declaradas",
+  "lidos": [
+    {
+      "caminho": "tarefa.md",
+      "bytes": 1080,
+      "sha256": "165ccef56674323e86656892337362916d4449e7ab5894705c5ff7fd3573dc7c"
+    },
+    {
+      "caminho": "spec.md",
+      "bytes": 8423,
+      "sha256": "f7d1e6b22708bc3fd30a96ea1f5c74e88541bc80c5d4cf559370686861082574"
+    }
+  ],
+  "escritos": [
+    {
+      "caminho": "entrega.md",
+      "bytes": 9543,
+      "sha256": "6fc459272e790b4347904c9d6562490b4a4d55c88258178097044a192924da90"
+    }
+  ],
+  "atributos": {},
+  "gates": [
+    {
+      "tentativa": 1,
+      "decisao": "aprovar",
+      "em": "2026-11-24T14:57:29.8376033Z"
+    }
+  ]
+}
