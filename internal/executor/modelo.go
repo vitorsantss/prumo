@@ -14,5 +14,5 @@ func (Modelo) Executar(_ context.Context, p Pedido) (Resultado, error) {
 	for _, e := range p.Entradas {
 		fmt.Fprintf(&b, "## %s\n\n%s\n\n", e.Nome, strings.TrimSpace(e.Conteudo))
 	}
-	return Resultado{Conteudo: b.String(), Uso: Uso{Provedor: "prumo", Modelo: "modelo"}}, nil
+	return Resultado{Conteudo: b.String()}, nil
 }

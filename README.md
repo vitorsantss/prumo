@@ -30,7 +30,7 @@ go build -o prumo ./cmd/prumo
 
 Por padrão as etapas de IA usam o **executor dublê**, que responde sem IA, pra testar o fluxo de graça. Pra usar o Claude Code (pago, ADR-0005), passe `--executor claude`. O caminho livre, com agente e modelo abertos, é a issue #13.
 
-No gate de cada etapa manual você escolhe: aprovar, pedir ajuste (a etapa roda de novo com o seu comentário) ou refazer. Tudo fica em `~/.local/share/prumo/<workspace>/tasks/<id>/` (ou em `$PRUMO_HOME`): a tarefa, a saída de cada etapa, o `etapa.json` com o que foi lido, escrito, tokens e tempo, e o `tarefa.json` com o resumo.
+No gate de cada etapa manual você escolhe: aprovar, pedir ajuste (a etapa roda de novo com o seu comentário) ou refazer. Tudo fica em `~/.local/share/prumo/<workspace>/tasks/<id>/` (ou em `$PRUMO_HOME`): a tarefa, a saída de cada etapa, o `etapa.json` com o que foi lido, escrito, tokens, voltas do agente e tempo, o `usage.jsonl` com uma linha por modelo em cada tentativa de IA (entrada com cache, leitura e criação de cache, saída e custo; `prumo.custo_base: list` quer dizer preço de tabela, não o que foi pago) e o `tarefa.json` com o resumo.
 
 Testes: `go test ./...`
 

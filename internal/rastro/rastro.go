@@ -13,11 +13,17 @@ import (
 )
 
 const (
-	AtributoProvedor      = "gen_ai.provider.name"
-	AtributoModelo        = "gen_ai.request.model"
-	AtributoTokensEntrada = "gen_ai.usage.input_tokens"
-	AtributoTokensSaida   = "gen_ai.usage.output_tokens"
-	AtributoCustoUSD      = "prumo.custo_usd"
+	AtributoProvedor           = "gen_ai.provider.name"
+	AtributoModelo             = "gen_ai.request.model"
+	AtributoTokensEntrada      = "gen_ai.usage.input_tokens"
+	AtributoTokensLeituraCache = "gen_ai.usage.cache_read.input_tokens"
+	AtributoTokensCriacaoCache = "gen_ai.usage.cache_creation.input_tokens"
+	AtributoTokensSaida        = "gen_ai.usage.output_tokens"
+	AtributoCustoUSD           = "prumo.custo_usd"
+	AtributoBaseCusto          = "prumo.custo_base"
+	AtributoModelos            = "prumo.modelos"
+	AtributoVoltas             = "prumo.voltas"
+	AtributoDuracaoIAMS        = "prumo.duracao_ia_ms"
 )
 
 type Arquivo struct {
