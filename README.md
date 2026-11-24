@@ -16,7 +16,7 @@ A ideia: decidir sem IA sempre que der (regras, heurísticas), usar IA só onde 
 
 ## Estado
 
-Esqueleto do C1 rodando: uma CLI em Go que lê o `pipeline.yml`, executa as etapas de uma tarefa com um gate manual e grava o rastro de cada etapa (ADR-0007).
+Esqueleto do C1 rodando com IA de verdade: uma CLI em Go que lê o `pipeline.yml`, executa as etapas de uma tarefa com um gate manual e grava o rastro de cada etapa (ADR-0007). A primeira tarefa real, da Rinha de Backend, passou de ponta a ponta com o Claude Code.
 
 ## Como rodar
 
@@ -31,6 +31,32 @@ go build -o prumo ./cmd/prumo
 Por padrão as etapas de IA usam o **executor dublê**, que responde sem IA, pra testar o fluxo de graça. Pra usar o Claude Code (pago, ADR-0005), passe `--executor claude`. O caminho livre, com agente e modelo abertos, é a issue #13.
 
 No gate de cada etapa manual você escolhe: aprovar, pedir ajuste (a etapa roda de novo com o seu comentário) ou refazer. Tudo fica em `~/.local/share/prumo/<workspace>/tasks/<id>/` (ou em `$PRUMO_HOME`): a tarefa, a saída de cada etapa, o `etapa.json` com o que foi lido, escrito, tokens, voltas do agente e tempo, o `usage.jsonl` com uma linha por modelo em cada tentativa de IA (entrada com cache, leitura e criação de cache, saída e custo; `prumo.custo_base: list` quer dizer preço de tabela, não o que foi pago) e o `tarefa.json` com o resumo.
+
+### Rodar com IA, passo a passo
+
+Precisa do Claude Code instalado e com login feito. O uso entra na sua conta.
+
+Linux ou macOS:
+
+```sh
+go build -o prumo ./cmd/prumo
+PRUMO_HOME="$HOME/prumo-teste" ./prumo executar --pipeline exemplos/pipeline.yml --tarefa exemplos/rinha-2024q1/1-transacao-e-extrato.md --executor claude
+```
+
+Windows (PowerShell):
+
+```powershell
+go build -o prumo.exe ./cmd/prumo
+$env:PRUMO_HOME = "$HOME\prumo-teste"
+.\prumo.exe executar --pipeline exemplos\pipeline.yml --tarefa exemplos\rinha-2024q1\1-transacao-e-extrato.md --executor claude
+```
+
+1. O terminal mostra a pasta da tarefa e roda a etapa SPEC com o Claude.
+2. No gate, leia a SPEC e escolha: `a` aprova, `j` pede ajuste com um comentário, `r` refaz.
+3. A etapa Entrega roda sem IA e o terminal mostra o total de tokens e o custo de tabela.
+4. Na pasta da tarefa, o `usage.jsonl` e o `etapas/01-spec/etapa.json` têm o detalhe. No PowerShell, leia com `Get-Content -Encoding UTF8` pra não quebrar os acentos.
+
+O que aconteceu nas primeiras execuções reais está em [exemplos/rinha-2024q1/execucoes.md](exemplos/rinha-2024q1/execucoes.md).
 
 Testes: `go test ./...`
 
